@@ -1,26 +1,9 @@
-# Welcome to your Jupyter Book
+# Flood Inundation Mapping in Kansas
 
-This is a small sample book to give you a feel for how book content is
-structured.
+This document tells the journey of building an operational near-real-time flood inundation mapping system for the State of Kansas.
+
+The project uses stream gauge stage observations to generate flood inundation depth map in the eastern half of Kansas. It uses the FLDPLN inundation model which was developed by Dr. Jude Kastens at Kansas Biological Survey. The system was developed by a group of students and faculty members, including David Weekley, Abu Mahdi, Jim Coll, and Dr. Xingong Li, at the Department of Geography & Atmospheric Science, University of Kansas. The project is primarily funded by the Kansas Water Office.
 
 :::{note}
-Here is a note!
-:::
-
-And here is a code block:
-
-```
-e = mc^2
-```
-
-Check out the content pages bundled with this sample book to see more examples.
-
-You can also add figures to your book.
-
-:::{figure} https://assets.gishub.org/images/book-cover.png
-:label: gispro-book-cover
-:alt: GISPro Book Cover
-:align: center
-
-GIS Programming with Python Book Cover.
+This documentation is currently under construction. PLease check back!
 :::
