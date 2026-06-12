@@ -1,0 +1,1014 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>6. Serve Flood Maps &#8212; Jupyter Book Demo</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/06_server';</script>
+    <link rel="canonical" href="https://giswqs.github.io/jupyter-book-demo/book/06_server.html" />
+    <link rel="icon" href="../_static/fav.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="7. Flood Mapping Dashboard" href="07_client.html" />
+    <link rel="prev" title="5. Gauges" href="05_gauge.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Jupyter Book Demo - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Jupyter Book Demo - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_intro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_fldpln.html">2. The FLDPLN Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_tiling.html">3. Tile FLDPLN Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_parallelization.html">4. Parallelize Flood Mapping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_gauge.html">5. Gauges</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">6. Serve Flood Maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_client.html">7. Flood Mapping Dashboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_image_viewer.html">8. Rapid Image Viewer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_future.html">9. Future Improvements</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="system.html">System Description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open_source.html">Open Source vs. ArcPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_env.html">Build a Python Environment for Using the FLDPLN Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="binder.html">Binder and BinderHub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/giswqs/jupyter-book-demo/main?urlpath=tree/book/06_server.md" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/giswqs/jupyter-book-demo/blob/main/book/06_server.md" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/giswqs/jupyter-book-demo" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/giswqs/jupyter-book-demo/edit/main/book/06_server.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/giswqs/jupyter-book-demo/issues/new?title=Issue%20on%20page%20%2Fbook/06_server.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/book/06_server.ipynb" target="_blank"
+   class="btn btn-sm btn-download-notebook-button dropdown-item"
+   title="Download notebook file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="../_sources/book/06_server.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Serve Flood Maps</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-an-arcgis-fldpln-python-environment">6.1. Create an ArcGIS-fldpln python environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serving-visualizing-big-raster-data">6.2. Serving/Visualizing Big Raster Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-tilers-localtileserve-and-titiler">6.3. Using Tilers (localtileserve and titiler)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#issues-in-generating-flood-cog-tile-files">6.4. Issues in Generating Flood COG Tile Files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamentals-of-map-services">6.5. Fundamentals of Map Services</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serve-flood-maps-on-arcgis-server">6.6. Serve Flood Maps on ArcGIS Server</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-overall-process">6.6.1. The overall process</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mosaic-dataset">6.6.2. Mosaic Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#file-vs-sde-geodatabase">6.6.3. File vs SDE Geodatabase</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#publish-map-and-image-services">6.6.4. Publish Map and Image Services</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#update-gauges-and-flood-maps">6.6.5. Update gauges and flood maps</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resources">6.6.6. Resources</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resources-on-arcgis-image-for-arcgis-online">6.6.7. Resources on ArcGIS Image for ArcGIS Online</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#schedule-flood-mapping-jobs-on-the-server">6.7. Schedule Flood Mapping Jobs on the Server</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-scripts-and-batch-files">6.7.1. Python scripts and batch files</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#worker-space-for-dask-localcluster">6.7.2. Worker space for Dask LocalCluster</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#schedule-task">6.7.3. Schedule task</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-database-on-the-server">6.8. Using Database on the Server</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#postgresql">6.8.1. PostgreSQL</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-postgresql-geodatabase-using-arcgis-tools">6.8.2. Create a PostGreSQL Geodatabase using ArcGIS tools</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#register-database-with-arcgis-server">6.8.3. Register Database with ArcGIS Server</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arcsde-license-update-issue">6.8.4. ArcSDE license update issue</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#access-postgresql-using-python">6.8.5. Access PostgreSQL Using Python</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#create-database-using-pgadmin-and-commands">6.8.5.1. Create database using pgAdmin and commands</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#delete-a-postgresql-database">6.8.6. Delete a PostGreSQL Database</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-psql">6.8.7. Use psql</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="serve-flood-maps">
+<h1><span class="section-number">6. </span>Serve Flood Maps<a class="headerlink" href="#serve-flood-maps" title="Link to this heading">#</a></h1>
+<p>The flood maps (both stream and reservoir flood depth raster data) should be made available to not only the researchers and state division of emergency management but also the general public on the web. In this context, <strong>“Serving flood maps”</strong> has several options:</p>
+<ul class="simple">
+<li><p>Serve the maps as raster data. Make the data discoverable and available/downloadable on the web. The SpatioTemporal Asset Catalogs (STAC) interface can be used for this. This requires the user to download the data and has the software (ArcGIS or QGIS) and ability to visualize and explore the data.</p></li>
+<li><p>Serve the data as maps. The original raster data are visualized as RGB images. The user can see the maps directly in a web browser or using the software that user is familiar with and can consume the maps such as ArcGIS or QGIS.</p></li>
+<li><p>Serve some analysis capabilities on the maps. The user can request certain analysis/manipulation on the data.</p></li>
+</ul>
+<p>Ideally, a good service is to provide all the options above and let the user choose the best option for their needs. The maps can be served either an on-premise or cloud web server using commercial GIS server (such as ArcGIS Server with map and image services) or open source geospatial server software.</p>
+<p>The Kansas flood maps are currently served on an on-premise ArcGIS Server at KU. But exploration has also been done serving the flood maps as cloud-optimized geoTiff (COG) on Azure Blob storage and using a tiler to visualize them.</p>
+<section id="create-an-arcgis-fldpln-python-environment">
+<h2><span class="section-number">6.1. </span>Create an ArcGIS-fldpln python environment<a class="headerlink" href="#create-an-arcgis-fldpln-python-environment" title="Link to this heading">#</a></h2>
+<p>For the KFIM system, both the fldpln Python package and ArcGIS Python packages are needed. For example, reservoir inundation mapping (fim_reservoir.py) uses both arcpy and fldpln package. As such we created a python environment arcgispro-py3-fldpln with the following steps:</p>
+<ul>
+<li><p>Clone an ArcGIS Pro python environment to user’s (in this case user “fldpln”) Python environments</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">create</span> <span class="o">--</span><span class="n">clone</span> <span class="s2">&quot;C:\Program Files\ArcGIS\Pro</span><span class="se">\b</span><span class="s2">in\Python\envs</span><span class="se">\a</span><span class="s2">rcgispro-py3&quot;</span> <span class="o">-</span><span class="n">p</span> <span class="s2">&quot;C:\Users</span><span class="se">\f</span><span class="s2">ldpln\miniconda3\envs</span><span class="se">\a</span><span class="s2">rcgispro-py3-fldpln&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Activate the cloned environment</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">activate</span> <span class="n">arcgispro</span><span class="o">-</span><span class="n">py3</span><span class="o">-</span><span class="n">fldpln</span>
+</pre></div>
+</div>
+</li>
+<li><p>Install the fldpln package in the cloned environment</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">fldpln</span>
+</pre></div>
+</div>
+</li>
+<li><p>Install psycopg2, which is not included in both packages, but needed for PostgreSQL database connection</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">psycopg2</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="serving-visualizing-big-raster-data">
+<h2><span class="section-number">6.2. </span>Serving/Visualizing Big Raster Data<a class="headerlink" href="#serving-visualizing-big-raster-data" title="Link to this heading">#</a></h2>
+<p>For big raster data, if the data is stored as a single file, there are typically two ways to serve the data:</p>
+<ul class="simple">
+<li><p>Pre-tile at different levels (pyramid) and serve the tiles at different levels for display and analysis. This approach is also good for analyzing the data at different spatial resolutions in parallel, and the GEE platform uses this approach.</p></li>
+<li><p>Through dynamic tiling (see Vincent Sarago’s <a class="reference external" href="https://developmentseed.org/titiler/dynamic_tiling/">titiler</a> and articles on why dynamic tiling might be better). This approach is good for displaying data especially the data are saved as COG which is compressed and has pyramids.</p></li>
+</ul>
+<p>If the big raster data are already tiled, as in the case of flood maps, it is possible to serve the data as a single raster. In ArcGIS, this is done through the mosaic dataset which can be displayed in ArcGIS Pro or served as an image service in ArcGIS Server.</p>
+</section>
+<section id="using-tilers-localtileserve-and-titiler">
+<h2><span class="section-number">6.3. </span>Using Tilers (localtileserve and titiler)<a class="headerlink" href="#using-tilers-localtileserve-and-titiler" title="Link to this heading">#</a></h2>
+<p><a class="reference external" href="https://github.com/banesullivan/localtileserver">Localtileserver</a> is a local tile server for viewing local or remote large geospatial images with ipyleaflet or folium in Jupyter.</p>
+<ul class="simple">
+<li><p>See Qiusheng leafmap #32 notebook example and VizUseLocaltileserver notebook</p></li>
+<li><p>No issue when running it locally (office desktop)</p></li>
+<li><p>Installed localtileserver on PC. But it didn’t work initially when use leafmap to display COGs. Qiusheng had to fix a bug and to added a new method Map.add_geotiff() in v0.7.7.</p></li>
+<li><p>Localtileserver can render both local and remote GeoTIFF file, though remote file should be COG.</p></li>
+<li><p>All the viewers (leaflet, folium and leafmap) can display both local and remote files but <strong>folium is 2 times faster than leafmap</strong></p></li>
+<li><p>For leafmap, Map.add_local_tile() and add_geotiff() both use localtileserver. As such, both methods can view local or remote GeoTIFF files. It’s however unclear what the difference between the two methods.</p></li>
+</ul>
+<p>TiTiler uses <a class="reference external" href="https://developmentseed.org/titiler/dynamic_tiling/">dynamic tiling</a> instead of pre-tiled raster by taking the advantages of COG GeoTIFF, which has overview and pyramids.</p>
+<ul class="simple">
+<li><p>We can create a tilier endpoint on our server or use the one at <a class="reference external" href="https://titiler.xyz">https://titiler.xyz</a> which is set up by DevelopmentSeed but available for anyone to use.</p></li>
+<li><p>For tiled COG files, titiler also supports mosaic layer using the mosaicjson API. We found that using tiles and mosaicjson API is faster than a single COG file. This also avoids the process of mosaicing tile COGs into one big COG, which is a bottle neck problem in flood mapping process.</p></li>
+</ul>
+<p>PC has its own tiTiler server but only works with the datasets in its STAC Catalog. See Qiusheng leafmap #37 notebook.  It seems the endpoint (<a class="reference external" href="https://planetarycomputer.microsoft.com/docs/reference/data/">PgSTAC Mosaic endpoints</a>) can handle mosaic COGs. However, our flood map tiles may not be ingested into PC’s Catalog!</p>
+<p>For serving flood maps using open source software, we may need to create a titiler server (that supports mosaic endpoint just like PC) running on our server.See <a class="reference external" href="https://github.com/developmentseed/titiler/blob/master/docs/advanced/customization.md#add-a-mosaicjson-creation-endpoint">titiler doc</a> and related <a class="reference external" href="https://github.com/developmentseed/titiler/blob/master/docs/examples/code/tiler_with_auth.md">security/token issue</a>.</p>
+<p>The maps served by the tilers can be displayed/consumed by several viewers (ipyleaflet, folium, leafmap):</p>
+<ul class="simple">
+<li><p>All the viewers can display both local and remote files but <strong>folium is 2 times faster than leafmap</strong></p></li>
+<li><p>Leafmap is a general map display component which has a better GUI and easy to use compared with leaflet and folium.</p></li>
+<li><p>For leafmap, Map.add_local_tile() and add_geotiff() both use localtileserver. As such, both methods can view local or remote GeoTIFF files. It’s however unclear what the difference between the two methods.</p></li>
+</ul>
+<p>There are several options to build a web application using the tilers and viewers:</p>
+<ul class="simple">
+<li><p>Use voila to turn a Python notebook into a web application (similar to the TrendySnow app)</p></li>
+<li><p>Use streamlit to create a web application which has much more flexibility than notebook+ voila approach</p></li>
+</ul>
+<p>One challenge to turn flood maps into a web application is that the <strong>maps updated frequently</strong> (hourly for the dashboard). The web application may have strange experience when displaying the maps which they are updated. In the current implementation, the stream flood map (tile COGs files) are first generated in a new folder, and the mosaic dataset is then swapped to the new folder. This swapping takes some time and may cause the web application to have a weird experience.</p>
+</section>
+<section id="issues-in-generating-flood-cog-tile-files">
+<h2><span class="section-number">6.4. </span>Issues in Generating Flood COG Tile Files<a class="headerlink" href="#issues-in-generating-flood-cog-tile-files" title="Link to this heading">#</a></h2>
+<p><strong>There are still bugs in creating blob tile COGs and mosaic tile COGs</strong></p>
+<ul class="simple">
+<li><p>Code for saving tile files as COGs is based on <a class="reference external" href="https:%5Ccogeotiff.github.io%5Crio-cogeo%5CAPI#using-the-api-with-in-memoryfile">this example</a></p></li>
+<li><p>cog_translate() still have some warning like “IncompatibleBlockRasterSize: Block Size are bigger than raster sizes”. Need to know more about other parameters when create COG (compression methods, pyramids/overview, …)</p></li>
+<li><p>Somehow, the spring COG file (spring_NumOfFsps.tif) generated by MosaicGtifsBlob() and the COG file (spring_NumOfFsps_COG.tif) generated by MosaciGtifs() have different size (see them in the maps container)!</p></li>
+<li><p>Still unable to install cogeo-mosaic into fldpln2 env, which is used to generate a MosaicJSON file for library tiles!</p></li>
+<li><p>FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead</p></li>
+</ul>
+</section>
+<section id="fundamentals-of-map-services">
+<h2><span class="section-number">6.5. </span>Fundamentals of Map Services<a class="headerlink" href="#fundamentals-of-map-services" title="Link to this heading">#</a></h2>
+<p>Understand the difference between various map services (for example, image and map services) in ArcGIS and OGC, and how to serve them on a web server.</p>
+<ul class="simple">
+<li><p>PSU online courses on web mapping applications</p>
+<ul>
+<li><p>PSU GEOG865 Cloud and Server GIS (ArcGIS Server)</p></li>
+<li><p>PSU GEOG585 <a class="reference external" href="https://www.e-education.psu.edu/geog585/node/519">Open Web Mapping</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="https://nam10.safelinks.protection.outlook.com/?url=https%3A%2F%2Fenterprise.arcgis.com%2Fen%2Fserver%2Flatest%2Fpublish-services%2Fwindows%2Fservices-in-arcgis-enterprise.htm&amp;amp;data=05%7C01%7Clixi%40ku.edu%7C064286eeab8b41d81aef08da612fc0ef%7C3c176536afe643f5b96636feabbe3c1a%7C0%7C0%7C637929154966785933%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;amp;sdata=tBQLcDfhPDpSrUwkKbBc%2Bi6LmCGkCT2K4pXfEm7NqMU%3D&amp;amp;reserved=0">ArcGIS Server GIS Services</a></p></li>
+<li><p><a class="reference external" href="https://nam10.safelinks.protection.outlook.com/?url=https%3A%2F%2Fauth0.com%2Fblog%2Fintroduction-to-streamlit-and-streamlit-components%2F&amp;amp;data=05%7C01%7Clixi%40ku.edu%7C064286eeab8b41d81aef08da612fc0ef%7C3c176536afe643f5b96636feabbe3c1a%7C0%7C0%7C637929154966942176%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;amp;sdata=KIbez5ljmJWg2un%2F1%2BEe6sDZiOfIgY%2Bztaz1jXirddg%3D&amp;amp;reserved=0">Introduction to Streamlit and Streamlit Components</a></p></li>
+</ul>
+</section>
+<section id="serve-flood-maps-on-arcgis-server">
+<h2><span class="section-number">6.6. </span>Serve Flood Maps on ArcGIS Server<a class="headerlink" href="#serve-flood-maps-on-arcgis-server" title="Link to this heading">#</a></h2>
+<p>ArcGIS Server is one of the options to serve flood maps. ArcGIS mosaic dataset is used to visualize flood map tiles of COG files. The other options include serve the maps using tile server on the KBS server or on the cloud (such Microsoft Planetary Computer’s Blob storage).</p>
+<p>This section describes how to serve flood mapping on an on-premise server using ArcGIS Server.</p>
+<p>The KARS server at KU Computer Center is divided into two identical virtual machines (test &amp; production servers), each has <strong>8 cores and 192G RAM</strong>. The names for the servers are <a class="reference external" href="http://itprdkarsap.home.ku.edu">itprdkarsap.home.ku.edu</a> and <a class="reference external" href="http://ittstkarsap.home.ku.edu">ittstkarsap.home.ku.edu</a> respectively.</p>
+<p>The services published on the KBS ArcGIS server can be accessed by adding the server in ArcGIS Pro in the Catlog\Servers\New ArcGIS Server Connection.</p>
+<section id="the-overall-process">
+<h3><span class="section-number">6.6.1. </span>The overall process<a class="headerlink" href="#the-overall-process" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The mapping script generates a flood depth raster for each library tile as a COG-Tif file (need to confirm it’s a COG tif). Those tif files may have pyramids in them already (is this controlled in the mapping script?).</p></li>
+<li><p>Those tif files are used to create an ArcGIS mosaic dataset. The mosaic dataset needs overviews (i.e., pyramids for mosaic dataset) to speed up the display when it is served as a web service.</p></li>
+<li><p>The mosaic dataset is then used to create ArcGIS Image Service (and/or WMS and WCS) to make the data available to the web.</p></li>
+</ul>
+</section>
+<section id="mosaic-dataset">
+<h3><span class="section-number">6.6.2. </span>Mosaic Dataset<a class="headerlink" href="#mosaic-dataset" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>The general steps of manually creating a mosaic dataset from a flood map using ArcGIS Pro include:</p>
+<ul>
+<li><p>Create a new mosaic dataset in the Catolog tab</p></li>
+<li><p>In Geoprocessing tab, search for “Set mosaic dataset properties”. Using the tool to set mosaic operator. For mindtf, this should be set as minimum but for flood depth, this should be maximum</p></li>
+<li><p>Add rasters to the mosaic dataset (check Calculate Statistics and Build Overviews to speed up visualizing the data). what’s the difference between this and run Calculate Statistics and Build Overviews tools after adding rasters to the mosaic dataset?</p></li>
+<li><p>Build overviews using Define Overviews and Build Overviews tools in Pro. For the MinDTF mosaic dataset, the overviews (2 levels, one at cell size of 25 m and the other is at 50 m) were built using the following parameters.</p>
+<p><img alt="" src="../_images/build_overviews.PNG" /></p>
+</li>
+</ul>
+</li>
+<li><p>Script task_map2md.py automate the manual process. The overview building step needs to be checked and added if necessary!</p></li>
+<li><p>Based on <a class="reference external" href="https://www.youtube.com/watch?v=4UlVlN0G9qk">ESRI Mosaic dataset video</a>, the best practice is to use one Geodatabase for a mosaic dataset, especially if the mosaic dataset is dynamically updated, for example current flood map.</p></li>
+<li><p>The geodatabases used for managing flood maps are located under D:\projects_new\fldpln\kansas\mosaic_dataset_gdbs.</p></li>
+</ul>
+</section>
+<section id="file-vs-sde-geodatabase">
+<h3><span class="section-number">6.6.3. </span>File vs SDE Geodatabase<a class="headerlink" href="#file-vs-sde-geodatabase" title="Link to this heading">#</a></h3>
+<p>If there is just one user for the geodatabase, file geodatabase is the choice. When there is a concern on concurrence use of the geodatabase, SDE geodatabase should be the choice as it’s designed to handle multiple users/processes. For the gauge and hexagon max depth tables, and the reservoir_depth and  nowcast_depth mosaic datasets, they are more than one processes which access and update them. So, all of them should be inside a SDE geodatabase.</p>
+<p>The gauge table and reservoir_floodplain_hexagons tables are both stored in the fldpln_ks.sde as those tables are updated frequently. Those two tables are just fine.</p>
+<p>The reservoir_depth and nowcast_depth mosaic datasets are also frequently updated when the dashboard web map request data. <strong>It’s suspected that the stream flood depth mosaics shown sometimes on the dashboad map might be a result of using a file geodatabase for the mosaic dataset as it happens when the server is updating the depth mosaic dataset while at the same time, the dashboard map is request the map</strong> As such, they should be also put into a SDE geodatabase. The mosaic datasets were tried to put into the fldpln_ks_mosaicdatasets.sde geodatabase. However, updating the mosaic datasets using the AddRastersToMosaicDataset tool led to following error. Note that there is no complain when using the RemoveRastersFromMosaicDataset tool to remove all existing rasters in the mosaic dataset! And the rasters seem added to the mosaci dataset all right!</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Add rasters to the mosaic dataset: D:\projects_new\fldpln\kansas\fldpln_ks_mosaicdatasets.sde\nowcast_depth ...</span>
+<span class="go">Traceback (most recent call last):</span>
+<span class="go">  File &quot;Z:\tools_os\task_map2md.py&quot;, line 66, in &lt;module&gt;</span>
+<span class="go">    duplicate_items_action=&quot;OVERWRITE_DUPLICATES&quot;,calculate_statistics=&quot;NO_STATISTICS&quot;,estimate_statistics=&quot;ESTIMATE_STATISTICS&quot;)</span>
+<span class="go">  File &quot;C:\Program Files\ArcGIS\Pro\Resources\ArcPy\arcpy\management.py&quot;, line 14275, in AddRastersToMosaicDataset</span>
+<span class="go">    raise e</span>
+<span class="go">  File &quot;C:\Program Files\ArcGIS\Pro\Resources\ArcPy\arcpy\management.py&quot;, line 14272, in AddRastersToMosaicDataset</span>
+<span class="go">    retval = convertArcObjectToPythonObject(gp.AddRastersToMosaicDataset_management(*gp_fixargs((in_mosaic_dataset, raster_type, input_path, update_cellsize_ranges, update_boundary, update_overviews, maximum_pyramid_levels, maximum_cell_size, minimum_dimension, spatial_reference, filter, sub_folder, duplicate_items_action, build_pyramids, calculate_statistics, build_thumbnails, operation_description, force_spatial_reference, estimate_statistics, aux_inputs, enable_pixel_cache, cache_location), True)))</span>
+<span class="go">  File &quot;C:\Program Files\ArcGIS\Pro\Resources\ArcPy\arcpy\geoprocessing\_base.py&quot;, line 512, in &lt;lambda&gt;</span>
+<span class="go">    return lambda *args: val(*gp_fixargs(args, True))</span>
+<span class="go">arcgisscripting.ExecuteError: ERROR 160284: Cannot acquire a schema lock because of an existing lock.</span>
+<span class="go">Failed to execute (AddRastersToMosaicDataset).</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><span style="color:red"><strong>For reservoir_depth, setting calculate_statistics=”NO_STATISTICS” in AddRastersToMosaicDataset tool somehow avoided the error. But this didn’t work for nowcast_depth! It’s not clear why there is an existing lock.</strong></span></p>
+<ul>
+<li><p>It may not necessary to calculate each source raster’s statistics when adding them to the mosaic dataset.Setting estimate_statistics=”ESTIMATE_STATISTICS in AddRastersToMosaicDataset can still estimate mosaic dataset’s statistics while adding the rasters. And skipping calculating source raster’s statistics also speeds up the update.</p></li>
+<li><p>There is the AlterMosaicDatasetSchema tool, but it seems not for this purposed and it didn’t have any effect on the issue.</p></li>
+</ul>
+</li>
+<li><p>David’s script “020 – create reservoir flood fill <a class="reference external" href="http://rasters.py">rasters.py</a>” updates items/rows in the mosaic dataset using a cursor? I just remove all the items and then add new depth. Same for stream flood depth.</p></li>
+<li><p>Should each mosaic database in its own SDE geodatabase as suggested by ESRI?</p></li>
+</ul>
+</section>
+<section id="publish-map-and-image-services">
+<h3><span class="section-number">6.6.4. </span>Publish Map and Image Services<a class="headerlink" href="#publish-map-and-image-services" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The map services published on the KBS server are available at <a class="reference external" href="https://services.kars.geoplatform.ku.edu/arcgis/rest/services">https://services.kars.geoplatform.ku.edu/arcgis/rest/services</a>. Flood mapping related map services are published under the folder “fldpln_kansas” on the server.</p>
+<ul>
+<li><p>fldpln_kansas/Basemap (MapServer)</p></li>
+<li><p>fldpln_kansas/floodplains (ImageServer)</p></li>
+<li><p>fldpln_kansas/MinDtf (ImageServer)</p></li>
+<li><p>fldpln_kansas/RandomStage (ImageServer)</p></li>
+<li><p>fldpln_kansas/ReservoirMap (ImageServer)</p></li>
+<li><p>fldpln_kansas/StreamFloodMap_Current (ImageServer)</p></li>
+</ul>
+</li>
+<li><p>Map services can be published using ArcGIS Pro on KBS ArcGIS Server. To publish map services on the server, an ArcGIS Server Manager account (kars, avhRR=landsat) is need to connect to the server at localhost:6443 in ArcGIS Pro.</p></li>
+<li><p>Published map services are managed, for example stop, start and delete a map service, by the same ArcGIS Server Manager account. The ArcGIS Server Manager can be accessed at <a class="reference external" href="https://localhost:6443/arcgis/manager">https://localhost:6443/arcgis/manager</a> on the KBS server.</p></li>
+<li><p>To publish a map or image service with mosaic dataset, the server must have a the ArcGIS Image Server license. We may get around by publishing a <a class="reference external" href="https://enterprise.arcgis.com/en/server/latest/publish-services/windows/share-imagery-as-an-arcgis-online-tiled-map-service.htm">tiled map service</a> without using ArcGIS Image Server but the approach seems cumbersome.</p></li>
+<li><p>Both ArcGIS Desktop and Pro can be used to publish map services. What is the difference?</p></li>
+<li><p>Map services can be published on either on-premises ArcGIS Server (such as the KBS server) or ArcGIS Online which is a server on the cloud. What are pros and cons between the two?</p></li>
+<li><p>Image service parameters: sampling set to nearest neighbor!</p></li>
+<li><p>Image Service (pixel value + some analysis functions) vs. WMS (just for display) vs. WCS (can query pixel values)</p></li>
+</ul>
+</section>
+<section id="update-gauges-and-flood-maps">
+<h3><span class="section-number">6.6.5. </span>Update gauges and flood maps<a class="headerlink" href="#update-gauges-and-flood-maps" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>Update gauge feature table</p>
+<p>The gauge table is stored in a PostGreSQL database. Function GetGaugeStageFromPostgres() in fldpln_gauge.py stores sensitive information for accessing the table in the database. This has been resolved by using .ini (see database.ini) configuration file vs. fldpln_header.py</p>
+</li>
+<li><p>Update flood maps (reservoir and stream inundation maps)</p>
+<p>After new maps are added to a mosaic dataset and a mosaic dataset based image service, both ArcGIS Pro and the image service need to be refreshed to properly display the mosaic dataset and image service in Pro and dashboard. Otherwise, the image service will show chess boxes on the dashboard.</p>
+<p>To refresh the image service, a token is needed to send the refresh request to the service. The token can be generated using ArcGIS Server Manager (with proper user name and passwd) &#64; <a class="reference external" href="https://localhost:6443/arcgis/tokens/generateToken">https://localhost:6443/arcgis/tokens/generateToken</a> or <a class="reference external" href="https://kbs-karsfl-pc01.home.ku.edu/arcgis/tokens/generateToken">https://kbs-karsfl-pc01.home.ku.edu/arcgis/tokens/generateToken</a>. Note that by default, the token expires in a day. For longer life span token, we have to change the Security setting of the service. And it seems that ArcGIS Server only allows maximum of 1 year and this might be because of the annual license at KU.</p>
+</li>
+</ul>
+</section>
+<section id="resources">
+<h3><span class="section-number">6.6.6. </span>Resources<a class="headerlink" href="#resources" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://gis.wsu.edu/portal/portalhelp/en/get-started/latest/windows/what-is-arcgis-enterprise-.htm">ArcGIS Enterprise</a></p>
+<ul>
+<li><p><a class="reference external" href="https://gis.wsu.edu/portal/portalhelp/en/get-started/latest/windows/additional-server-deployment.htm">ArcGIS Enterprise server roles</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="https://gis.wsu.edu/portal/portalhelp/en/server/latest/get-started/windows/what-is-arcgis-for-server-.htm">ArcGIS Server</a></p>
+<ul>
+<li><p><a class="reference external" href="https://gis.wsu.edu/portal/portalhelp/en/server/latest/get-started/windows/about-arcgis-server-licensing-roles.htm">ArcGIS Server licensing roles</a></p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="resources-on-arcgis-image-for-arcgis-online">
+<h3><span class="section-number">6.6.7. </span>Resources on ArcGIS Image for ArcGIS Online<a class="headerlink" href="#resources-on-arcgis-image-for-arcgis-online" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Overview of ArcGIS Image for ArcGIS Online capabilities: <a class="reference external" href="https://youtu.be/tXQ98pHXwdY">https://youtu.be/tXQ98pHXwdY</a></p>
+<ul>
+<li><p>ArcGIS Image for ArcGIS Online Implementation Guide: <a class="reference external" href="https://www.esri.com/content/dam/esrisites/en-us/media/pdf/implementation-guides/arcgis-image-online-implementation-guide.pdf">https://www.esri.com/content/dam/esrisites/en-us/media/pdf/implementation-guides/arcgis-image-online-implementation-guide.pdf</a></p></li>
+<li><p>Get to know ArcGIS Image for ArcGIS Online: <a class="reference external" href="https://www.esri.com/content/dam/esrisites/en-us/media/pdf/implementation-guides/get-to-know-arcgis-image-for-arcgis-online.pdf">https://www.esri.com/content/dam/esrisites/en-us/media/pdf/implementation-guides/get-to-know-arcgis-image-for-arcgis-online.pdf</a></p></li>
+<li><p>Raster Analytics and Deep Learning in ArcGIS Online: <a class="reference external" href="https://www.esri.com/arcgis-blog/products/arcgis-online/imagery/esri-uc-2021-raster-analytics-and-deep-learning-in-arcgis-online/">https://www.esri.com/arcgis-blog/products/arcgis-online/imagery/esri-uc-2021-raster-analytics-and-deep-learning-in-arcgis-online/</a></p></li>
+</ul>
+</li>
+<li><p>Educational Resources</p>
+<ul>
+<li><p>Get Started with ArcGIS Image for ArcGIS Online: <a class="reference external" href="https://community.esri.com/t5/education-blog/get-started-with-arcgis-image-for-arcgis-online/ba-p/1167373">https://community.esri.com/t5/education-blog/get-started-with-arcgis-image-for-arcgis-online/ba-p/1167373</a></p></li>
+<li><p>Try ArcGIS Image for ArcGIS Online (learn path): <a class="reference external" href="https://learn.arcgis.com/en/paths/work-with-imagery-in-the-cloud/">https://learn.arcgis.com/en/paths/work-with-imagery-in-the-cloud/</a></p></li>
+<li><p>Imagery in Action MOOC:
+<a class="reference external" href="https://www.esri.com/training/catalog/6074ab588e68a831e4d8974b/imagery-in-action/">https://www.esri.com/training/catalog/6074ab588e68a831e4d8974b/imagery-in-action/</a></p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="schedule-flood-mapping-jobs-on-the-server">
+<h2><span class="section-number">6.7. </span>Schedule Flood Mapping Jobs on the Server<a class="headerlink" href="#schedule-flood-mapping-jobs-on-the-server" title="Link to this heading">#</a></h2>
+<p>In the operational mode, flood maps are generated based on current observed stage and forecasted stage which are constantly updated by NWS and other agencies. Those flood maps can be generated by scheduled jobs where each job may have several taks.</p>
+<section id="python-scripts-and-batch-files">
+<h3><span class="section-number">6.7.1. </span>Python scripts and batch files<a class="headerlink" href="#python-scripts-and-batch-files" title="Link to this heading">#</a></h3>
+<p>Flood maps are first created using the fldpln_lib2map.py script, which generates tile COG files. Those COG files are then put into an ArcGIS mosaic dataset by the fldpln_map2md.py script for visualization and for serving as image and map services. The two scripts use different python environments where the first script uses open source packages and the second script uses arcpy for ArcGIS mosaic dataset. Because of this, a batch file is needed to run the scripts together. To change the python environment between the script, we can either use the “conda” command or  directly use the python.exe from the environments.</p>
+<p>ArcGIS Pro or image services may lock the files under the folder that serve as the data source to a mosaic dataset. As such, updated flood maps can not directly overwrite the tile COG files under the mosaic dataset source folder.  To deal with this, new flood maps are stored under a new time stamped folder, for example fcst_yyyymmdd_hhmm, and the mosaic dataset is updated with the new folder. The third python script, fldpln_deletemapfolder.py, is called in the batch file to remove the map folders that are older than a certain time period, for example a day. The third python script can be combined with the second script though.</p>
+</section>
+<section id="worker-space-for-dask-localcluster">
+<h3><span class="section-number">6.7.2. </span>Worker space for Dask LocalCluster<a class="headerlink" href="#worker-space-for-dask-localcluster" title="Link to this heading">#</a></h3>
+<p>The fldpln_lib2map.py script can use a Dask LocalCluster to speed up flood mapping. When create a LocalCLuster, Dask creats the “dask-worker-space” folder for its workers. By defaut, the folder is created under the same folder where the python script is located. However, when the script is executed in a batch file which is scheduled as a task, Dask, by default, creates the folder under C:\Windows\system32 which is usually prohibited for most users. To avoid this, when creating the LocalCluster, we need to explicitly set the “local_dir” parameter to a folder we can access, for example D:\projects_new\fldpln\tools\dask-worker-space.</p>
+</section>
+<section id="schedule-task">
+<h3><span class="section-number">6.7.3. </span>Schedule task<a class="headerlink" href="#schedule-task" title="Link to this heading">#</a></h3>
+<p>Create a task folder, for example fldpln_kansas, under Task Scheduler\Task Scheduler Library to organize all the tasks related with one project.</p>
+<p>To schedule a task which runs, say, every hour, first <a class="reference external" href="https://www.thewindowsclub.com/how-to-schedule-batch-file-run-automatically-windows-7">create as a daily task</a> using Task Scheduler. Then <a class="reference external" href="https://techrando.com/2019/06/22/how-to-execute-a-task-hourly-in-task-scheduler/">modify the Trigger property of the daily task</a> to repeat the task every hour during a day.</p>
+<p>By default, the task “Run only when user is logged on”, and the task can be run either on demand or automatically as scheduled. A CMD window will popup to display the standard and error outputs from the batch file.</p>
+<p>To change the task to “Run whether user is logged on or not”, the user must have the “Log on as batch job rights”. With the “lixi_a” account (an admin account), I have <a class="reference external" href="https://www.urtech.ca/2019/06/solved-this-task-requires-that-the-user-account-specified-has-log-on-as-batch-job-rights/">assigned my “lixi” account the batch job right</a>.</p>
+<ul class="simple">
+<li><p>While a network user can run tasks on the server whether the user is logged on or not, the network drives that are accessible to the user seems NOT available any more. So, all the network data, scripts and batch files MUST be accessible on the server local drive.</p></li>
+<li><p>The standard (1) and error (2) outputs when running the batch file MUST be redirected to a file. Otherwise, the task won’t run! This can be done when setting up the action of the task using “&gt;fldpln.log” or “&gt;&gt;fldpln.log” as the last parameter of the batch file.</p></li>
+</ul>
+<p>While it’s convenient to schedule the tasks on the server using the same network user, for example lixi, it’s better to use a local user for this (especially if the network user leaves the institute). To test this, the fldpln_task local account on the server is created (through Computer Management\Local Users and Groups) using the lixi_a admin account on the server. The account is given the remote access to the server (through user name itprdkarsap\fldpln_task) and assigned the “Log on as batch job rights”. The account has to install Miniconda and build the python environments, for example fldpln, to run the batch file and scripts.</p>
+<p>A local account (fldpln, passwd = Karsfim&#64;20241211) was created on the new server and hopefully there is no expiration on its passwd. The fldpln python environment was also created using the account and the kfim code was developed using the account too.</p>
+<p>On the old KARS server, for convenience, however, the tasks are still scheduled using the network account lixi! Another problem with using lixi account is that the account has to change its passwd two times a year. When the password expires, the tasks are disabled and the tasks have to be manually re-enabled with the new password. Below is how this can be done:</p>
+<ul class="simple">
+<li><p>Start Task Scheduler</p></li>
+<li><p>Go to Task Scheduler Library and locate fldpln_kanas folder</p></li>
+<li><p>Right click on the task and select Properties</p></li>
+<li><p>On the popup dialog box that appears, click on the Ok button and the system will prompt for the new password. Enter the new password and click OK.</p></li>
+</ul>
+<p>Sometimes when the password expires, ArcGIS Server may lock the tile files under the map folder (D:\projects_new\fldpln\kansas\maps) and tasks/scripts are unable to delete those folders. We need to restart ArcGIS Server (I also think the server is automatically restarted from time to time) to clean up the folders. We did this by asking Justin Loebel at KU IT to do this. Can we use ArcGIS Server Manager (<a class="reference external" href="//localhost:6443/arcgis/manager/">//localhost:6443/arcgis/manager/</a> with an account (kars, avhRR=landsat)) to restart the server?</p>
+</section>
+</section>
+<section id="using-database-on-the-server">
+<h2><span class="section-number">6.8. </span>Using Database on the Server<a class="headerlink" href="#using-database-on-the-server" title="Link to this heading">#</a></h2>
+<p>Geospatial data can be stored as Shapefiles, file geodatabase and enterprise geodatabase using an underlying database management system (DBMS). Different data stores are for different purposes. While shapefiles are simple and readable by almost any GIS software, they have some significant cons such as the length of field name in a table and the lack of concurrence management. File geodatabase is a step further to remove some of those limitations on shapfiles but still limits to single user database. In flood mapping, there are several cases that a geospatial data is updated (AHPS gauges, flood map mosaic datasets) by one process and, at the same time, it may be read by another process (ArcGIS map services). As such, An enterprise database need to be used in the flood mapping application.</p>
+<section id="postgresql">
+<h3><span class="section-number">6.8.1. </span>PostgreSQL<a class="headerlink" href="#postgresql" title="Link to this heading">#</a></h3>
+<p>PostgreSQL is developed from Postgres as an open source relational database management system. The KBS server has PostgrSQL installed which serves as the enterprise database. ArcGIS also can use PostgreSQL through ArcGIS SDE (spatial database engine).</p>
+</section>
+<section id="create-a-postgresql-geodatabase-using-arcgis-tools">
+<h3><span class="section-number">6.8.2. </span>Create a PostGreSQL Geodatabase using ArcGIS tools<a class="headerlink" href="#create-a-postgresql-geodatabase-using-arcgis-tools" title="Link to this heading">#</a></h3>
+<p>To use PostgreSQL in ArcGIS, we first need to create a PostGreSQL database. This can be done using the Create Enterprise Geodatabase geoprocessing tool in ArcGIS. The following parameters are needed for the tool involving both PostgrSQL and ArcSDE credentials:</p>
+<ul>
+<li><p>Database Platform:  PostgreSQL</p></li>
+<li><p>Instance:  <a class="reference external" href="http://kbs-karsfl-pc01.home.ku.edu">kbs-karsfl-pc01.home.ku.edu</a></p></li>
+<li><p>Database Administrator: sde</p></li>
+<li><p>Database Admin Password: avhRR=landsat</p></li>
+<li><p>Geodatabase Administrator Password: avhRR=landsat</p></li>
+<li><p>Authorization File: C:\Program Files\ESRI\License11.4\sysgen\keycodes</p>
+<p><img alt="Create Enterprise Geodatabase" src="../_images/create_enterprise_geodatabase.PNG" /></p>
+</li>
+</ul>
+<p>After the PostgreSQL geodatabse is created, we need to create a database connection file so that ArcGIS can access the database. This is done using the Create Database Connection tool as shown below:</p>
+<p><img alt="Create Database Connection" src="../_images/create_database_connection.PNG" /></p>
+<p>Note that the connection file has a default extension of .sde and can be saved in any folder. For this project, it is saved under D:\fldpln\ks2024\databases where all the mosaic databaset file geodatabases are stored. The connection file is encrypted as it contains the password. The connection file can then be used to add the database to an ArcGIS project in Catalog through Databases\Add Database (navigating to where the connection file is located). The connection file can also be created in ArcGIS Catalog through Databases\New Database Connection and the connection file is saved under the ArcGIS project folder.</p>
+</section>
+<section id="register-database-with-arcgis-server">
+<h3><span class="section-number">6.8.3. </span>Register Database with ArcGIS Server<a class="headerlink" href="#register-database-with-arcgis-server" title="Link to this heading">#</a></h3>
+<p>When use ArcGIS Server to publish web services that rely on local data, we need to register that data with ArcGIS Server to avoid copying the data to the server. We can register file, folder, and database to the server by using the <a class="reference external" href="https://localhost:6443/arcgis/manager/site.html">ArcGIS Server Manager</a> on the server by going to Site\Data Stores after logging in the manager. Currently, there are folders (such as D:) and databases (such as fldpln_kansas) are register with the server.</p>
+</section>
+<section id="arcsde-license-update-issue">
+<h3><span class="section-number">6.8.4. </span>ArcSDE license update issue<a class="headerlink" href="#arcsde-license-update-issue" title="Link to this heading">#</a></h3>
+<p>KU has an annual ESRI campus license update. For ArcSDE databases, for example the fldpln_ks.sde which stores the gauge observations retrieved from NOAA/NWS/AHPS map server, need to be updated using “keycodes” (under folder C:\Program Files\ESRI\License10.9\sysgen) instead of ArcGIS Server license file (ECP file). Based on Dustin Fross’ email (8/7/24), ArcGIS Server creates the keycode file when ArcServer is licensed annually. Every Enterprise Geodatabase has to also be “licensed” using the keycode file.</p>
+</section>
+<section id="access-postgresql-using-python">
+<h3><span class="section-number">6.8.5. </span>Access PostgreSQL Using Python<a class="headerlink" href="#access-postgresql-using-python" title="Link to this heading">#</a></h3>
+<p>When updating and getting gauge stage from the PostgreSQL database, the psycopg2 library, the most popular PostgreSQL database adapter for the Python programming language, is used. To hide senstive information from python code, a text database connection file (with .ini extension) was created. This connection file serves the same purpose as the .sde file used by ArcGIS to connect to the PostgreSQL database.</p>
+<p>gauge_read_from_postgres.py demonstrates the basics of accessing PostGreSQL database through Python.</p>
+<section id="create-database-using-pgadmin-and-commands">
+<h4><span class="section-number">6.8.5.1. </span>Create database using pgAdmin and commands<a class="headerlink" href="#create-database-using-pgadmin-and-commands" title="Link to this heading">#</a></h4>
+<p>pgAdmin is a GUI PostgreSQL database management software.</p>
+<p>A database can also be created by using PostgreSQL command createdb. For example, using the same PostgreSQL credential, we can create a new database li_db with the following command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">createdb -h itprdkarsap.home.ku.edu -U sde -O sde -W li_db</span>
+</pre></div>
+</div>
+<p>Note that the createdb command is located under C:\Program Files\PostgreSQL\13\bin on the server if it not directly available in the command window. The command will prompt for the passwd for the sde user.</p>
+</section>
+</section>
+<section id="delete-a-postgresql-database">
+<h3><span class="section-number">6.8.6. </span>Delete a PostGreSQL Database<a class="headerlink" href="#delete-a-postgresql-database" title="Link to this heading">#</a></h3>
+<p>pgAdmin can be used to delete a geodatabase.</p>
+<p>While ArcGIS SDE provides a tool to create a PostGreSQL database, it doesn’t have a tool to delete a PostGreSQL database. To delete a PostGreSQL database, we have to use the dropdb command. Before we delete any database, we should first remove any services (such as map or mosaic dataset based image services) that relies on the database. The following command will delete the li_db.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">dropdb -h itprdkarsap.home.ku.edu -U sde -W -i li_db</span>
+</pre></div>
+</div>
+</section>
+<section id="use-psql">
+<h3><span class="section-number">6.8.7. </span>Use psql<a class="headerlink" href="#use-psql" title="Link to this heading">#</a></h3>
+<p>psql is a tool that inactively communicate with PostGreSQL. The following command will list all the database with user sde:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">psql -h itprdkarsap.home.ku.edu -U sde -l</span>
+</pre></div>
+</div>
+<p>The following commands connect to the fldpln_kansas database, list all the tables in the database, list the fields in table fc_stream_gauges, and exit:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sql -h itprdkarsap.home.ku.edu -U sde fldpln_kansas</span>
+<span class="go">fldpln_kansas=# \dt+</span>
+<span class="go">fldpln_kansas=# \d+ fc_stream_gauges</span>
+<span class="go">fldpln_kansas=# \q</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "giswqs/jupyter-book-demo",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="05_gauge.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">5. </span>Gauges</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="07_client.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">7. </span>Flood Mapping Dashboard</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-an-arcgis-fldpln-python-environment">6.1. Create an ArcGIS-fldpln python environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serving-visualizing-big-raster-data">6.2. Serving/Visualizing Big Raster Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-tilers-localtileserve-and-titiler">6.3. Using Tilers (localtileserve and titiler)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#issues-in-generating-flood-cog-tile-files">6.4. Issues in Generating Flood COG Tile Files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamentals-of-map-services">6.5. Fundamentals of Map Services</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serve-flood-maps-on-arcgis-server">6.6. Serve Flood Maps on ArcGIS Server</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-overall-process">6.6.1. The overall process</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mosaic-dataset">6.6.2. Mosaic Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#file-vs-sde-geodatabase">6.6.3. File vs SDE Geodatabase</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#publish-map-and-image-services">6.6.4. Publish Map and Image Services</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#update-gauges-and-flood-maps">6.6.5. Update gauges and flood maps</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resources">6.6.6. Resources</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resources-on-arcgis-image-for-arcgis-online">6.6.7. Resources on ArcGIS Image for ArcGIS Online</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#schedule-flood-mapping-jobs-on-the-server">6.7. Schedule Flood Mapping Jobs on the Server</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-scripts-and-batch-files">6.7.1. Python scripts and batch files</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#worker-space-for-dask-localcluster">6.7.2. Worker space for Dask LocalCluster</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#schedule-task">6.7.3. Schedule task</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-database-on-the-server">6.8. Using Database on the Server</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#postgresql">6.8.1. PostgreSQL</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-postgresql-geodatabase-using-arcgis-tools">6.8.2. Create a PostGreSQL Geodatabase using ArcGIS tools</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#register-database-with-arcgis-server">6.8.3. Register Database with ArcGIS Server</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arcsde-license-update-issue">6.8.4. ArcSDE license update issue</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#access-postgresql-using-python">6.8.5. Access PostgreSQL Using Python</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#create-database-using-pgadmin-and-commands">6.8.5.1. Create database using pgAdmin and commands</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#delete-a-postgresql-database">6.8.6. Delete a PostGreSQL Database</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-psql">6.8.7. Use psql</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Qiusheng Wu
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

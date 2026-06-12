@@ -2,13 +2,13 @@
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="./" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Flood Inundation Mapping in Kansas &#8212; Jupyter Book Demo</title>
+    <title>8. Rapid Image Viewer &#8212; Jupyter Book Demo</title>
   
   
   
@@ -27,45 +27,46 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- So that users can add custom icons -->
-  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="_static/doctools.js?v=9a2dae69"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="_static/copybutton.js?v=f281be69"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'index';</script>
-    <link rel="canonical" href="https://giswqs.github.io/jupyter-book-demo/index.html" />
-    <link rel="icon" href="_static/fav.ico"/>
-    <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="1. Introduction" href="book/01_intro.html" />
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/08_image_viewer';</script>
+    <link rel="canonical" href="https://giswqs.github.io/jupyter-book-demo/book/08_image_viewer.html" />
+    <link rel="icon" href="../_static/fav.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="9. Future Improvements" href="09_future.html" />
+    <link rel="prev" title="7. Flood Mapping Dashboard" href="07_client.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -87,7 +88,7 @@
   <dialog id="pst-search-dialog">
     
 <form class="bd-search d-flex align-items-center"
-      action="search.html"
+      action="../search.html"
       method="get">
   <i class="fa-solid fa-magnifying-glass"></i>
   <input type="search"
@@ -117,8 +118,6 @@
       
       
       
-        
-      
       <dialog id="pst-primary-sidebar-modal"></dialog>
       <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
@@ -138,7 +137,7 @@
     
   
 
-<a class="navbar-brand logo" href="#">
+<a class="navbar-brand logo" href="../index.html">
   
   
   
@@ -149,8 +148,8 @@
       
     
     
-    <img src="_static/logo.png" class="logo__image only-light" alt="Jupyter Book Demo - Home"/>
-    <img src="_static/logo.png" class="logo__image only-dark pst-js-only" alt="Jupyter Book Demo - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Jupyter Book Demo - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Jupyter Book Demo - Home"/>
   
   
 </a></div>
@@ -164,24 +163,24 @@
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="book/01_intro.html">1. Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="book/02_fldpln.html">2. The FLDPLN Model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="book/03_tiling.html">3. Tile FLDPLN Libraries</a></li>
-<li class="toctree-l1"><a class="reference internal" href="book/04_parallelization.html">4. Parallelize Flood Mapping</a></li>
-<li class="toctree-l1"><a class="reference internal" href="book/05_gauge.html">5. Gauges</a></li>
-<li class="toctree-l1"><a class="reference internal" href="book/06_server.html">6. Serve Flood Maps</a></li>
-<li class="toctree-l1"><a class="reference internal" href="book/07_client.html">7. Flood Mapping Dashboard</a></li>
-<li class="toctree-l1"><a class="reference internal" href="book/08_image_viewer.html">8. Rapid Image Viewer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="book/09_future.html">9. Future Improvements</a></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_intro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_fldpln.html">2. The FLDPLN Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_tiling.html">3. Tile FLDPLN Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_parallelization.html">4. Parallelize Flood Mapping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_gauge.html">5. Gauges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_server.html">6. Serve Flood Maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_client.html">7. Flood Mapping Dashboard</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">8. Rapid Image Viewer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_future.html">9. Future Improvements</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendices</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="book/system.html">System Description</a></li>
-<li class="toctree-l1"><a class="reference internal" href="book/open_source.html">Open Source vs. ArcPy</a></li>
-<li class="toctree-l1"><a class="reference internal" href="book/python_env.html">Build a Python Environment for Using the FLDPLN Model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="book/binder.html">Binder and BinderHub</a></li>
-<li class="toctree-l1"><a class="reference internal" href="book/bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="system.html">System Description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open_source.html">Open Source vs. ArcPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_env.html">Build a Python Environment for Using the FLDPLN Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="binder.html">Binder and BinderHub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
 </ul>
 
     </div>
@@ -233,6 +232,73 @@
 
 
 
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/giswqs/jupyter-book-demo/main?urlpath=tree/book/08_image_viewer.md" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/giswqs/jupyter-book-demo/blob/main/book/08_image_viewer.md" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
 <div class="dropdown dropdown-source-buttons">
   <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
     <i class="fab fa-github"></i>
@@ -258,7 +324,7 @@
       
       
       
-      <li><a href="https://github.com/giswqs/jupyter-book-demo/edit/main/index.md" target="_blank"
+      <li><a href="https://github.com/giswqs/jupyter-book-demo/edit/main/book/08_image_viewer.md" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -275,7 +341,7 @@
       
       
       
-      <li><a href="https://github.com/giswqs/jupyter-book-demo/issues/new?title=Issue%20on%20page%20%2Findex.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/giswqs/jupyter-book-demo/issues/new?title=Issue%20on%20page%20%2Fbook/08_image_viewer.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -305,7 +371,24 @@
       
       
       
-      <li><a href="_sources/index.md" target="_blank"
+      <li><a href="../_sources/book/08_image_viewer.ipynb" target="_blank"
+   class="btn btn-sm btn-download-notebook-button dropdown-item"
+   title="Download notebook file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="../_sources/book/08_image_viewer.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -379,7 +462,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Flood Inundation Mapping in Kansas</h1>
+    <h1>Rapid Image Viewer</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -393,20 +476,10 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="flood-inundation-mapping-in-kansas">
-<h1>Flood Inundation Mapping in Kansas<a class="headerlink" href="#flood-inundation-mapping-in-kansas" title="Link to this heading">#</a></h1>
-<p>This document tells the journey of building an <a class="reference external" href="https://ku.maps.arcgis.com/apps/dashboards/6de842421d3945e3ae0fe16372416b10">operational near-real-time flood inundation mapping system</a> for the State of Kansas.</p>
-<p>The project uses stream gauge stage observations to generate flood inundation depth map in the eastern half of Kansas. It uses the FLDPLN inundation model which was developed by Dr. Jude Kastens at Kansas Biological Survey. The system was developed by a group of students and faculty members, including David Weiss, Abu Mahdi, David Weekley, Jim Coll, and Dr. Xingong Li, at the Department of Geography &amp; Atmospheric Science, University of Kansas. The project is primarily funded by the Kansas Water Office.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This documentation is currently under construction. PLease check back!</p>
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
+  <section class="tex2jax_ignore mathjax_ignore" id="rapid-image-viewer">
+<h1><span class="section-number">8. </span>Rapid Image Viewer<a class="headerlink" href="#rapid-image-viewer" title="Link to this heading">#</a></h1>
+<p>This chapter covers the development of a <a class="reference external" href="https://kenneth-ekpetere.users.earthengine.app/view/image-viewer-v3">rapid image viewer (RIV)</a> on the Google Earth Engine (GEE). The RIV is a web application that allows users to view images in a browser and is built using Javascript and GEE GUI widgets. It is designed to be to be easy to use with a wide range of image types available on GEE.</p>
+<p>Ken will be the primary author of the RIV.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -422,7 +495,7 @@
         },
         kernelOptions: {
             name: "python3",
-            path: "./."
+            path: "./book"
         },
         predefinedOutput: true
     }
@@ -439,12 +512,21 @@
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="07_client.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">7. </span>Flood Mapping Dashboard</p>
+      </div>
+    </a>
     <a class="right-next"
-       href="book/01_intro.html"
+       href="09_future.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">1. </span>Introduction</p>
+        <p class="prev-next-title"><span class="section-number">9. </span>Future Improvements</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -498,8 +580,8 @@ By Qiusheng Wu
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
   </footer>

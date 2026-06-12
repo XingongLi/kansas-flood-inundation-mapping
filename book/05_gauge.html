@@ -1,0 +1,866 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>5. Gauges &#8212; Jupyter Book Demo</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/05_gauge';</script>
+    <link rel="canonical" href="https://giswqs.github.io/jupyter-book-demo/book/05_gauge.html" />
+    <link rel="icon" href="../_static/fav.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6. Serve Flood Maps" href="06_server.html" />
+    <link rel="prev" title="4. Parallelize Flood Mapping" href="04_parallelization.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Jupyter Book Demo - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Jupyter Book Demo - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_intro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_fldpln.html">2. The FLDPLN Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_tiling.html">3. Tile FLDPLN Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_parallelization.html">4. Parallelize Flood Mapping</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">5. Gauges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_server.html">6. Serve Flood Maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_client.html">7. Flood Mapping Dashboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_image_viewer.html">8. Rapid Image Viewer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_future.html">9. Future Improvements</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="system.html">System Description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open_source.html">Open Source vs. ArcPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_env.html">Build a Python Environment for Using the FLDPLN Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="binder.html">Binder and BinderHub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/giswqs/jupyter-book-demo/main?urlpath=tree/book/05_gauge.md" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/giswqs/jupyter-book-demo/blob/main/book/05_gauge.md" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/giswqs/jupyter-book-demo" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/giswqs/jupyter-book-demo/edit/main/book/05_gauge.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/giswqs/jupyter-book-demo/issues/new?title=Issue%20on%20page%20%2Fbook/05_gauge.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/book/05_gauge.ipynb" target="_blank"
+   class="btn btn-sm btn-download-notebook-button dropdown-item"
+   title="Download notebook file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="../_sources/book/05_gauge.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Gauges</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usgs-gauges-in-and-around-kansas">5.1. USGS Gauges in and around Kansas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#noaa-nws-ahps-gauges">5.2. NOAA/NWS/AHPS Gauges</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#merge-usgs-and-ahps-gauges">5.3. Merge USGS and AHPS gauges</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gauge-stage-datum-elevation-and-vertical-datum">5.3.1. Gauge stage datum elevation and vertical datum</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-lake-gauges-for-flood-mapping">5.4. Prepare lake gauges for flood mapping</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-stream-gauges-for-flood-mapping">5.5. Prepare stream gauges for flood mapping</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vertical-datum-adjustment">5.6. Vertical datum adjustment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-lake-and-stream-fim-tables">5.7. Create lake and stream FIM tables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-a-gauge-table-for-nowcast">5.8. Build a gauge table for NOWCAST</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gauge-issues">5.9. Gauge issues</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#david-weekly-s-gauges">5.10. David Weekly’s Gauges</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clean-up-the-gauges">5.10.1. Clean up the gauges</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#check-the-gauges">5.10.2. Check the gauges</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#retrieve-current-and-forecast-gauge-stage-from-ahps">5.11. Retrieve current and forecast gauge stage from AHPS</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpolate-dof-for-fsps-using-snapped-gauges">5.12. Interpolate DOF for FSPs using snapped gauges</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#horizontal-interpolation">5.12.1. Horizontal Interpolation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vertical-interpolation">5.12.2. Vertical Interpolation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manually-assign-stream-orders">5.13. Manually assign stream orders</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="gauges">
+<h1><span class="section-number">5. </span>Gauges<a class="headerlink" href="#gauges" title="Link to this heading">#</a></h1>
+<p>Flood mapping depends on the availability, quality and timing of the stream gauge stage. In the US, the most authoritative source for gauge data is the USGS <a class="reference external" href="https://water.usgs.gov/nsip/">National Streamflow Information Program</a> which supports the collection and (or) delivery of both streamflow and water-level information at over approximately 10000 sites.The <a class="reference external" href="https://waterdata.usgs.gov/nwis/">National Water Information System (NWIS)</a> publishes the real-time (instantaneous) gauge data at some of those sites.</p>
+<section id="usgs-gauges-in-and-around-kansas">
+<h2><span class="section-number">5.1. </span>USGS Gauges in and around Kansas<a class="headerlink" href="#usgs-gauges-in-and-around-kansas" title="Link to this heading">#</a></h2>
+<p>Using the bounding box of (-99.61,36.81,-94.20,40.25) which is based on the 1-km buffer of the Kansas stream and reservoir floodplains raster (see the image below), USGS lake and stream gauges with instantaneous values are retrieved from NWIS’ <a class="reference external" href="https://waterservices.usgs.gov/rest/Site-Service.html">Site Web Service</a> using <a class="reference internal" href="#waterservices.usgs.gov/nwis/site/?format=rdb,1.0&amp;bBox=-99.610000,36.810000,-94.200000,40.250000&amp;siteType=LK,ST&amp;siteStatus=active&amp;hasDataTypeCd=iv"><span class="xref myst">this URL</span></a> which is generated using the <a class="reference external" href="https://waterservices.usgs.gov/rest/Site-Test-Tool.html">Site Test Tool</a>. The returned gauge data, which is in USGS RDB tab-delimited format, was manually processed and saved as an Excel file (usgs_gauges_ks_nearby.xlsx), which was then imported into ArcGIS as a feature class. A total of 271 gauges within the geographic box were retrieved from the site web service.</p>
+<p><img alt="usgs_gauges" src="../_images/usgs_gauges_ks_nearby.PNG" /></p>
+</section>
+<section id="noaa-nws-ahps-gauges">
+<h2><span class="section-number">5.2. </span>NOAA/NWS/AHPS Gauges<a class="headerlink" href="#noaa-nws-ahps-gauges" title="Link to this heading">#</a></h2>
+<p>The National Weather Service’s (NWS) <a class="reference external" href="https://water.weather.gov/ahps/">Advanced Hydrologic Prediction Service (AHPS)</a> is a web site that provides forecast products, including river (and reservoir) stage observation and forecasts. While AHPS allows users to view current observations and forecasts through interactive online maps, it also makes the data downloadable as Shapefiles or retrievable through WMS/WFS services. The majority of the AHPS gauge data, especially current observation stage, originates from the NWIS.</p>
+<p>Current and forecast gauge stage in the nation can be <a class="reference external" href="https://water.weather.gov/ahps/download.php">downloaded as Shapefiles</a>, which may not be efficient if only a small subset of gauges are used for flood mapping. This capability is implemented in functions GetAhpsGaugeForecast() and GetAhpsGaugeHistoricalFloodStages() in fldpln_gauge.py.</p>
+<p>There are 241 AHPS gauges from the <a class="reference external" href="https://water.weather.gov/ahps/download.php?data=tgz_obs">current observation shapefile</a> which are within the geographical box.</p>
+</section>
+<section id="merge-usgs-and-ahps-gauges">
+<h2><span class="section-number">5.3. </span>Merge USGS and AHPS gauges<a class="headerlink" href="#merge-usgs-and-ahps-gauges" title="Link to this heading">#</a></h2>
+<p>Among the 271 USGS gauges and 241 AHPS gauges, there are overlapping gauges which can be identified based on their distance. First, the nearest AHPS gauges for each USGS gauge which are less than or equal to 350 m were found. This resulted in 191 USGS-AHPS pairs. Then, the nearest USGS gauges for each AHPS gauge were also found and this resulted in 190 AHPS-USGS pairs. There are 190 gauge pairs that are nearest neighbors to each other. There is two USGS-AHPS pairs where two USGS gauges have the same AHPS gauge as their nearest gauge. In other word, in one of the USGS-AHPS pairs, the AHPS gauge has a different nearest USGS gauge. At the end, there 190 common/overlapping gauges, 81 unique USGS gauges and 51 unique AHPS gauges. In total there are 322 gauges that might be used for flood mapping.</p>
+<div class="highlight-note notranslate"><div class="highlight"><pre><span></span>The nearest approach doesn&#39;t guaranntee the USGS~AHPS paris are the same gauges. Their name (or general descriptions) should also be check to reassure this!
+</pre></div>
+</div>
+<p>The USGS gauges have the following fields:</p>
+<div class="highlight-table notranslate"><div class="highlight"><pre><span></span>  agency_cd       -- Agency
+  site_no         -- Site identification number
+  station_nm      -- Site name
+  site_tp_cd      -- Site type
+  dec_lat_va      -- Decimal latitude
+  dec_long_va     -- Decimal longitude
+  coord_acy_cd    -- Latitude-longitude accuracy
+  dec_coord_datum_cd -- Decimal Latitude-longitude datum
+  alt_va          -- Altitude of Gage/land surface
+  alt_acy_va      -- Altitude accuracy
+  alt_datum_cd    -- Altitude datum
+</pre></div>
+</div>
+<p>The  AHPS gauges have the following fields:</p>
+<div class="highlight-table notranslate"><div class="highlight"><pre><span></span>  &#39;GaugeLID&#39;, &#39;count&#39;, &#39;Status&#39;, &#39;Location&#39;, &#39;Latitude&#39;, &#39;Longitude&#39;,
+  &#39;Waterbody&#39;, &#39;State&#39;, &#39;Observed&#39;, &#39;ObsTime&#39;, &#39;Units&#39;, &#39;Action&#39;, &#39;Flood&#39;,
+  &#39;Moderate&#39;, &#39;Major&#39;, &#39;LowThresh&#39;, &#39;LowThreshU&#39;, &#39;WFO&#39;, &#39;HDatum&#39;,
+  &#39;PEDTS&#39;, &#39;SecValue&#39;, &#39;SecUnit&#39;, &#39;URL&#39;
+</pre></div>
+</div>
+<p>The merged gauges have the following fields:</p>
+<div class="highlight-table notranslate"><div class="highlight"><pre><span></span>  &#39;stationid&#39;,&#39;name&#39;,&#39;organization&#39;,&#39;stype&#39;,&#39;stationurl&#39;,
+  &#39;status&#39;,&#39;status_code&#39;,&#39;stage_ft&#39;,&#39;stage_time&#39;,&#39;graphurl&#39;,
+  &#39;action_stage&#39;,&#39;flood_stage&#39;,&#39;moderate_stage&#39;,&#39;major_stage&#39;,
+  &#39;datum_elevation&#39;,&#39;vdatum&#39;,&#39;to_navd88&#39;,
+  &#39;latitude&#39;,&#39;longitude&#39;,&#39;hdatum&#39;,&#39;x_utm14&#39;,&#39;y_utm14&#39;]
+</pre></div>
+</div>
+<p>When merge the gauges, the field values (such as the ‘name’ field) of the common gauges primarily came from USGS fields. For common and just AHPS gauges, their station URLs are from AHPS which are used to retrieve gauge stage datum elevation and vertical datum information. For the gauges that are only available from AHPS, gauge type (i.e., the ‘stype’ field) is based on whether its “Location” field contains the word “ Lake” or “ Reservoir”. Also, the “State” field is added into the “name” field for selecting lake gauges based the states later.</p>
+<section id="gauge-stage-datum-elevation-and-vertical-datum">
+<h3><span class="section-number">5.3.1. </span>Gauge stage datum elevation and vertical datum<a class="headerlink" href="#gauge-stage-datum-elevation-and-vertical-datum" title="Link to this heading">#</a></h3>
+<p>The stage of a stream gauge is relative to its datum which have an elevation defined on either vertical datum NAVD88 or NGVD29. It’s necessary to have the stage datum elevation in order to convert stage into stream water surface elevation and then to calculate depth of flow (i.e., depth of flow = water surface elevation -  stream bed elevation). For lake guages, the elevation reported are relative to the vertical datum, either AVD88 or NGVD29.</p>
+<p>Most USGS have stage datum elevation and vertical datum information when guages are retrieved from the NWIS. The AHPS gauges from the downloaded shapefile don’t have those information. All the AHPS gauges have their datum elevation and vertical datum information retrieved from their station HTML page using the function GetAhpsGaugeDatumElevation() in fldpln_gauge.py. When common gauges don’t have datum elevation and vertical datum, they are also retrieved from AHPS station pages if they have the information.</p>
+<p>Compared with David’s original gauges (622 in fldpln_ks.sde.FC_Stream_Gauges) and revised/cleaned-uo gauges (266 in fldpln_ks.sde.fldpln_ks_gauges), the new gauges cover all David’s gauges within the geographic box.</p>
+</section>
+</section>
+<section id="prepare-lake-gauges-for-flood-mapping">
+<h2><span class="section-number">5.4. </span>Prepare lake gauges for flood mapping<a class="headerlink" href="#prepare-lake-gauges-for-flood-mapping" title="Link to this heading">#</a></h2>
+<p>AHPS gauge DMRK1 seems a stream gauge in the upstream of the Webster reservoir and should not be classified as a lake gauge just based on its name has the word of reservoir. This gauge’s type (i.e., the stype field) was changed to ‘ST’ in the code. USGS lake gauge 391259097001800 seems an odd lake gauge and there is another lake gauge MLFK1 for the same lake.</p>
+<p>Among the 322 gauges, there are 28 lake gauges within the geographic box and 23 of them are in Kansas. Compared with David’s lake gauges (24) in Reservoir_Vertical_Datum_Adjustments.xlsx, two of the most western lake gauges (Cedar Bluff &amp; Keith Sebelius) are not included as they are outside the geographical box. The rest of the 22 gauges are all covered by the new lake gauges, and the USGS lake gauge 391259097001800 is an extra. Note that there are only 20 lakes that we have the bathymetry/DEM data and can map their flood inundation extents.</p>
+<p>Based on David Weekly’s Excel file (Reservoir_Vertical_Datum_Adjustments.xlsx) which stores the lake gauges that have bathy/DEM data for lake inundation mapping, for the 23 lake gauges, there are 19 gauges that can be used for FIM.</p>
+</section>
+<section id="prepare-stream-gauges-for-flood-mapping">
+<h2><span class="section-number">5.5. </span>Prepare stream gauges for flood mapping<a class="headerlink" href="#prepare-stream-gauges-for-flood-mapping" title="Link to this heading">#</a></h2>
+<p>Among the 322 gauges, there are 294 stream gages that can be used for flood inundation mapping (FIM). With a snapping distance of 350 meters,  there are 215 stream gauges that can be snapped to the FSPs of all the libraries. However, the same gauge can be snapped to the FSPs of different libraries  because library FSPs may overlap and sometimes the “overlapping” FSPs may have different locations (see figure below). There are in fact only 193 unique stream gauges that can be used for flood mapping in the libraries.</p>
+<p><img alt="" src="book/images/snap_gauge_to_fsps.PNG" /></p>
+<p>In total, there are 216 gauges (193 stream gauges and 23 lake gauges) that can be used for flood inundation mapping in eastern Kansas. Among the 193 stream gauges, 2 of them don’t have stage datum elevation. The two gauges, USGS station 06888990 on the Kansas River at Topeka water plant and USGS station 375350097262800 on the lower Arkansas River at a ASR (Aquifer storage and recovery) facility near Sedgwick, KS,  may measure water surface elevation directly and therefore don’t need stage datum elevation. However, using the <a class="reference external" href="https://waterservices.usgs.gov/rest/IV-Test-Tool.html">USGS Instantaneous Values Test Tool</a> and python script, it was found that both gauges measure stages. As such, there are a total of 191 stream gauges that can be used for stream flood mapping.</p>
+</section>
+<section id="vertical-datum-adjustment">
+<h2><span class="section-number">5.6. </span>Vertical datum adjustment<a class="headerlink" href="#vertical-datum-adjustment" title="Link to this heading">#</a></h2>
+<p>The FLDPLN libraries (and their FSPs) and lake bathymetry/DEM elevation are based on the NAVD88 vertical datum. Both stream and reservoir water surface elevation needs to be adjusted if their vertical datum are different from the NAVD88. Among the 23 lake gauges, there is only one gauge (06912490, PLKK1) has the vertical datum of NGVD29. Among the 191 stream gauges, there is one gauge (NSOK1) which doesn’t have a vertical datum. For those 23 gauges (22 lake + 1 stream) without vertical datum, we assume the vertical datum is set to NGVD29.</p>
+<p>Since FLDPLN libraries use NAVD88, a gauge will have a non-zero adjustment value to NAVD88 if the gauge’s vertical datum is NGVD29. This vertical datum conversion can be done using <a class="reference external" href="https://geodesy.noaa.gov/">National Geodetic Survey (NGS)’</a> interactive <a class="reference external" href="https://geodesy.noaa.gov/NCAT/">Coordinate Conversion and Transformation Tool (NCAT)</a> or <a class="reference external" href="https://www.ngs.noaa.gov/web_services/ncat/lat-long-height-service.shtml">Latitude-longitude-height Service</a>. Function NGVD29ToNAVD88OrthoHeightAdjustment() in fldpln_gauge.py has been implemented to use the web service. If a gauge’s horizontal datum is NAD8s or NAd83/WGA84, its vertical datum in the conversion service is <em>assumed as NAD83(1986)</em>. Several other NAD83 variants (NAD83(HARN), NAD83(NSRS2007)) were also tried but no difference was found in the adjustments.</p>
+<p>For lake gauges, David Weekly provided an Excel file (Reservoir_Vertical_Datum_Adjustments.xlsx) which stores the adjustment. There are some difference between David’s adjustment and the adjustment obtained through the NGS web service. This is likely because the gauge’s latitude and longitude are slightly different and it’s not sure what horizontal datum were used in David’s conversion.</p>
+<p>After the above processing, there are 210 gauges (191 stream and 19 lake) can bee for using in flood inundation mapping.</p>
+</section>
+<section id="create-lake-and-stream-fim-tables">
+<h2><span class="section-number">5.7. </span>Create lake and stream FIM tables<a class="headerlink" href="#create-lake-and-stream-fim-tables" title="Link to this heading">#</a></h2>
+<p>The 19 lake gauges and there corresponding bathy/DEM data file names (stored in the ‘lib_name’ field) are saved in the Excel file fim_lake_gauge_bathy_table.xlsx. The 191 stream gauges and their snapped FSPs are saved in the Excel file fim_stream_gauge_fsp_table.xlsx. Note that there are 213 rows in the table as one gauge can be snapped to the FSPs in different libraries!</p>
+</section>
+<section id="build-a-gauge-table-for-nowcast">
+<h2><span class="section-number">5.8. </span>Build a gauge table for NOWCAST<a class="headerlink" href="#build-a-gauge-table-for-nowcast" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Create a PostgreSQL table</p></li>
+<li><p>Convert the table to a feature class in ArcGIS. The feature class is served as a map layer</p></li>
+<li><p>Update the table</p></li>
+</ul>
+</section>
+<section id="gauge-issues">
+<h2><span class="section-number">5.9. </span>Gauge issues<a class="headerlink" href="#gauge-issues" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>AHPS  gauge AWS web service seems unstable (see fim_stream_nowcast_py_02260600.log and fim_stream_nowcast_py_20250303_0904.log) and David commented they are slow than USGS/NWIS. So, Nowcast and Reservior mapping stages are retrieved from USGS/NWIS web service if possible. This led the issue of the Lawrence Kansas River gauge (06891080/LWRK1) which has two stages. Currently the max stage with the most recent stage time is used.</p></li>
+<li><p>Turn this document into a JupyterNotebook by combining this MD file with scripts gauge_merge_usgs_ahps.py and gauge_prepare_fim_gauges.py</p></li>
+<li><p>delete def PrepareAhpsGaugeDatum() in fldpln_gauge.py?</p></li>
+<li><p>Replace SnapGaugesToFsps() with SnapGauges2Fsps()</p></li>
+<li><p>GetUsgsGaugeStageFromWebService(usgsIds). Gauge 06891080,LWRK1 KANSAS R AT LAWRENCE, KS has TWO values! How should we handle this situation?</p></li>
+<li><p>Update SnapGauges2FspsBlob(), leave this until it’s necessary.</p></li>
+</ul>
+</section>
+<section id="david-weekly-s-gauges">
+<h2><span class="section-number">5.10. </span>David Weekly’s Gauges<a class="headerlink" href="#david-weekly-s-gauges" title="Link to this heading">#</a></h2>
+<section id="clean-up-the-gauges">
+<h3><span class="section-number">5.10.1. </span>Clean up the gauges<a class="headerlink" href="#clean-up-the-gauges" title="Link to this heading">#</a></h3>
+<p>David’s FC_Stream_Gauges has 622 gauges from various sources (NOAA, USGS, and NB DNR). Below are the major steps involved to clean up the gauges.</p>
+<ul class="simple">
+<li><p>Current observation gauges (i.e., national_shapefile_obs.shp) within 1-km buffer of floodplain and reservoir are selected. A total of 203 AHPS gauges are selected.</p></li>
+<li><p>David’s FC_Stream_Gauges within 1-km buffer of floodplain and reservoir are selected. A total of 398 gauges are selected. David’s gauges are more than AHPS gauges because of they also include some gauges from USGS and the State of NB.</p></li>
+<li><p>Clean up David’s gauge</p>
+<ul>
+<li><p>Among David’s 398 gauges, there are duplicates between AHPS and USGS (133) and AHPS and NB (5) gauges. After removing the duplicates (USGS &amp; NB gaues), there are 260 gauges (71 USGS, 189 AHPS). This is done by using the tool Generate Near Table, which can find the nearest neighbor within the same FC.</p></li>
+<li><p>Among the 189 AHPS gauges, 182 are in current AHPS gauges (ahps_gauge_within_fldpln_reservior_1kmbuf). 7 of them are NOT included in current AHPS gauges though some of them still actively observe stage. Those 7 gauges are kept. This is done by spatially joining AHPS gauges to David’s gauges.</p></li>
+<li><p>Among the 71 USGS gauges, 57 are not included in the AHPS gauges (no AHPS gauges are found within 1-km radius). 14 of the 71 USGS gauges have AHPS gauges within 1-km radius. 3 of them are different from the AHPS gauges. The other 11 USGS gauges are found in AHPS gauges. Their attributes (such as AHPS station ID, major flood stage, etc.) are copied from AHPS gauges.</p></li>
+<li><p>At the end, 260 David gauges are kept. Among them, 60 are USGS gauges and the rest are AHPS gauges.</p></li>
+</ul>
+</li>
+<li><p>There are 8 AHPS gauges (david_ahps_merge) which are not included in the 260 David gauges. This is done by spatially joining David’s gauges to AHPS gauges. Those gauges are merged together as the gauges for use in Kansas flood mapping. Later it was found there are two gauges (ARCCK1 and STCK1) are duplicated and they were deleted. So, at the end there are 266 gauges collected based on David’s initial gauges.</p></li>
+<li><p>The original gauge fields were further edited and several new fields (vdatum, to_navd88, x_utm14, y_utm14) were added and populated with data from AhpsGaugeDatum_XYTableToPoint and Reservoir_Datum_Conversions__XYTableToPoint tables. The final gauges are saved in <strong>fldpln_ks_gauges</strong>.</p></li>
+<li><p>This cleanup process is laborious and it may be worth to directly retrieve data from the data sources!</p></li>
+</ul>
+</section>
+<section id="check-the-gauges">
+<h3><span class="section-number">5.10.2. </span>Check the gauges<a class="headerlink" href="#check-the-gauges" title="Link to this heading">#</a></h3>
+<p>Initially, 200 m and 220 of the 266 gauges can be snapped to library FSPs within a radius of <strong>200 meters</strong>. It was found, however, that two gauges (SJSM7 and KCDM7) have a distance of 238.6 and 204.7 respectively and were not used in flood mapping for library morv. The snap distance was then increased to 250 m and this increase didn’t affect other gauges. With the increased snap distance, there 222 gauges can be snapped to the FSPs and 64 of them don’t have a station datum elevation. The following is the checking results by running the gauge_check_gauges.py script.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">bigblue: 10 gauges, 1 no-datum: [&#39;BARK1&#39;]</span>
+<span class="go">chik_saltfork_medlodg: 2 gauges</span>
+<span class="go">cotneo: 14 gauges, 8 no-datum: [&#39;07179710&#39;, &#39;07180200&#39;, &#39;07180500&#39;, &#39;07179750&#39;, &#39;CTWK1&#39;, &#39;07179700&#39;, &#39;07179785&#39;, &#39;EPRK1&#39;]</span>
+<span class="go">ksrv: 24 gauges, 6 no-datum: [&#39;06888500&#39;, &#39;LOUK1&#39;, &#39;06888990&#39;, &#39;06892518&#39;, &#39;06888300&#39;, &#39;TNRK1&#39;]</span>
+<span class="go">litark: 3 gauges</span>
+<span class="go">lowark: 15 gauges, 6 no-datum: [&#39;07144201&#39;, &#39;07143375&#39;, &#39;07144301&#39;, &#39;07144490&#39;, &#39;375350097262800&#39;, &#39;BLPK1&#39;]</span>
+<span class="go">lowrep: 5 gauges, 3 no-datum: [&#39;06855850&#39;, &#39;JMSK1&#39;, &#39;CLDK1&#39;]</span>
+<span class="go">mdc: 12 gauges, 2 no-datum: [&#39;06916600&#39;, &#39;QNMK1&#39;]</span>
+<span class="go">midkan: 11 gauges, 3 no-datum: [&#39;06888500&#39;, &#39;LOUK1&#39;, &#39;06888300&#39;]</span>
+<span class="go">midsol: 3 gauges, 1 no-datum: [&#39;06876070&#39;]</span>
+<span class="go">morv: 21 gauges, 5 no-datum: [&#39;PLCM7&#39;, &#39;06892518&#39;, &#39;06893195&#39;, &#39;TNRK1&#39;, &#39;KSYM7&#39;]</span>
+<span class="go">nemaha: 2 gauges</span>
+<span class="go">neosho: 21 gauges, 8 no-datum: [&#39;07179710&#39;, &#39;07183000&#39;, &#39;07184500&#39;, &#39;07179750&#39;, &#39;07179700&#39;, &#39;07182395&#39;, &#39;EPRK1&#39;, &#39;LRYK1&#39;]</span>
+<span class="go">ninnescah: 3 gauges, 1 no-datum: [&#39;07144780&#39;]</span>
+<span class="go">osagemarmaton: 5 gauges, 1 no-datum: [&#39;06917500&#39;]</span>
+<span class="go">smoksalsol: 13 gauges, 4 no-datum: [&#39;06876070&#39;, &#39;GLAK1&#39;, &#39;ABIK1&#39;, &#39;BRNK1&#39;]</span>
+<span class="go">spring: 3 gauges</span>
+<span class="go">upark: 10 gauges, 2 no-datum: [&#39;07142680&#39;, &#39;HCHK1&#39;]</span>
+<span class="go">upkan: 13 gauges, 6 no-datum: [&#39;06857100&#39;, &#39;06879100&#39;, &#39;ALEK1&#39;, &#39;ABIK1&#39;, &#39;JUCK1&#39;, &#39;WDBK1&#39;]</span>
+<span class="go">uprep: 5 gauges</span>
+<span class="go">upsal: 4 gauges, 1 no-datum: [&#39;06867500&#39;]</span>
+<span class="go">upsmoky: 3 gauges</span>
+<span class="go">upsol: 2 gauges</span>
+<span class="go">verdigriscaney: 10 gauges, 5 no-datum: [&#39;07166500&#39;, &#39;07167500&#39;, &#39;07170990&#39;, &#39;07172000&#39;, &#39;07165750&#39;]</span>
+<span class="go">walnut: 8 gauges, 1 no-datum: [&#39;07148111&#39;]</span>
+<span class="go">Total snapped gauges: 222, 64 without datum</span>
+</pre></div>
+</div>
+<p>While mapping the 2019 flood event for the low Neosho river, we found AHPS gauge <a class="reference external" href="https://water.weather.gov/ahps2/hydrograph.php?wfo=sgf&amp;amp;gage=NSOK1">NSOK1</a> has a NGVD29 vertical datum of 808 and NAVD88 of 777.51. The difference between the two vertical datum calculated from the converter is only 0.505. Using the NGVD29 datum led to higher water surafce elevation at NSOK1 than the upstream gauge OSWK1, and caused significant overestimation on the flood event. When we used 777.51 as NGVD29 datum, those anormalies were removed. This example shows there may be errors for the AHPS gauges.</p>
+</section>
+</section>
+<section id="retrieve-current-and-forecast-gauge-stage-from-ahps">
+<h2><span class="section-number">5.11. </span>Retrieve current and forecast gauge stage from AHPS<a class="headerlink" href="#retrieve-current-and-forecast-gauge-stage-from-ahps" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Current and forecast stage for a set of gauges can be retrieved using a query supported by the <a class="reference external" href="https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Observations/ahps_riv_gauges/MapServer">AHPS WMS/WFS services</a> or the <a class="reference external" href="https://mapservices.weather.noaa.gov/eventdriven/rest/services/water/ahps_riv_gauges/MapServer">same service on AWS</a> . This capability is implemented based on David’s code.</p>
+<ul>
+<li><p><a class="reference external" href="https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Observations/ahps_riv_gauges/MapServer/0/query">Build a query with GUI</a></p></li>
+<li><p><a class="reference external" href="https://idpgis.ncep.noaa.gov/arcgis/sdk/rest/index.html#//02ss0000000r000000">Documentation on the query API</a></p></li>
+</ul>
+</li>
+<li><p><span style="color:red">For unknown reason, requesting more than one gauge (using OR in the SQL whereclause) is prohibited when using the idpgis service. The AWS service seems working though (see email exchange with Don Rinker at NWS on this issue)</p></li>
+</ul>
+</section>
+<section id="interpolate-dof-for-fsps-using-snapped-gauges">
+<h2><span class="section-number">5.12. </span>Interpolate DOF for FSPs using snapped gauges<a class="headerlink" href="#interpolate-dof-for-fsps-using-snapped-gauges" title="Link to this heading">#</a></h2>
+<p><img alt="" src="../_images/interpolate_fsp_dof.png" /></p>
+<ul class="simple">
+<li><p>Iterate stream orders from low to high</p></li>
+<li><p>For the gauge(s) on a stream order:</p>
+<ul>
+<li><p>Add an up-stream ending gauge (left orange circle) by leveling the water toward the end of the segment of the most upstream gauge (left black circle)</p></li>
+<li><p>Add a downstream ending gauge (right orange circle) by setting the stage to 0 at the start of the segment of the most downstream gauge (right black circle)</p></li>
+<li><p>If the stream is a tributary and its flow-in stream have an interpolated stage at the junction, then the downstream ending gauge will have the stage of the junction</p></li>
+</ul>
+</li>
+<li><p>There are 3 DOF interpolation functions in <a class="reference external" href="http://fldpln.py">fldpln.py</a>:</p>
+<ul>
+<li><p>EstimateFspDofFromGauge() implements both horizontal and vertical interpolation using self-developed functions.</p></li>
+<li><p>EstimateFspDofFromGaugeOld() only implements horizontal interpolation using np.interp().</p></li>
+<li><p>EstimateFspDofFromGaugeReallyOld(), the version before EstimateFspDofFromGaugeOld(), only implements horizontal interpolation using np.interp().</p></li>
+</ul>
+</li>
+</ul>
+<section id="horizontal-interpolation">
+<h3><span class="section-number">5.12.1. </span>Horizontal Interpolation<a class="headerlink" href="#horizontal-interpolation" title="Link to this heading">#</a></h3>
+<p>This approach linearally interpolates a FSP’s DOF (deepth of flow) between two gauges using the stream-distance of the FSP as the weight. Let gx1 and gy1 be the stream-distance and DOF of the first gauge respectively and gx2 and gy2 be those of the second gauge. With a FSP which has a stream-distance of fx, the DOF of the FSP, i.e., fy can be claculated as:
+fy = gy1 + (fx-gx1)*(gy2-gy1)/(gx2-gx1)</p>
+</section>
+<section id="vertical-interpolation">
+<h3><span class="section-number">5.12.2. </span>Vertical Interpolation<a class="headerlink" href="#vertical-interpolation" title="Link to this heading">#</a></h3>
+<p>This approach linearlly interpolates a FSP’s DOF between two gauges using the filled elevation of the FSP as the weight. Horizontal is used only when interpolting the FSPs between two gauges which are located on flat filled elevation.</p>
+<p>Let gx1, ge1 and gy1 be the stream-distance, filled elevation and DOF of the first gauge respectively and gx2, ge2 and gy2 be those of the second gauge. With a FSP which has a stream-distance of fx and elevation of fe, the DOF of the FSP, i.e., fy can be claculated as:
+fy = gy1 + (fe-ge1)<em>(gy2-gy1)/(ge2-ge1)
+if ge2 == ge1, then
+fy = gy1 + (fx-gx1)</em>(gy2-gy1)/(gx2-gx1)</p>
+</section>
+</section>
+<section id="manually-assign-stream-orders">
+<h2><span class="section-number">5.13. </span>Manually assign stream orders<a class="headerlink" href="#manually-assign-stream-orders" title="Link to this heading">#</a></h2>
+<p>Stream order is crucial in interpolating FSPs’ DOF for flood mapping. They are currently manually assigned in AcGIS. Below are the necessary conditions to make sure the interpolation on DOF can be carried out correctly.</p>
+<ul class="simple">
+<li><p>Low stream (multiple segments) order indicates main stream and high orders mean tributaries.</p></li>
+<li><p>Order must be unique to each contiguous stream. No two streams can have the same order even if the streams are in different sub-watersheds in a library (see Neosho as an example)</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "giswqs/jupyter-book-demo",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="04_parallelization.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>Parallelize Flood Mapping</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="06_server.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">6. </span>Serve Flood Maps</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usgs-gauges-in-and-around-kansas">5.1. USGS Gauges in and around Kansas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#noaa-nws-ahps-gauges">5.2. NOAA/NWS/AHPS Gauges</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#merge-usgs-and-ahps-gauges">5.3. Merge USGS and AHPS gauges</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gauge-stage-datum-elevation-and-vertical-datum">5.3.1. Gauge stage datum elevation and vertical datum</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-lake-gauges-for-flood-mapping">5.4. Prepare lake gauges for flood mapping</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-stream-gauges-for-flood-mapping">5.5. Prepare stream gauges for flood mapping</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vertical-datum-adjustment">5.6. Vertical datum adjustment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-lake-and-stream-fim-tables">5.7. Create lake and stream FIM tables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-a-gauge-table-for-nowcast">5.8. Build a gauge table for NOWCAST</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gauge-issues">5.9. Gauge issues</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#david-weekly-s-gauges">5.10. David Weekly’s Gauges</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clean-up-the-gauges">5.10.1. Clean up the gauges</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#check-the-gauges">5.10.2. Check the gauges</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#retrieve-current-and-forecast-gauge-stage-from-ahps">5.11. Retrieve current and forecast gauge stage from AHPS</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpolate-dof-for-fsps-using-snapped-gauges">5.12. Interpolate DOF for FSPs using snapped gauges</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#horizontal-interpolation">5.12.1. Horizontal Interpolation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vertical-interpolation">5.12.2. Vertical Interpolation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manually-assign-stream-orders">5.13. Manually assign stream orders</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Qiusheng Wu
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

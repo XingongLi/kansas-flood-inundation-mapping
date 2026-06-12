@@ -1,0 +1,914 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Build a Python Environment for Using the FLDPLN Model &#8212; Jupyter Book Demo</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/python_env';</script>
+    <link rel="canonical" href="https://giswqs.github.io/jupyter-book-demo/book/python_env.html" />
+    <link rel="icon" href="../_static/fav.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Binder and BinderHub" href="binder.html" />
+    <link rel="prev" title="Open Source vs. ArcPy" href="open_source.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Jupyter Book Demo - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Jupyter Book Demo - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_intro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_fldpln.html">2. The FLDPLN Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_tiling.html">3. Tile FLDPLN Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_parallelization.html">4. Parallelize Flood Mapping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_gauge.html">5. Gauges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_server.html">6. Serve Flood Maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_client.html">7. Flood Mapping Dashboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_image_viewer.html">8. Rapid Image Viewer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_future.html">9. Future Improvements</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="system.html">System Description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open_source.html">Open Source vs. ArcPy</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Build a Python Environment for Using the FLDPLN Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="binder.html">Binder and BinderHub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/giswqs/jupyter-book-demo/main?urlpath=tree/book/python_env.md" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/giswqs/jupyter-book-demo/blob/main/book/python_env.md" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/giswqs/jupyter-book-demo" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/giswqs/jupyter-book-demo/edit/main/book/python_env.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/giswqs/jupyter-book-demo/issues/new?title=Issue%20on%20page%20%2Fbook/python_env.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/book/python_env.ipynb" target="_blank"
+   class="btn btn-sm btn-download-notebook-button dropdown-item"
+   title="Download notebook file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="../_sources/book/python_env.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Build a Python Environment for Using the FLDPLN Model</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basics-of-python-environments">Basics of Python environments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-the-fldpln-python-environment">Build the “fldpln” Python environment</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-miniconda">Install Miniconda</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-the-python-environment">Create the Python environment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-mamba-for-faster-package-management">Install Mamba for faster package management</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-necessary-common-packages">Install Necessary Common Packages</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-fldpln-related-python-packages">Install FLDPLN Related Python Packages</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#install-the-fldpln-model-python-package">Install the FLDPLN Model Python Package</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#install-the-fldpln-mapping-package">Install the fldpln_mapping package</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-environment-in-different-development-environments">Using the Environment in Different Development Environments</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#use-the-environment-on-cloud-jupyterlab">Use the environment on cloud JupyterLab</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#use-the-environment-in-local-jupyterlab">Use the environment in local JupyterLab</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#use-the-fldpln-environment-in-vsc">Use the ‘fldpln’ environment in VSC</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#replicate-the-fldpln-environment-using-yaml-file">Replicate the fldpln Environment Using YAML File</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-python-environments">Other Python Environments</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-arcgidpro-py3-environment">The “arcgidpro-py3” environment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-arcgisrpo-py3-clone-environment">The “arcgisrpo-py3-clone” environment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-geo3-environment">The “geo3” environment:</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="build-a-python-environment-for-using-the-fldpln-model">
+<h1>Build a Python Environment for Using the FLDPLN Model<a class="headerlink" href="#build-a-python-environment-for-using-the-fldpln-model" title="Link to this heading">#</a></h1>
+<section id="basics-of-python-environments">
+<h2>Basics of Python environments<a class="headerlink" href="#basics-of-python-environments" title="Link to this heading">#</a></h2>
+<p>Brief introduction on Python virtual environment and options to manage the environment. The last 3 options don’t come with standard Python installation and have to be installed separately.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://realpython.com/python-virtual-environments-a-primer/">Python venv module</a>, preinstalled with Python starting from version 3.3</p></li>
+<li><p>Virtualenv, a superset of venv module</p></li>
+<li><p>Conda, a Python package manager</p></li>
+<li><p>Pip, a Python package manager</p></li>
+</ul>
+<p><a class="reference external" href="https://pythonspeed.com/articles/conda-vs-pip/">Pip vs Conda: an in-depth comparison of Python’s two package management systems</a>.</p>
+<p><a class="reference external" href="https://towardsdatascience.com/environments-conda-pip-aaaaah-d2503877884c">A way, which combines pip and conda, and works</a>:</p>
+<ul class="simple">
+<li><p>conda for Python and virtual environments</p></li>
+<li><p>pip for Python package management inside the virtual environment</p></li>
+</ul>
+<p><a class="reference external" href="https://towardsdatascience.com/python-the-system-path-and-how-conda-and-pyenv-manipulate-it-234f8e8bbc3e">Python, The System Path and how conda and pyenv manipulate it</a>. A deep dive into what happens when you type ‘python’ and how popular tools manipulate this.</p>
+</section>
+<section id="build-the-fldpln-python-environment">
+<h2>Build the “fldpln” Python environment<a class="headerlink" href="#build-the-fldpln-python-environment" title="Link to this heading">#</a></h2>
+<p>In order to use the FLDPLN model, we need to have a Python environment with the necessary packages installed. This section provides information on how to build the “fldpln” Python environment and how to use it in various environments including local and cloud JupyterLab and in Visual Studio Code (VSC).</p>
+<p>The following steps are tested on my desktop computer (<a class="reference external" href="http://gas-fpg0ff3.home.ku.edu">gas-fpg0ff3.home.ku.edu</a>) for the 2024 Summer Institute which include the following major components:</p>
+<ul class="simple">
+<li><p>Create a Python environment and install necessary common packages</p></li>
+<li><p>Install fldpln package</p></li>
+<li><p>Install the fldpln_py Python package and MATLAB Runtime</p></li>
+</ul>
+<p>We assume that you don’t have conda installed and we start from scratch. If you already have conda installed, you can skip the first step.</p>
+<section id="install-miniconda">
+<h3>Install Miniconda<a class="headerlink" href="#install-miniconda" title="Link to this heading">#</a></h3>
+<p>First we will download Miniconda to install Python and necessary Python environment management tools on the system. Miniconda is a lightweight version of Anaconda, which is a full-fledged data science platform. Miniconda only includes Python and conda, while Anaconda includes Python, conda, and a suite of other packages.</p>
+<ul class="simple">
+<li><p>Go to the <a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html#windows-installers">Miniconda download page</a> and download the Miniconda installer for Windows. The web site provides the installer with the most recent Python version. This is fine as we can create a new Python environment with the desired Python version later.</p></li>
+<li><p>Run the installer and follow the instructions to install Miniconda on the system. Make sure to check the box to add Miniconda to the system PATH so that you can use conda in the command prompt window.</p></li>
+</ul>
+</section>
+<section id="create-the-python-environment">
+<h3>Create the Python environment<a class="headerlink" href="#create-the-python-environment" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>Open the Anaconda Prompt (miniconda3) Command Window which is created by Miniconda and has Python 3.10 and conda installed.</p></li>
+<li><p>Create the “fldpln” env by running the following command. This will create a new Python environment with the name “fldpln” and the Python version (Python 3.10) comes with Miniconda. <strong>It’s important to specify the Python version (in our case 3.11) as this is the hightest Python version that the MATLAB Runtime supports.</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="n">fldpln</span> <span class="n">python</span><span class="o">=</span><span class="mf">3.11</span>
+</pre></div>
+</div>
+</li>
+<li><p>List the available envs using the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">env</span> <span class="nb">list</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="install-mamba-for-faster-package-management">
+<h3>Install Mamba for faster package management<a class="headerlink" href="#install-mamba-for-faster-package-management" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Activate the “fldpln” env using the following command:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">activate</span> <span class="n">fldpln</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Install Mamba, a faster and more efficient package manager than conda, using the following command:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">mamba</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="install-necessary-common-packages">
+<h2>Install Necessary Common Packages<a class="headerlink" href="#install-necessary-common-packages" title="Link to this heading">#</a></h2>
+<p>Make sure the “fldpln” env is activated before installing those packages.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="n">conda</span> <span class="n">activate</span> <span class="n">fldpln</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Install geopandas package using the following command. This will also install many dependent general and geospatial packages including numpy, pandas, scipy, gdal, shapely etc.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mamba</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">geopandas</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Install “h5py” (for reading .mat file), “rasterio”, “openpyxl” (for reading Excel xls file) and “fastparquet” (for reading parquet file, i.e., .snz file) using the following command:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mamba</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">h5py</span> <span class="n">rasterio</span> <span class="n">openpyxl</span> <span class="n">fastparquet</span>
+</pre></div>
+</div>
+<p>Note that we cannot use “import gdal” but have to use “from osgeo import gdal” and this is explained <a class="reference external" href="https://opensourceoptions.com/blog/how-to-install-gdal-with-anaconda/">here</a>, <strong>The GDAL distribution from conda-forge installs GDAL as parts of the OSGEO package, which includes GDAL, OGR, and OSR</strong>.</p>
+<ul class="simple">
+<li><p>Install packages for mapping</p>
+<ul>
+<li><p>rio-cogeo for CloudOptimized GeoTIFF (COGEO) creation plugin for rasterio using the following command. Note the hyphen in the package name.</p></li>
+<li><p>lxml for processing XML and HTML</p></li>
+<li><p>psycopg2 for PostgreSQL database adapter</p></li>
+</ul>
+</li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mamba</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">rio</span><span class="o">-</span><span class="n">cogeo</span> <span class="n">lxml</span> <span class="n">psycopg2</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Install dask package for parallel computing. This package is not necessary if inundation mapping is not time critical (say, for research purpose).</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mamba</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">dask</span>
+</pre></div>
+</div>
+<section id="install-fldpln-related-python-packages">
+<h3>Install FLDPLN Related Python Packages<a class="headerlink" href="#install-fldpln-related-python-packages" title="Link to this heading">#</a></h3>
+<p>Currently, there are two python packages are needed for using the FLDPLN model. The first package is the fldpln_py package which is a wrapper for the FLDPLN model implemented in MATLAB. The second package (fldpln_mapping), which <strong>has NOT been created yet,</strong> contains Python scripts for tiling and mapping FLDPLN libraries.</p>
+<section id="install-the-fldpln-model-python-package">
+<h4>Install the FLDPLN Model Python Package<a class="headerlink" href="#install-the-fldpln-model-python-package" title="Link to this heading">#</a></h4>
+<p>The FLDPLN model is developed in MATLAB and compiled into a Python package (fldpln_py). The compiled Python package can be installed on any system (Windows or Linux) with Python and MATLAB Runtime installed. Note that the MATLAB Runtime is required but free to run the compiled Python package.</p>
+<ul class="simple">
+<li><p>The simplest way we can zip the package and make it available for download and install it by running “python <a class="reference external" href="http://setup.py">setup.py</a> install” or “pip install .” in the package folder.</p></li>
+<li><p>We can also put the package on Github’s root folder and install it using “pip install git+https://github.com/opengeos/leafmap.git”</p></li>
+<li><p>Ideally, we should publish the package to PyPI or Anaconda Cloud and install it using pip or conda</p></li>
+<li><p>The MATLAB Runtime installer for Windows automatically sets the library path during installation, but on Linux or macOS you must add the libraries manually. See <a class="reference external" href="https://www.mathworks.com/help/compiler_sdk/cxx/mcr-path-settings-for-run-time-deployment.html">here</a> for more information.</p></li>
+</ul>
+</section>
+<section id="install-the-fldpln-mapping-package">
+<h4>Install the fldpln_mapping package<a class="headerlink" href="#install-the-fldpln-mapping-package" title="Link to this heading">#</a></h4>
+<p>The mapping package has several pure Python scripts which can be directly used/imported in notebooks. In the future, we plan to create a package, fldpln_mapping, and publish it on PyPI so that it can be installed using pip.</p>
+</section>
+</section>
+<section id="using-the-environment-in-different-development-environments">
+<h3>Using the Environment in Different Development Environments<a class="headerlink" href="#using-the-environment-in-different-development-environments" title="Link to this heading">#</a></h3>
+<p>The fldpln python environment can be used in different development environments including Visual Studio Code (VSC) and JupyterLab. Below are the steps to use the environment in those environments.</p>
+<section id="use-the-environment-on-cloud-jupyterlab">
+<h4>Use the environment on cloud JupyterLab<a class="headerlink" href="#use-the-environment-on-cloud-jupyterlab" title="Link to this heading">#</a></h4>
+<p>Below are the additional steps needed to use the environment on the virtual machine’s JupyterLab running on the <a class="reference external" href="https://staging.ciroh.awi.2i2c.cloud/hub/login">AWI 2i2c-based cloud computing infrastructure</a>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">activate</span> <span class="n">fldpln</span>
+<span class="n">mamba</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">jupyter</span>
+<span class="n">Conda</span> <span class="n">activate</span> <span class="n">fldpln</span>
+</pre></div>
+</div>
+<p>After this, when you create a new launcher, you should see notebook using the fldpln environment as an option as shown in the screenshot below.
+<img alt="JupyterLab on the cloud" src="../_images/JupyterLab_on_awi_cloud.png" /></p>
+</section>
+<section id="use-the-environment-in-local-jupyterlab">
+<h4>Use the environment in local JupyterLab<a class="headerlink" href="#use-the-environment-in-local-jupyterlab" title="Link to this heading">#</a></h4>
+<p>You may also want to use the environment with  Jupyter notebooks on your own machine. In this case, we need to install the jupyterlab package into the env using the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mamba</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">jupyterlab</span>
+</pre></div>
+</div>
+<p>After installation, first navigate to the folder where your Jupyter notebooks are located and run the following command to start JupyterLab in a web browser. Note the space between the words.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">jupyter</span> <span class="n">lab</span>
+</pre></div>
+</div>
+<p>You can shutdown the local JupyterLab by using “Ctrl + C” in the command window where you started JupyterLab.</p>
+<p>You may also want to install the Git extension for JupyterLab for version control:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">jupyterlab</span><span class="o">-</span><span class="n">git</span>
+</pre></div>
+</div>
+</section>
+<section id="use-the-fldpln-environment-in-vsc">
+<h4>Use the ‘fldpln’ environment in VSC<a class="headerlink" href="#use-the-fldpln-environment-in-vsc" title="Link to this heading">#</a></h4>
+<p>The Python environment should be available in VSC for writing Python scripts. Below are some trouble shooting steps if the environment is not available in VSC.</p>
+<ul class="simple">
+<li><p>Make sure the conda command is added to system’s PATH environment variable so that VSC can use the conda to activate a specific python env.</p>
+<ul>
+<li><p>When install miniconda (or Anaconda), the default installation setting doesn’t add its executable path (on my machine “C:\Users\lixi\Anaconda3\”) to the PATH environment variable.</p></li>
+<li><p>This is done by using the Advanced System Settings in Control Panel (see the screenshot below)
+<img alt="Setup PATH variable" src="../_images/PATH_environment_variables.png" /></p></li>
+</ul>
+</li>
+<li><p>VSC terminal</p>
+<ul>
+<li><p>VSC uses powershell as the default terminal which cause some issues even after including conda path in the PATH environment variable.</p></li>
+<li><p>A quick solution is to change the default powershell terminal in VSC to the regular cmd terminal by press CTRL+SHIFT+P in VSC and search for “terminal select default profile” and select “Command Prompt C:\WINDOWS\System32\cmd.exe”</p></li>
+</ul>
+</li>
+<li><p>When using VSC to run Jupyter notebooks, VSC automatically installed ipykernel into the environment.</p></li>
+</ul>
+<p>VSC also supports Jupyter notebooks. But this needs the ipython kernel package be installed into the environment with the following command. Note that the kernel can also be installed when you open a notebook in VSC and choose the environment.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mamba</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">ipykernel</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="replicate-the-fldpln-environment-using-yaml-file">
+<h3>Replicate the fldpln Environment Using YAML File<a class="headerlink" href="#replicate-the-fldpln-environment-using-yaml-file" title="Link to this heading">#</a></h3>
+<p>Once the pyhton environment is built, it is possible to export the environment as a YAML configuration file and replicate the environment on a different machine. We can export the fldpln environment to a .yaml (or .yml) configuration file using the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">env</span> <span class="n">export</span> <span class="o">-</span><span class="n">n</span> <span class="n">fldpln</span> <span class="o">&gt;</span> <span class="n">fldpln</span><span class="o">.</span><span class="n">yaml</span>
+</pre></div>
+</div>
+<p>or using the following command if you are already in the fldpln env:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">env</span> <span class="n">export</span> <span class="o">&gt;</span> <span class="n">fldpln</span><span class="o">.</span><span class="n">yaml</span>
+</pre></div>
+</div>
+<p><strong>For some reason, the first line in the YAML file (“name: base”) does not reflect the environment name we want (i.e., “fldpln”). In this case, we need to change “base” to “fldpln” before creating the environment on the target machine.</strong></p>
+<p>On the target machine (assuming that conda and mamba have already been installed) in a command window, navigate to the folder where the .yaml file is saved, and run the following either conda or mamba to create the fldpln env using the file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mamba</span> <span class="n">env</span> <span class="n">create</span> <span class="o">-</span><span class="n">f</span> <span class="n">fldpln</span><span class="o">.</span><span class="n">yaml</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">env</span> <span class="n">create</span> <span class="o">-</span><span class="n">f</span> <span class="n">fldpln</span><span class="o">.</span><span class="n">yaml</span>
+</pre></div>
+</div>
+<p>Solving the environment and installing all the packages might take a surprisingly long time especially using conda, so be patient.</p>
+<p><strong>Note that different YAML files are needed for Windows and Unix-based systems</strong>. Two YAML files, fldpln_windows.yaml and fldpln_awi_2i2c.yaml, are created for Windows and Unix-based systems respectively. <strong>Those YAML files don’t have the fldpln and fldpln_py packages installed.</strong></p>
+</section>
+</section>
+<section id="other-python-environments">
+<h2>Other Python Environments<a class="headerlink" href="#other-python-environments" title="Link to this heading">#</a></h2>
+<p>In addition to the fldpln env, I have a few other python environments on my laptop. The following are the environments.</p>
+<section id="the-arcgidpro-py3-environment">
+<h3>The “arcgidpro-py3” environment<a class="headerlink" href="#the-arcgidpro-py3-environment" title="Link to this heading">#</a></h3>
+<p>This is the default env for ArcGIS Pro and should/can not be changed in anyway according to ESRI. This env has the <a class="reference external" href="http://scipy.io">scipy.io</a> and 5py libraries which are needed to read and write various versions of .mat files. The arcpy version of the code uses this env where a user can run the mapping notebook in ArcGIS Pro. This env (and arcpy version code), however, can only use mat-based tiles whose file size is only 60% of snappy-based tiles but runs 30% slower than sanppy-based files (i.e., snz).</p>
+<p>conda does not show the env when listing available envs. But it can be activated by providing the path(in quotation marks because of the space in “Program Files”)to the python.exe as</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">activate</span> <span class="s2">&quot;C:\Program Files\ArcGIS\Pro\envs</span><span class="se">\a</span><span class="s2">rcgispro-py3&quot;</span>
+</pre></div>
+</div>
+<p>VSC can use the env by providing the path of C:\Program Files\ArcGIS\Pro\bin\Python\envs\arcgispro-py3\python.exe without problem!</p>
+<p>The env works fine for the mapping scripts in the open source version of the code with mat-based tiles. But it won’t work with snappy-based tiles. Also it doesn’t work for the tiling scripts in the open source version of the code as it doesn’t have the geopandas package.</p>
+</section>
+<section id="the-arcgisrpo-py3-clone-environment">
+<h3>The “arcgisrpo-py3-clone” environment<a class="headerlink" href="#the-arcgisrpo-py3-clone-environment" title="Link to this heading">#</a></h3>
+<p>This env is only available on my laptop, and the original goal is to expend the arcgispro-py3 env which comes with ArcGIS Pro so that the env can be used for both the arcpy and open source version of the scripts. As we cannot make changes on the arcgispro-py3 env, a copy of the “arcgispro-py3” env was cloned using ArcGIS Pro’s python env manager.</p>
+<p>when I tried to install the “fastparquet” package (version 0.7.2), which is needed to save tiles in snappy (i.e., snz) format, use <a class="reference external" href="https://pro.arcgis.com/en/pro-app/latest/arcpy/get-started/work-with-python-environments.htm">ArcGIS Pro Python package manager</a>, several issues were encountered.</p>
+<ul>
+<li><p>First, the “pyarrow” library comes with ArcGIS Pro is NOT usable (version issue) for saving and reading parquet files. It FAILED to install the “fastparquet” package for unknown reason in the cloned ArcGIS Pro Python environment.</p></li>
+<li><p><a class="reference external" href="https://support.esri.com/en/technical-article/000020560">This ESRI support page</a> covers on how to manage the Python environment in a cloned ArcGIS Pro Python environment. However, I was unable to activate the cloned environment through the Python Command Prompt under ArcGIS. When I tried to activate the cloned environment, I got the following error:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Error</span><span class="p">:</span> <span class="n">Your</span> <span class="n">shell</span> <span class="n">has</span> <span class="ow">not</span> <span class="n">been</span> <span class="n">properly</span> <span class="n">configured</span> <span class="n">to</span> <span class="n">use</span> <span class="s1">&#39;conda activate&#39;</span>
+</pre></div>
+</div>
+<p>This may be because that I have two conda installed on my system, one from ESRI and the other from Anaconda. So I used my Anaconda Prompt (command window) to install fastparquet in the cloned ArcGIS Pro Python environment. Note that the cloned ArcGIS environment is visible but does not have a name as is was created by the conda from ArcGIS. We have to activate it by its path instead using the following commands:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">activate</span> <span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">lixi</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">ESRI</span>\<span class="n">conda</span>\<span class="n">envs</span>\<span class="n">arcgispro</span><span class="o">-</span><span class="n">py3</span><span class="o">-</span><span class="n">clone</span>
+<span class="n">conda</span> <span class="n">install</span> <span class="n">fastparquet</span>
+</pre></div>
+</div>
+<p>This way, the env just worked fine with both .gzip and snappy format. I don’t need to install python-snappy.</p>
+</li>
+</ul>
+<p>To make the env work for open source based tiling scripts we need to install geopandas. After installing geopandas, geopandas had issues with the rtree library, which was resolved by downgrading rtree version from 0.9.7 to 0.9.3 (using conda install rtree=0.9.3). Then there is a problem with fiona which somehow cannot use the gdal library which was installed from channel “[arcgispro]  esri”. After updated fiona from 1.8.4 to 1.8.18 using “conda update Fiona”, geopandas finally works!</p>
+<p>To make the env work for open source based mapping scripts, we need to install rasterio. The installation went smoothly but when running the mapping scripts, I got the following messages:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Can</span><span class="s1">&#39;t find requested entry point: GDALRegisterMe</span>
+<span class="n">Can</span><span class="s1">&#39;t find requested entry point: GDALRegister_nitf</span>
+<span class="n">Can</span><span class="s1">&#39;t find requested entry point: GDALRegisterMe</span>
+<span class="n">Can</span><span class="s1">&#39;t find requested entry point: GDALRegister_nitf</span>
+</pre></div>
+</div>
+<p>I suspect that this is related to the gdal library which comes from ESRI channel “[arcgispro]  esri”. The scripts still ran and the results seem correct though</p>
+<p>With the above experience and experiment, it seems unrealistic to build single python environment for both arcpy and open source versions by expending. The primary problem, I believe, is that <strong>some of the python packages in arcgispro-py3 are from the ESRI channel “[arcgispro]  esri” (i.e., customized packages) which may not be compatible with the packages from other standard channels!</strong></p>
+</section>
+<section id="the-geo3-environment">
+<h3>The “geo3” environment:<a class="headerlink" href="#the-geo3-environment" title="Link to this heading">#</a></h3>
+<p>This environment was created in the fall of 2020 when teaching GEOG560. It works fine for open-source based mapping scripts but not for tiling library. It had problem when reading .xlsx Excel files. Installing the xlrd library still didn’t work. It worked after installing openpyxl and specifying it as the engine in pd.read_excel(). It also had problem to re-order FSP dataframe columns (fspDf = fspDf[fspIdxColumnNames]). This env is not further improved and expended. Instead, a new env “fldpln” was created for the open-source based version.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "giswqs/jupyter-book-demo",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="open_source.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Open Source vs. ArcPy</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="binder.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Binder and BinderHub</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basics-of-python-environments">Basics of Python environments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-the-fldpln-python-environment">Build the “fldpln” Python environment</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-miniconda">Install Miniconda</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-the-python-environment">Create the Python environment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-mamba-for-faster-package-management">Install Mamba for faster package management</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-necessary-common-packages">Install Necessary Common Packages</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-fldpln-related-python-packages">Install FLDPLN Related Python Packages</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#install-the-fldpln-model-python-package">Install the FLDPLN Model Python Package</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#install-the-fldpln-mapping-package">Install the fldpln_mapping package</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-environment-in-different-development-environments">Using the Environment in Different Development Environments</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#use-the-environment-on-cloud-jupyterlab">Use the environment on cloud JupyterLab</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#use-the-environment-in-local-jupyterlab">Use the environment in local JupyterLab</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#use-the-fldpln-environment-in-vsc">Use the ‘fldpln’ environment in VSC</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#replicate-the-fldpln-environment-using-yaml-file">Replicate the fldpln Environment Using YAML File</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-python-environments">Other Python Environments</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-arcgidpro-py3-environment">The “arcgidpro-py3” environment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-arcgisrpo-py3-clone-environment">The “arcgisrpo-py3-clone” environment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-geo3-environment">The “geo3” environment:</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Qiusheng Wu
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,939 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2. The FLDPLN Model &#8212; Jupyter Book Demo</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/02_fldpln';</script>
+    <link rel="canonical" href="https://giswqs.github.io/jupyter-book-demo/book/02_fldpln.html" />
+    <link rel="icon" href="../_static/fav.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="3. Tile FLDPLN Libraries" href="03_tiling.html" />
+    <link rel="prev" title="1. Introduction" href="01_intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Jupyter Book Demo - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Jupyter Book Demo - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_intro.html">1. Introduction</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. The FLDPLN Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_tiling.html">3. Tile FLDPLN Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_parallelization.html">4. Parallelize Flood Mapping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_gauge.html">5. Gauges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_server.html">6. Serve Flood Maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_client.html">7. Flood Mapping Dashboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_image_viewer.html">8. Rapid Image Viewer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_future.html">9. Future Improvements</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="system.html">System Description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open_source.html">Open Source vs. ArcPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_env.html">Build a Python Environment for Using the FLDPLN Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="binder.html">Binder and BinderHub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/giswqs/jupyter-book-demo/main?urlpath=tree/book/02_fldpln.md" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/giswqs/jupyter-book-demo/blob/main/book/02_fldpln.md" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/giswqs/jupyter-book-demo" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/giswqs/jupyter-book-demo/edit/main/book/02_fldpln.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/giswqs/jupyter-book-demo/issues/new?title=Issue%20on%20page%20%2Fbook/02_fldpln.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/book/02_fldpln.ipynb" target="_blank"
+   class="btn btn-sm btn-download-notebook-button dropdown-item"
+   title="Download notebook file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="../_sources/book/02_fldpln.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>The FLDPLN Model</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">2.1. Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fldpln-inundation-library">2.2. FLDPLN Inundation Library</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-steps-of-using-the-fldpln-model">2.3. General Steps of Using the FLDPLN Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hydrological-conditioning-dem">2.4. Hydrological Conditioning DEM</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scripts-and-tools">2.4.1. Scripts and Tools</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-stream-segments">2.5. Generate Stream Segments</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">2.5.1. Scripts and Tools</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#matlab-scripts">2.5.1.1. MATLAB Scripts</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#python-scripts">2.5.1.2. Python Scripts</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#output-files">2.5.2. Output Files</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tools">2.5.2.1. Tools</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-segment-library">2.6. Create Segment Library</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scripts">2.6.1. Scripts</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">2.6.1.1. MATLAB Scripts</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">2.6.1.2. Python Scripts</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">2.6.2. Output Files</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reformat-segment-library-files">2.7. Reformat segment library files</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">2.7.1. Scripts</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">2.7.1.1. MATLAB Scripts</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">2.7.1.2. Python Scripts</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">2.7.2. Output Files</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mapping-flood">2.8. Mapping Flood</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-libraries">2.9. Examples Libraries</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wildcat-creek-2018-labor-day-flood">2.9.1. Wildcat Creek 2018 Labor Day Flood</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#johnson-county-2017-and-2025">2.9.2. Johnson County 2017 and 2025</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#verdigris-river-2019-flood">2.9.3. Verdigris River 2019 Flood</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indian-creek-2017-flood">2.9.4. Indian Creek 2017 Flood</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="the-fldpln-model">
+<h1><span class="section-number">2. </span>The FLDPLN Model<a class="headerlink" href="#the-fldpln-model" title="Link to this heading">#</a></h1>
+<p>This chapter introduces the FLDPLN model for flood inundation mapping. It provides a review on different components of the FLDPLN model and how to run the model using both the MATLAB scripts and the FLDPLN Python package (i.e., fldpln_py).</p>
+<section id="introduction">
+<h2><span class="section-number">2.1. </span>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>FLDPLN is a low complexity flood inundation mapping model that implements the backfill and spillover flooding mechanism. It generates a flood inundation library which can be used to map flood inundation depth in real-time with stage observations and forecasts. More details needed to describe the model.</p>
+</section>
+<section id="fldpln-inundation-library">
+<h2><span class="section-number">2.2. </span>FLDPLN Inundation Library<a class="headerlink" href="#fldpln-inundation-library" title="Link to this heading">#</a></h2>
+<p>The model produces a FLDPLN library which is a collection of flood relationships between flood source pixels/cells (FSPs), which are stream pixels, and floodplain pixels (FPPs) for a watershed or geographical area. <strong>Each FSP-FPP pair has a depth to flood (DTF) property associated with it, which is the minimum depth of flow (DOF) at the FSP that is required to flood the FPP</strong>. While any FSP could flood a FPP eventually with increasing DOF, the FSP-FPP pairs and their DTFs are calculated with the maximum DOF at a FSP set to a certain limit. In Kansas, the max DOF is set to 15 meters or about 50 feet. Note that DTF and DOF are interchangeable in the FLDPLN model.</p>
+<p>A library is created by first identifying stream networks in a watershed and segmenting the networks into stream segments and then calculating the FSP-FPP pairs and their DTFs for each segment. Each segment consists of a set of FSPs and all the FPPs that could be flooded by a segment FSP are grouped together, and the relationships and their DTF are saved in a segment file in MATLAB’s .mat format. As such, a FPP in a segment file has at least one FSP on the segment that it could be flooded by, and a FSP on a segment can flood at least one FPP. Note that a FPP within a segment file may still be flooded by the FSPs on other segments, especially the upstream and/or downstream segments. <strong>Is this description on segment file correct? I recall that the number of FSPs associated with a FPP in a segment is always one! If this is the case, does this mean that the segment file only keeps the FSP with the least DTF? In addition, how are those segments decided, to keep all the segment files in appropriate the same size?</strong></p>
+<p>Note that there is no overlapping FSPs among segments. When segments are converted to vector lines by connecting FSP pixel centers, <strong>those line DON’T meet exactly at their ends in the stream network as there is always either one or square root of two pixel size space between two adjacent segments.</strong></p>
+</section>
+<section id="general-steps-of-using-the-fldpln-model">
+<h2><span class="section-number">2.3. </span>General Steps of Using the FLDPLN Model<a class="headerlink" href="#general-steps-of-using-the-fldpln-model" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Pre-process DEM</p></li>
+<li><p>Generate segments</p></li>
+<li><p>Generate segment library</p></li>
+<li><p>Tile the library</p></li>
+<li><p>Map floods</p></li>
+</ul>
+</section>
+<section id="hydrological-conditioning-dem">
+<h2><span class="section-number">2.4. </span>Hydrological Conditioning DEM<a class="headerlink" href="#hydrological-conditioning-dem" title="Link to this heading">#</a></h2>
+<p>The FLDPLN model requires a hydro-conditioned digital elevation model (DEM) as input. The hydro-conditioning process includes identifying depressions and filling shallow depressions, hydro-conditioning the DEM (dam and road culvert), adding flood defenses to the DEM, and calculating flow direction and flow accumulation. The hydro-conditioned DEM is then used to create stream networks and stream segments.</p>
+<ul class="simple">
+<li><p>Download DEM (typically in TIF format)</p></li>
+<li><p>Calculate hydrological derivatives from the DEM</p>
+<ul>
+<li><p>Identify depressions and fill shallow depressions</p></li>
+<li><p>Hydro-conditioning the DEM (dam and road culvert)</p></li>
+<li><p>Add flood defenses to DEM</p></li>
+<li><p>Calculate flow direction and flow accumulation</p></li>
+</ul>
+</li>
+<li><p>Create BIL files for use in FLDPLN</p></li>
+</ul>
+<section id="scripts-and-tools">
+<h3><span class="section-number">2.4.1. </span>Scripts and Tools<a class="headerlink" href="#scripts-and-tools" title="Link to this heading">#</a></h3>
+<p>To convert the DEM derivative to proper BIL files for use in FLDPLN, we can use the fldpln_pre_process_tool tool in the fldpln_preprocess_model.atbx ArcGIS Pro toolbox developed by David Weiss. The tool can be further improved:</p>
+<ul class="simple">
+<li><p>switch the order of output and input boxes, first input box and then output box</p></li>
+<li><p>set nodata value also correctly for the DEM bil file.</p></li>
+</ul>
+</section>
+</section>
+<section id="generate-stream-segments">
+<h2><span class="section-number">2.5. </span>Generate Stream Segments<a class="headerlink" href="#generate-stream-segments" title="Link to this heading">#</a></h2>
+<p>For version 8, the following MATLAB scripts should be run sequentially:</p>
+<ul class="simple">
+<li><p>xp_generate_segments.m</p></li>
+<li><p>xp_create_segment_library.m</p></li>
+<li><p>xp_generate_stage_volume_table.m</p></li>
+<li><p>xp_format_segment_library.m</p></li>
+<li><p>xp_prepare_library–script to format Jude/David lib for tiling and use with the fldpln_py and fldpln Python packages.</p></li>
+</ul>
+<p>The first step to create a FLDPLN library is to identify stream networks and create stream segments from a hydro-conditioned digital elevation model (DEM). The stream networks/pixels are first identified using a flow accumulation threshold (‘strthr’). The stream networks are first divided into reaches (stream links in ArcGIS term), which are stream segments between headwater and confluence pixels or between two consecutive confluence pixels. Note that pixels flow out of the DEM are treated as confluence pixels in this process. Those natural reaches/segments are further divided based on flow accumulation jumps greater than or equal to ‘facthr’. Then the segments are bisected until all segments are no longer than ‘seglen’.</p>
+<p>The default values for the 3 parameters are: 70 sq. miles, 25 sq. miles, and 2 miles for the libraries in KS. Note that Kansas FLDPLN libraries stream networks are more coarse grained than the National Water Model (NWM) reaches. This is because the stream networks are generated just to use available USGS gauges. If the NWM discharge is used for the flood inundation mapping, the stream networks need to be densified.</p>
+<section id="id1">
+<h3><span class="section-number">2.5.1. </span>Scripts and Tools<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<section id="matlab-scripts">
+<h4><span class="section-number">2.5.1.1. </span>MATLAB Scripts<a class="headerlink" href="#matlab-scripts" title="Link to this heading">#</a></h4>
+<p>Two scripts, create_segdb_facthr_maxlen.m and create_segments.m, are used to identify stream networks and create stream segments from a DEM. The former is the original script and the latter is a simple wrapper function to make the original function easy to use.</p>
+</section>
+<section id="python-scripts">
+<h4><span class="section-number">2.5.1.2. </span>Python Scripts<a class="headerlink" href="#python-scripts" title="Link to this heading">#</a></h4>
+<p>Python scripts to use the FLDPLN Python package to generate segments from a DEM.</p>
+</section>
+</section>
+<section id="output-files">
+<h3><span class="section-number">2.5.2. </span>Output Files<a class="headerlink" href="#output-files" title="Link to this heading">#</a></h3>
+<p>The outputs of the segment generation process are two files:</p>
+<ul class="simple">
+<li><p>str_segid BIL file which stores segment IDs as a raster data. Non-segment pixels are assigned a value of 0 (i.e., NODATA).</p></li>
+<li><p>seg_info.mat file which contains the following 7 variables.</p>
+<ul>
+<li><p>strcf–stream confluence pixels’ location as matrix indices</p></li>
+<li><p>strhd–stream headwater pixels’ location as matrix indices</p></li>
+<li><p>strpx0—stream pixels with location and flow accumulation</p>
+<ul>
+<li><p>Col1—MATLAB linear index of start pixel</p></li>
+<li><p>Col2—flow accumulation of the start pixel</p></li>
+</ul>
+</li>
+<li><p>strpx– stream pixels with segment ID and reach ID</p>
+<ul>
+<li><p>Col1—MATLAB linear index of start pixel</p></li>
+<li><p>Col2—flow accumulation of the start pixel</p></li>
+<li><p>Col3—reach ID</p></li>
+<li><p>Col4—segment ID</p></li>
+</ul>
+</li>
+<li><p>header–column names of the seg_info variable</p></li>
+<li><p>seg_info—segment information</p>
+<ul>
+<li><p>start pixel index, end pixel index, start facc, end facc, segment length (# of pixels), downstream segment ID, reach ID</p></li>
+</ul>
+</li>
+<li><p>seg_info0—reach information</p>
+<ul>
+<li><p>First segment start pixel, last segment end pixel, their corresponding faccs, total number of stream pixels</p></li>
+<li><p>Currently, the last column is either 0 (reach flows out DEM) or 1 (other reaches). We may want to change the column to indicate reach reach network connectivity which might be useful for automatically assign stream orders to segments.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<section id="tools">
+<h4><span class="section-number">2.5.2.1. </span>Tools<a class="headerlink" href="#tools" title="Link to this heading">#</a></h4>
+<p>The segment ID raster file can be converted to a shapefile using the ArcGIS Stream to Features tool. The shapefile can then be used to examine and select segments and create a segment library. Note that the Raster to Polyline tool doesn’t work properly in some cases. The left stream polyline is generated by the Raster to Polyline tool, and the right stream polyline is generated by the Stream to Feature tool. The left polyline is erroneous. Also note that the Stream to Features tool connects upstream segments at the downstream confluence pixel.</p>
+<p><img alt="" src="../_images/stream2feature.PNG" /></p>
+</section>
+</section>
+</section>
+<section id="create-segment-library">
+<h2><span class="section-number">2.6. </span>Create Segment Library<a class="headerlink" href="#create-segment-library" title="Link to this heading">#</a></h2>
+<p>The next step is to create a FLDPLN library for each of the segments. The library is a collection of flood inundation relationships between the FSPs on a segment and the FPPs those FSPs may inundate. The library stores the minimum depth of flow (DOF) required to flood a FPP from a FSP on the segment. The FSP-FPP flood inundation relationship is obtained by iteratively raising the water level at the FSPs on a segment until the FPPs is flooded. Water inundates a FPP through either backfill flooding or spillover flooding mechanism. The following parameters are used in the flood inundation process:</p>
+<ul class="simple">
+<li><p>fldmx–maximum DTF at FSPs (all DTF values will be less than or equal to this value)</p></li>
+<li><p>dh–depth step for the iterations</p></li>
+<li><p>fldmn–minimum DTF at FSPs (all floodplain heights lower than this value get mapped to this value at the end)</p></li>
+<li><p>mxht–cap height = max(dem+flood height) to cease flooding; enter 0 for no cap height</p></li>
+<li><p>ssflg = 1 if the ‘steady state’ model is to be evaluated, where spillover is performed exhastively during each iteration (recommended for high resolution DEM, e.g., 10-m NED and 2-m LiDAR) = 0 if only a single spillover flood step is to be used during each iteration (recommended for low resolution DEM, e.g., 30-m NED and 90-m NED)</p></li>
+</ul>
+<p>Questions with the model</p>
+<ul class="simple">
+<li><p>Parameters ‘mxht’ and ‘ssflg’? How about just backfill flooding?</p></li>
+<li><p>Do all the FSPs on a segment have the same DTF?</p></li>
+<li><p>Does the library only store the minimum DTF (and its corresponding FSP on the segment) for each FPP?</p></li>
+</ul>
+<p>Note that we can use the segment shapefile to select a subset of segments to create a library. The selected segments can be used to create a partial library for a DEM.</p>
+<section id="scripts">
+<h3><span class="section-number">2.6.1. </span>Scripts<a class="headerlink" href="#scripts" title="Link to this heading">#</a></h3>
+<section id="id2">
+<h4><span class="section-number">2.6.1.1. </span>MATLAB Scripts<a class="headerlink" href="#id2" title="Link to this heading">#</a></h4>
+<p>fldpln_model_v6ram.m</p>
+<p>This script is the original MATLAB function to create a FLDPLN library for ONE segment. There are 2 additional scripts which use different amount of RAM. fldpln_model_v6hd.m uses minimum RAM and fldpln_model_v6ram0.m is between v6hd and v6ram. The inp structure in the function takes the following parameters:</p>
+<ul class="simple">
+<li><p>inp.dem is the original DEM which is used to calculated filled depression depth with filled DEM</p></li>
+<li><p>inp.fil is the filled DEM</p></li>
+<li><p>inp.seg is the segment information file</p></li>
+<li><p>inp.segdr is the directory where the segment library files are stored. If this directory exists, it checks whether segment library has been created already.</p></li>
+<li><p>inp.segf is the segment ID BIL file, which is only needed when creating the library for a partial segment</p></li>
+</ul>
+<p>create_segment_library_v6ram.m</p>
+<p>This script is a wrapper of the fldpln_model_v6ram.m function, which creates a FLDPLN library from a set of segments.</p>
+<p>readbilheader.m, scanbil.m and readshapefield.m</p>
+<p>These scripts are used to read the header of a BIL file, scan a BIL file, and shapfile fields respectively.</p>
+<p>batch_rename_segment_files.m</p>
+<p>In case a library is somehow interrupted, this script is used to rename segment files (i.e., hXX_dhX_segX.mat and i.e., hXX_dhX_segX_tmp.mat) to the target maximum DTF to continue from where it stopped instead of starting from scratch. This file should be renamed as batch_rename_segment_library_files.m. Not exactly sure what it does!</p>
+</section>
+<section id="id3">
+<h4><span class="section-number">2.6.1.2. </span>Python Scripts<a class="headerlink" href="#id3" title="Link to this heading">#</a></h4>
+</section>
+</section>
+<section id="id4">
+<h3><span class="section-number">2.6.2. </span>Output Files<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<p>This step creates a segment library for each segment saved as the following two files:</p>
+<ul class="simple">
+<li><p>hXX_dhX_segX.mat contains two variables header and fldpln which has the columns of ‘refernce stream pixel’	‘floodplain pixel’	‘flood height’	‘flood height + fill depth’. The flood height is the depth of flow at the FSP that is required to flood the FPP. The fill depth is the depth of the depression at the FPP that is filled in during hydrological conditioning on the DEM.</p></li>
+<li><p>hXX_dhX_segX_tmp.mat has 7 variables. Need to know more about them.</p></li>
+</ul>
+</section>
+</section>
+<section id="reformat-segment-library-files">
+<h2><span class="section-number">2.7. </span>Reformat segment library files<a class="headerlink" href="#reformat-segment-library-files" title="Link to this heading">#</a></h2>
+<p>The original segment library files are further reformatted to make them ready for tiling. The primarily formatting is to convert FSP and FPP location indices into map coordinates. It easier for use in the flood mapping process. In addition to reformated segment library files, this step also creates two Excel files (fsp_info.xlsx, segment_network_info.xlsx) and copy BIL files’ spatial reference system as lib.prj to the output folder.</p>
+<section id="id5">
+<h3><span class="section-number">2.7.1. </span>Scripts<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<section id="id6">
+<h4><span class="section-number">2.7.1.1. </span>MATLAB Scripts<a class="headerlink" href="#id6" title="Link to this heading">#</a></h4>
+<p>Script <strong>xp_format_segment_library.m</strong> reformats the raw segment library files (typically under the rawlib folder) and creates the Excel files and copy the spatial reference file.</p>
+</section>
+<section id="id7">
+<h4><span class="section-number">2.7.1.2. </span>Python Scripts<a class="headerlink" href="#id7" title="Link to this heading">#</a></h4>
+</section>
+</section>
+<section id="id8">
+<h3><span class="section-number">2.7.2. </span>Output Files<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<p>Each reformated segment library file contains the following columns:</p>
+<ul class="simple">
+<li><p>FSP_x: x coordinate of the FSP pixel center in map coordinates</p></li>
+<li><p>FSP_y: y coordinate of the FSP pixel center in map coordinates</p></li>
+<li><p>floodplain_x: x coordinate of the FPP pixel center in map coordinates</p></li>
+<li><p>floodplain_y: y coordinate of the FPP pixel center in map coordinates</p></li>
+<li><p>DTF: the minimum depth of flow (DOF) at the FSP that is required to flood the FPP</p></li>
+<li><p>DTF + fill depth: the sum of DTF and filled depression depth. The filled depression depth is the depth of the depression at the FPP that is filled in during hydrological conditioning on the DEM.</p></li>
+</ul>
+<p>The fsp_info Excel file has the following columns:</p>
+<ul class="simple">
+<li><p>X: x coordinate of the FSP pixel center in map coordinates</p></li>
+<li><p>Y: y coordinate of the FSP pixel center in map coordinates</p></li>
+<li><p>StrID: stream ID of the segment? (column never used)</p></li>
+<li><p>SegID: segment ID of the FSP</p></li>
+<li><p>FIL: FSP’s bed elevation</p></li>
+</ul>
+<p>The segment_network_info Excel file contains the following columns:</p>
+<ul class="simple">
+<li><p>SegID: segment ID of the segment</p></li>
+<li><p>seg_len: length of the segment in the number of FSP pixels</p></li>
+<li><p>segID_ds: downstream segment ID of the segment</p></li>
+</ul>
+<p>Questions:</p>
+<ul class="simple">
+<li><p>What’s the use of the StrID field in the fsp_info Excel file? It’s introduced in script format_segment_library.m.</p></li>
+</ul>
+</section>
+</section>
+<section id="mapping-flood">
+<h2><span class="section-number">2.8. </span>Mapping Flood<a class="headerlink" href="#mapping-flood" title="Link to this heading">#</a></h2>
+<p>With the FSP-FPP pairs and their DTFs, the flood mapping process is divided into three steps:</p>
+<ul class="simple">
+<li><p><strong>Determine the depth of flow (DOF) at each FSP.</strong> This is done by calculating the difference between the water surface elevation at a certain time and stream bed elevation at the FSP. FSP’s bed elevation is provided in the “FIL” column in the “*_fsp_info” Excel file comes with a library. In the case of a gauged FSP, its DOF is calculated as: DOF = gauge stage + gauge datum elevation - FIL. Note that here we assume the vertical datum used by the bed elevation and the gauge datum elevation are the same. Otherwise, those elevations have to be adjusted to the same vertical datum.</p></li>
+<li><p><strong>Determine the depth of flood (DTF) at a FPP from each paired FSP.</strong> For each FSP that may flood the FPP (i.e., paired with the FPP), the flood depth from the FSP can be calculated as: FD = DOF - DTF + Filled Depression Depth. When DOF is less than DTF, water level at the FSP is not high enough to inundate the FPP.</p></li>
+<li><p><strong>Determine the depth of flood (DTF) at a FPP.</strong> The flood depth at a FPP is the maximum flood depth among all the FSPs that can inundate the FPP, i.e., the FSPs that have a positive flood depth.</p></li>
+</ul>
+</section>
+<section id="examples-libraries">
+<h2><span class="section-number">2.9. </span>Examples Libraries<a class="headerlink" href="#examples-libraries" title="Link to this heading">#</a></h2>
+<p>In the following sections, we will provide examples of using the FLDPLN model to create a FLDPLN library for the Wildcat Creek and Verdigris River watersheds in Kansas.</p>
+<section id="wildcat-creek-2018-labor-day-flood">
+<h3><span class="section-number">2.9.1. </span>Wildcat Creek 2018 Labor Day Flood<a class="headerlink" href="#wildcat-creek-2018-labor-day-flood" title="Link to this heading">#</a></h3>
+<p>Wildcat Creek is a tributary of the Kansas River in northeastern Kansas. The creek is about 125 miles long and drains an area of about 680 square miles. The creek flows through the cities of Manhattan and Junction City. The creek is prone to flooding, especially in the Manhattan area. The creek has several stream gauges that provide real-time streamflow data. The creek has a FLDPLN library that contains flood relationships between FSPs and FPPs for the creek. The library has 25 segment files that cover the entire creek. The library is used to map flood extents for the creek. <strong>Need to check this co-pilot generated text</strong></p>
+<ul class="simple">
+<li><p>Create library for selected segments. For example, the wildcat10m_3dep DEM is much large than the Wildcat creek watershed. We can select only the segments within the watershed create a library.</p></li>
+<li><p>Low watershed size to 50 (default is 70 square miles) to extend stream networks to include the upstream gauge which is not used in current midkan library</p></li>
+</ul>
+</section>
+<section id="johnson-county-2017-and-2025">
+<h3><span class="section-number">2.9.2. </span>Johnson County 2017 and 2025<a class="headerlink" href="#johnson-county-2017-and-2025" title="Link to this heading">#</a></h3>
+</section>
+<section id="verdigris-river-2019-flood">
+<h3><span class="section-number">2.9.3. </span>Verdigris River 2019 Flood<a class="headerlink" href="#verdigris-river-2019-flood" title="Link to this heading">#</a></h3>
+</section>
+<section id="indian-creek-2017-flood">
+<h3><span class="section-number">2.9.4. </span>Indian Creek 2017 Flood<a class="headerlink" href="#indian-creek-2017-flood" title="Link to this heading">#</a></h3>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "giswqs/jupyter-book-demo",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="01_intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Introduction</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="03_tiling.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>Tile FLDPLN Libraries</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">2.1. Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fldpln-inundation-library">2.2. FLDPLN Inundation Library</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-steps-of-using-the-fldpln-model">2.3. General Steps of Using the FLDPLN Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hydrological-conditioning-dem">2.4. Hydrological Conditioning DEM</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scripts-and-tools">2.4.1. Scripts and Tools</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-stream-segments">2.5. Generate Stream Segments</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">2.5.1. Scripts and Tools</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#matlab-scripts">2.5.1.1. MATLAB Scripts</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#python-scripts">2.5.1.2. Python Scripts</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#output-files">2.5.2. Output Files</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tools">2.5.2.1. Tools</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-segment-library">2.6. Create Segment Library</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scripts">2.6.1. Scripts</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">2.6.1.1. MATLAB Scripts</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">2.6.1.2. Python Scripts</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">2.6.2. Output Files</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reformat-segment-library-files">2.7. Reformat segment library files</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">2.7.1. Scripts</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">2.7.1.1. MATLAB Scripts</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">2.7.1.2. Python Scripts</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">2.7.2. Output Files</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mapping-flood">2.8. Mapping Flood</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-libraries">2.9. Examples Libraries</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wildcat-creek-2018-labor-day-flood">2.9.1. Wildcat Creek 2018 Labor Day Flood</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#johnson-county-2017-and-2025">2.9.2. Johnson County 2017 and 2025</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#verdigris-river-2019-flood">2.9.3. Verdigris River 2019 Flood</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indian-creek-2017-flood">2.9.4. Indian Creek 2017 Flood</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Qiusheng Wu
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

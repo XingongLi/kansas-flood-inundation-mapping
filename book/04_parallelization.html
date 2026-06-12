@@ -1,0 +1,843 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>4. Parallelize Flood Mapping &#8212; Jupyter Book Demo</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/04_parallelization';</script>
+    <link rel="canonical" href="https://giswqs.github.io/jupyter-book-demo/book/04_parallelization.html" />
+    <link rel="icon" href="../_static/fav.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="5. Gauges" href="05_gauge.html" />
+    <link rel="prev" title="3. Tile FLDPLN Libraries" href="03_tiling.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Jupyter Book Demo - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Jupyter Book Demo - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_intro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_fldpln.html">2. The FLDPLN Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_tiling.html">3. Tile FLDPLN Libraries</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">4. Parallelize Flood Mapping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_gauge.html">5. Gauges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_server.html">6. Serve Flood Maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_client.html">7. Flood Mapping Dashboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_image_viewer.html">8. Rapid Image Viewer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_future.html">9. Future Improvements</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="system.html">System Description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open_source.html">Open Source vs. ArcPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_env.html">Build a Python Environment for Using the FLDPLN Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="binder.html">Binder and BinderHub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/giswqs/jupyter-book-demo/main?urlpath=tree/book/04_parallelization.md" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/giswqs/jupyter-book-demo/blob/main/book/04_parallelization.md" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/giswqs/jupyter-book-demo" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/giswqs/jupyter-book-demo/edit/main/book/04_parallelization.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/giswqs/jupyter-book-demo/issues/new?title=Issue%20on%20page%20%2Fbook/04_parallelization.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/book/04_parallelization.ipynb" target="_blank"
+   class="btn btn-sm btn-download-notebook-button dropdown-item"
+   title="Download notebook file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="../_sources/book/04_parallelization.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Parallelize Flood Mapping</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mapping-issues">4.1. Mapping Issues</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#test-done-on-pc-office-desktop-computer-and-kars-server">4.2. Test done on PC, office desktop computer and KARS server</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stream-flood-maps">4.3. Stream Flood Maps</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reservoir-flood-mapping-not-parallelized-yet">4.4. Reservoir flood mapping (not parallelized yet!)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#issues">4.5. Issues</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#runs-for-historical-flood-maps">4.6. Runs for Historical Flood Maps</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#action-flood-map-503-tiles">4.6.1. “Action” Flood Map (503 tiles)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flood-flood-map-528-tiles">4.6.2. “Flood” Flood Map (528 tiles)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#moderate-flood-map-553-tiles">4.6.3. “Moderate” Flood Map (553 tiles)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#major-flood-map-614-tiles">4.6.4. “Major” Flood Map (614 tiles)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parallelization-on-microsoft-planetary-computer-pc">4.7. Parallelization on Microsoft Planetary Computer (PC)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#local-vs-blob-storage-files">4.7.1. Local vs blob storage files</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parallelization-using-dask-gateway-cluster">4.7.2. Parallelization using Dask Gateway cluster</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#notes-on-using-dask-gateway-on-pc">4.7.3. Notes on using Dask Gateway on PC</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implement-map-compute-engine-using-dask">4.8. Implement Map Compute Engine using Dask?</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="parallelize-flood-mapping">
+<h1><span class="section-number">4. </span>Parallelize Flood Mapping<a class="headerlink" href="#parallelize-flood-mapping" title="Link to this heading">#</a></h1>
+<p>Because of the amount of data and the importance of real-time application, it is important to parallelize the flood mapping. We used the Dask python library for parallelizing the flood mapping. Typically, parallelization on Dask is done using Dask collections (dask array, dask dataframe, etc.) as shown below.</p>
+<p><img alt="" src="../_images/dask.PNG" /></p>
+<p>With tiled relations, flood mapping parallelization can be done by building a <a class="reference external" href="https://docs.dask.org/en/stable/custom-graphs.html">custom directed acyclic graph (DAG)</a> that is executed by dask schedulers on a single machine or a cluster.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># from MapFloodDepthWithTilesAsDag()</span>
+<span class="n">dag</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">tid</span><span class="p">,</span><span class="n">fppExtent</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">tileIds</span><span class="p">,</span><span class="n">fppExtents</span><span class="p">):</span>
+    <span class="n">dag</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;MapOneTile_</span><span class="si">{</span><span class="n">tid</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">MapOneTile</span><span class="p">,</span><span class="n">libFolder</span><span class="p">,</span><span class="n">libName</span><span class="p">,</span><span class="n">tid</span><span class="p">,</span><span class="n">fppExtent</span><span class="p">,</span><span class="n">cellSize</span><span class="p">,</span><span class="n">libSr</span><span class="p">,</span><span class="n">fileFormat</span><span class="p">,</span><span class="n">outMapFolder</span><span class="p">,</span><span class="n">fspDof</span><span class="p">,</span><span class="n">aoiExtent</span><span class="p">)</span> 
+<span class="n">dagRootName</span> <span class="o">=</span> <span class="s1">&#39;MapTiles&#39;</span>
+<span class="n">dag</span><span class="p">[</span><span class="n">dagRootName</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">GetTileTifs</span><span class="p">,</span><span class="nb">list</span><span class="p">(</span><span class="n">dag</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+</pre></div>
+</div>
+<p>Parallelization experiments were one on Microsoft Planetary Computer and the operational system (i.e., the dashboard) is parallelized on a single machine with 8 cores.</p>
+<p>In addition to Dask, there are Ray and other <a class="reference external" href="https://nikolay-vaklev.medium.com/need-for-speed-in-python-d64f3da0fb7d">other python parallelization options</a>. Those options should be explored in the future.</p>
+<section id="mapping-issues">
+<h2><span class="section-number">4.1. </span>Mapping Issues<a class="headerlink" href="#mapping-issues" title="Link to this heading">#</a></h2>
+<p>MinDtf for all the libraries were mapped and mosaic as one TIF file (mindtf.tif)</p>
+<p>No flood map with current gauge stage observation</p>
+<ul class="simple">
+<li><p>nemaha and lowrep both only have two gauges with current observation. However, current stage observation is negative and cannot produce a map</p></li>
+<li><p>lowrep has 4 gauges with categorical stages (i.e., ‘Major’, ‘Moderate’, ‘Flood’ and ‘Action”). But only two of the gauges (CNKK1 and CYCK1) have regular observation and forecast.</p></li>
+</ul>
+<p>With tiled libraries, flood mapping can be parallelized using either on-premise or cloud computational resources such as Planetary Computer, Pangeo, GEE,and CyberGISX.</p>
+</section>
+<section id="test-done-on-pc-office-desktop-computer-and-kars-server">
+<h2><span class="section-number">4.2. </span>Test done on PC, office desktop computer and KARS server<a class="headerlink" href="#test-done-on-pc-office-desktop-computer-and-kars-server" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Parallelization using PC’s Dask Gateway</p>
+<ul>
+<li><p>Mapping the tiles only take 19% of the time with 20 workers</p></li>
+<li><p>Library files are stored in Azure Blob Storage using a free trial Azure Storage Account (fldpln). 3 libraries (spring, lowark, and neosho) are uploaded for test and each library is stored in a Container.</p></li>
+<li><p>All the code related with reading/writing files (.snz, .csv, .tif) were rewritten to work with blob storage. This is the biggest change in the code.</p></li>
+<li><p>Separated the mosaic function from the MapFloodDepthWithTiles() function as</p>
+<ul>
+<li><p>It’s necessary to create the DAG</p></li>
+<li><p>It’s probably not necessary to mosaic the tiles</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Parallelization using a local cluster on PC (32G Ram + 4 cores) and office computer (32G Ram + 6 cores)</p>
+<ul>
+<li><p>Mapping the tiles takes 44% of the time (spring and lowark) with 4 workers</p></li>
+<li><p>Libraries can be stored either as local file or in Azure Blob Storage</p></li>
+<li><p>Not much change in code when using local library files</p></li>
+<li><p><span style="color:red">Need to test more on office desktop computer which has 32G RAM and 6 cores. Having memory (?) issues with five large libraries. Set processes=False seemed solving the problem.</span></p></li>
+</ul>
+</li>
+<li><p>Parallelization using a local cluster on KARS production server (4 workers, 47G RAM) has no issue to generate the tiles for MinDtf (1301 tiles)</p></li>
+<li><p>See Excel file (LocalBlobParalleleComparison) for comparison of the parallelization platforms.</p></li>
+</ul>
+</section>
+<section id="stream-flood-maps">
+<h2><span class="section-number">4.3. </span>Stream Flood Maps<a class="headerlink" href="#stream-flood-maps" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Flood mapping is done using the task_lib2map_*.py which has 4 arguments: outputMapFolder,mapType, mapSubtype, mapFolderName. An example of using the script is:</p></li>
+</ul>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">  &gt;python fldpln_lib2map.py D:\projects_new\fldpln\kansas\maps Forecast 0 fcst_000_20220616_1500</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Current and Forecast Maps<br />
+Main map type is ‘Forecast’ and subtypes are integers from 0 to 14 indicating the forecast length in days. 0 length is current observation.</p></li>
+<li><p>Special Maps<br />
+Main map type is ‘Special’ and four subtypes are:</p>
+<ul>
+<li><p>‘MinDtf’: minimum FSP depth to flood a FFP</p></li>
+<li><p>‘NumOfFsps’: number of FSPs that can flood a FFP</p></li>
+<li><p>‘Depression’: depression at a FFP</p></li>
+<li><p>String of a numeric value: the constant stage (in foot)) assigned to all FSPs</p></li>
+</ul>
+</li>
+<li><p>Historical Flood Maps<br />
+Main map type is ‘Historical’ and four subtppes include: ‘Action’, ‘Flood’, ‘Moderate’, ‘Major’</p></li>
+<li><p>Local cluster in Python script CAN ONLY RUN in the <strong>‘if __name__ == ‘__main__’:`</strong> block! See <a class="reference external" href="https://github.com/dask/distributed/issues/2422">this</a> on the issue.</p></li>
+<li><p>When close client and local cluster using client.close()+.shutdown() and cluster.close(), system shows the warning “distributed.nanny - WARNING - Worker process still alive after 3.999998664855957 seconds, killing”. See <a class="reference external" href="https://stackoverflow.com/questions/53394935/what-is-the-right-way-to-close-a-dask-localcluster">this</a> on using python context manager (i.e., the with keyword). However, it still shows the same warning!</p></li>
+<li><p>Using a local cluster in a Notebook is easier but it runs slower than in a Python script. Also, Notebook cluster gets slower and slower (not sure why?)</p></li>
+</ul>
+</section>
+<section id="reservoir-flood-mapping-not-parallelized-yet">
+<h2><span class="section-number">4.4. </span>Reservoir flood mapping (not parallelized yet!)<a class="headerlink" href="#reservoir-flood-mapping-not-parallelized-yet" title="Link to this heading">#</a></h2>
+<p>Reservoir water/flood maps are mapped using the gauge elevation at each reservoir with script fldpln_res2map.py.</p>
+<ul class="simple">
+<li><p>The reservoir DEM/bathymetry data (from David) are in web Mercator coordinate system? why (for serving it)?</p></li>
+</ul>
+</section>
+<section id="issues">
+<h2><span class="section-number">4.5. </span>Issues<a class="headerlink" href="#issues" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>When exits the script, whether uses single CPU or a local cluster, system shows “Fatal error condition occurred in D:\bld\aws-c-io_1633633258269\work\source\event_loop.c:74: aws_thread_launch(&amp;cleanup_thread, s_event_loop_destroy_async_thread_fn, el_group, &amp;thread_options) == AWS_OP_SUCCESS”. Not sure what is happening but t seems to me that the call to MapFloodDepthWithTiles() caused problem. However, <strong>the script seems generating correct maps</strong>!</p></li>
+<li><p>Scatter data? System shows “Map ksrv flood depth using LocalCLuster …
+C:\Users\lixi\Miniconda3\envs\fldpln\lib\site-packages\distributed\worker.py:4504: UserWarning: Large object of size 1.08 MiB detected in task graph:
+(‘D:\projects_new\fldpln\kansas\data\KS_tiled … columns], None)
+Consider scattering large objects ahead of time with client.scatter to reduce scheduler burden and keep data on workers” when mapping ksrv.</p></li>
+</ul>
+</section>
+<section id="runs-for-historical-flood-maps">
+<h2><span class="section-number">4.6. </span>Runs for Historical Flood Maps<a class="headerlink" href="#runs-for-historical-flood-maps" title="Link to this heading">#</a></h2>
+<p>local cluster with 4 cores/workers each has 32G RAM</p>
+<section id="action-flood-map-503-tiles">
+<h3><span class="section-number">4.6.1. </span>“Action” Flood Map (503 tiles)<a class="headerlink" href="#action-flood-map-503-tiles" title="Link to this heading">#</a></h3>
+<p>Total processing time (minutes): 6.097 (script), 14.894 (Notebook)<br />
+Individual library mapping time:<br />
+{‘bigblue’: 0.247, ‘chik_saltfork_medlodg’: 0.039, ‘cotneo’: 0.136, ‘ksrv’: 0.823, ‘litark’: 0.051, ‘lowark’: 0.29, ‘lowrep’: 0.119, ‘mdc’: 0.232, ‘midkan’: 0.122, ‘midsol’: 0.028, ‘morv’: 1.006, ‘nemaha’: 0.042, ‘neosho’: 0.665, ‘ninnescah’: 0.084, ‘osagemarmaton’: 0.046, ‘smoksalsol’: 0.453, ‘spring’: 0.079, ‘upark’: 1.034, ‘upkan’:0.227, ‘uprep’: 0.077, ‘upsal’: 0.054, ‘upsmoky’: 0.04, ‘upsol’: 0.017, ‘verdigriscaney’: 0.1, ‘walnut’: 0.085}</p>
+</section>
+<section id="flood-flood-map-528-tiles">
+<h3><span class="section-number">4.6.2. </span>“Flood” Flood Map (528 tiles)<a class="headerlink" href="#flood-flood-map-528-tiles" title="Link to this heading">#</a></h3>
+<p>Total processing time (minutes): 6.208 (script), 18.759 (Notebook)<br />
+Individual library mapping time:<br />
+{‘bigblue’: 0.255, ‘chik_saltfork_medlodg’: 0.03, ‘cotneo’: 0.125, ‘ksrv’: 0.896, ‘litark’: 0.049, ‘lowark’: 0.299, ‘lowrep’: 0.117, ‘mdc’: 0.225, ‘midkan’: 0.117, ‘midsol’: 0.027, ‘morv’: 1.016, ‘nemaha’: 0.045, ‘neosho’: 0.622, ‘ninnescah’: 0.076, ‘osagemarmaton’: 0.046, ‘smoksalsol’: 0.445, ‘spring’: 0.082, ‘upark’: 1.147, ‘upkan’: 0.206, ‘uprep’: 0.094, ‘upsal’: 0.05, ‘upsmoky’: 0.03, ‘upsol’: 0.015, ‘verdigriscaney’: 0.107, ‘walnut’: 0.085}</p>
+</section>
+<section id="moderate-flood-map-553-tiles">
+<h3><span class="section-number">4.6.3. </span>“Moderate” Flood Map (553 tiles)<a class="headerlink" href="#moderate-flood-map-553-tiles" title="Link to this heading">#</a></h3>
+<p>Total processing time (minutes): 8.296 (script), 9.179 (Notebook)<br />
+Individual library mapping time:<br />
+{‘bigblue’: 0.326, ‘chik_saltfork_medlodg’: 0.037, ‘cotneo’: 0.16, ‘ksrv’: 1.236, ‘litark’: 0.063, ‘lowark’: 0.385, ‘lowrep’: 0.166, ‘mdc’: 0.409, ‘midkan’: 0.185, ‘midsol’: 0.031, ‘morv’: 1.32, ‘nemaha’: 0.046, ‘neosho’: 0.72, ‘ninnescah’: 0.088, ‘osagemarmaton’: 0.057, ‘smoksalsol’: 0.633, ‘spring’: 0.121, ‘upark’: 1.32, ‘upkan’: 0.411, ‘uprep’: 0.119, ‘upsal’: 0.051, ‘upsmoky’: 0.04, ‘upsol’: 0.018, ‘verdigriscaney’: 0.244, ‘walnut’: 0.11}</p>
+</section>
+<section id="major-flood-map-614-tiles">
+<h3><span class="section-number">4.6.4. </span>“Major” Flood Map (614 tiles)<a class="headerlink" href="#major-flood-map-614-tiles" title="Link to this heading">#</a></h3>
+<p>Total processing time (minutes): 12.229 (script), 42.985 (Notebook)<br />
+Individual library mapping time:<br />
+{‘bigblue’: 0.53, ‘chik_saltfork_medlodg’: 0.05, ‘cotneo’: 0.28, ‘ksrv’: 1.806, ‘litark’: 0.081, ‘lowark’: 0.486, ‘lowrep’: 0.349, ‘mdc’: 0.83, ‘midkan’: 0.39, ‘midsol’: 0.037, ‘morv’: 1.779, ‘nemaha’: 0.106, ‘neosho’: 1.287, ‘ninnescah’: 0.098, ‘osagemarmaton’: 0.061, ‘smoksalsol’: 1.0, ‘spring’: 0.152, ‘upark’: 1.635, ‘upkan’: 0.526, ‘uprep’: 0.169, ‘upsal’: 0.056, ‘upsmoky’: 0.071, ‘upsol’: 0.02, ‘verdigriscaney’: 0.286, ‘walnut’: 0.143}</p>
+</section>
+</section>
+<section id="parallelization-on-microsoft-planetary-computer-pc">
+<h2><span class="section-number">4.7. </span>Parallelization on Microsoft Planetary Computer (PC)<a class="headerlink" href="#parallelization-on-microsoft-planetary-computer-pc" title="Link to this heading">#</a></h2>
+<p>Microsoft PC provides a cloud computing platform to scale geospatial data analysis. It provides big geospatial datasets and distributed computating capability through the Dask Gateway.</p>
+<ul class="simple">
+<li><p>What’s difference between Dask and Dask Gateway? See this on <a class="reference external" href="https://medium.com/pangeo/pangeo-with-dask-gateway-4b638825f105">why using Dask Gateway in Pangeo/PC</a>.</p></li>
+</ul>
+<section id="local-vs-blob-storage-files">
+<h3><span class="section-number">4.7.1. </span>Local vs blob storage files<a class="headerlink" href="#local-vs-blob-storage-files" title="Link to this heading">#</a></h3>
+<p>To experiment with the platform, several (3?) tiled libraries were uploaded to both PC virtual machine and Azure Blob Storage in order to use the workers from a Dask Gateway. Note that  gateway cluster workers cannot see “local files” on the PC virtual machine. They can only access the files in the blob storage. This is different from a Dask local cluster which can access local files.</p>
+<p>In the experiment, the baseline is the time used to map the tiles and mosaci the tiles on PC’s local file system. Below are the prilimilary results:</p>
+<ul class="simple">
+<li><p>With a dask cluster of 20 workers (8G RAM per worker, tiles are from blob storage), the time to map the tiles is about 19%, the time to mosaic the tiles is 744%, and total time is 47% of the baseline time.</p></li>
+<li><p>Use the same PC virtual machine (32G RAM) with lob storage, it tooks more time than the baseline time which stores the tiles in a local file system</p>
+<ul>
+<li><p>tile maps (126%), mosaic (740%), total (151%)</p></li>
+</ul>
+</li>
+<li><p>Use a dask cluster of 20 workers and compare with the PC virtual machine using tiles on the blob storage</p>
+<ul>
+<li><p>tile maps (15%), mosaic (98%), total (30%)</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="parallelization-using-dask-gateway-cluster">
+<h3><span class="section-number">4.7.2. </span>Parallelization using Dask Gateway cluster<a class="headerlink" href="#parallelization-using-dask-gateway-cluster" title="Link to this heading">#</a></h3>
+<p>The parallelization experiment on a Dask Gateway cluster was done using a <strong>custom DAG</strong>. In addition to this approach, there are several other ways to parallelization using the Dask Gateway.</p>
+<ul class="simple">
+<li><p>Use dask collections, for example dask.dataframe and dask-geopandas</p></li>
+<li><p>Build custom collections that implement the dask interface, for example xarray and xarray-spatial</p></li>
+</ul>
+</section>
+<section id="notes-on-using-dask-gateway-on-pc">
+<h3><span class="section-number">4.7.3. </span>Notes on using Dask Gateway on PC<a class="headerlink" href="#notes-on-using-dask-gateway-on-pc" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Connection to a dask cluster (See my email exchange with Tom &#64; PC regarding this)</p>
+<ul>
+<li><p>On <a class="reference external" href="https://gateway.dask.org/usage.html">Dask Gateway 0.9.0 Usage documentation</a>, it’s not clear to me how the computations (i.e., dask.array.mean()) know/use the cluster, i.e., <em>there is no code that connects the computation with the client</em>!</p></li>
+<li><p>In PC Quickstarts <a class="reference external" href="https://planetarycomputer.microsoft.com/docs/quickstarts/scale-with-dask/">Scale with Dask example</a>, there is also <em>no code that connectes the computation (i.e., xarray.mean()) with the client from a Dask Gateway</em>.</p></li>
+<li><p>Does the PC Quickstarts <a class="reference external" href="https://planetarycomputer.microsoft.com/docs/quickstarts/reading-tabular-data/">Reading Tabular Data example</a> (i.e., dask.dataframe.read_parquet()) use a backend Dask Gateway to scale file reading? How can we do this explicitly with a Dask Gateway we created?</p></li>
+<li><p>The PC <a class="reference external" href="https://github.com/microsoft/PlanetaryComputerExamples/blob/main/tutorials/zonal_statistics.ipynb">Zonal statistics example</a> which uses a “local Dask cluster” (i.e., dask.distributed runs basically the VM on the cloud?) to compute zonal stats. <em>There is also no code that connects the computation with the local cluster! How does xarray-spatial use the cluster as xarray-spatial only optimize the xarray using Numba!</em> (zone and value rasters are both dask.arrays?) Can we run it on a Dask Gateway cluster?</p>
+<ul>
+<li><p>PC Module pystac_client and stackstac somehow initialize a cluster when loading the data (or search an existing cluster created)? How can we configure the cluster if it’s created by default?</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>How do dask.dataframe, dask_geopandas and xarray-spatial implement their parallelization? Xarray-spatial uses Numba (just-in-time optimization but not parallelized?)</p></li>
+<li><p>Dask examples</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://examples.dask.org/applications/satellite-imagery-geotiff.html">https://examples.dask.org/applications/satellite-imagery-geotiff.html</a></p></li>
+<li><p><a class="reference external" href="https://blog.dask.org/2019/06/20/load-image-data">https://blog.dask.org/2019/06/20/load-image-data</a></p></li>
+<li><p><a class="github reference external" href="https://github.com/davidbrochart/xarray_leaflet">davidbrochart/xarray_leaflet</a></p></li>
+</ol>
+</li>
+</ul>
+</section>
+</section>
+<section id="implement-map-compute-engine-using-dask">
+<h2><span class="section-number">4.8. </span>Implement Map Compute Engine using Dask?<a class="headerlink" href="#implement-map-compute-engine-using-dask" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Map as a custom dask collection</p></li>
+<li><p>Neighborhood as custom dask collection</p>
+<ul>
+<li><p>Stored neighborhoods (such as FSP-FPP relations)</p></li>
+<li><p>Functional neighborhoods</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "giswqs/jupyter-book-demo",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="03_tiling.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>Tile FLDPLN Libraries</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="05_gauge.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">5. </span>Gauges</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mapping-issues">4.1. Mapping Issues</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#test-done-on-pc-office-desktop-computer-and-kars-server">4.2. Test done on PC, office desktop computer and KARS server</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stream-flood-maps">4.3. Stream Flood Maps</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reservoir-flood-mapping-not-parallelized-yet">4.4. Reservoir flood mapping (not parallelized yet!)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#issues">4.5. Issues</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#runs-for-historical-flood-maps">4.6. Runs for Historical Flood Maps</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#action-flood-map-503-tiles">4.6.1. “Action” Flood Map (503 tiles)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flood-flood-map-528-tiles">4.6.2. “Flood” Flood Map (528 tiles)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#moderate-flood-map-553-tiles">4.6.3. “Moderate” Flood Map (553 tiles)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#major-flood-map-614-tiles">4.6.4. “Major” Flood Map (614 tiles)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parallelization-on-microsoft-planetary-computer-pc">4.7. Parallelization on Microsoft Planetary Computer (PC)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#local-vs-blob-storage-files">4.7.1. Local vs blob storage files</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parallelization-using-dask-gateway-cluster">4.7.2. Parallelization using Dask Gateway cluster</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#notes-on-using-dask-gateway-on-pc">4.7.3. Notes on using Dask Gateway on PC</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implement-map-compute-engine-using-dask">4.8. Implement Map Compute Engine using Dask?</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Qiusheng Wu
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

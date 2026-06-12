@@ -1,0 +1,854 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>3. Tile FLDPLN Libraries &#8212; Jupyter Book Demo</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/03_tiling';</script>
+    <link rel="canonical" href="https://giswqs.github.io/jupyter-book-demo/book/03_tiling.html" />
+    <link rel="icon" href="../_static/fav.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="4. Parallelize Flood Mapping" href="04_parallelization.html" />
+    <link rel="prev" title="2. The FLDPLN Model" href="02_fldpln.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Jupyter Book Demo - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Jupyter Book Demo - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_intro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_fldpln.html">2. The FLDPLN Model</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">3. Tile FLDPLN Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_parallelization.html">4. Parallelize Flood Mapping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_gauge.html">5. Gauges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_server.html">6. Serve Flood Maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_client.html">7. Flood Mapping Dashboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_image_viewer.html">8. Rapid Image Viewer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_future.html">9. Future Improvements</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="system.html">System Description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open_source.html">Open Source vs. ArcPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_env.html">Build a Python Environment for Using the FLDPLN Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="binder.html">Binder and BinderHub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/giswqs/jupyter-book-demo/main?urlpath=tree/book/03_tiling.md" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/giswqs/jupyter-book-demo/blob/main/book/03_tiling.md" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/giswqs/jupyter-book-demo" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/giswqs/jupyter-book-demo/edit/main/book/03_tiling.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/giswqs/jupyter-book-demo/issues/new?title=Issue%20on%20page%20%2Fbook/03_tiling.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/book/03_tiling.ipynb" target="_blank"
+   class="btn btn-sm btn-download-notebook-button dropdown-item"
+   title="Download notebook file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="../_sources/book/03_tiling.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Tile FLDPLN Libraries</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tiling-relations-by-fsps">3.1. Tiling relations by FSPs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tiling-relations-by-fpps">3.2. Tiling relations by FPPs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tile-file-formats">3.2.1. Tile File Formats</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-mat-format">3.2.1.1. Using .mat format</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-parquet-format">3.2.1.2. Using Parquet format</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coordinate-based-vs-id-row-column-based-relations">3.2.2. Coordinate-based vs <strong>ID-row-column-based</strong> Relations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tile-size-and-mapping-time">3.2.3. Tile size and mapping Time</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#system-bottlenecks">3.3. System bottlenecks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#issues-in-tiling-the-libraries">3.4. Issues in tiling the libraries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adaptive-tiling">3.5. Adaptive tiling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-to-the-map-compute-framework">3.6. Connection to the Map Compute framework</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-vs-create-neighborhoods-in-mc">3.6.1. Use vs Create neighborhoods in MC</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#neighborhood-as-a-new-data-type">3.6.2. Neighborhood as a new data type</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#neighborhood-indexing">3.6.2.1. Neighborhood indexing</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#neighborhood-pyramid-and-generalization">3.6.2.2. Neighborhood pyramid and generalization</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#api-for-neighborhoods">3.6.2.3. API for neighborhoods</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#neighborhood-couple-and-de-couple">3.6.2.4. Neighborhood couple and de-couple</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="tile-fldpln-libraries">
+<h1><span class="section-number">3. </span>Tile FLDPLN Libraries<a class="headerlink" href="#tile-fldpln-libraries" title="Link to this heading">#</a></h1>
+<p>The FSP-FPP relations generated by the FLDPLN algorithm/model can be organized/structured in several different ways for flood mapping. Tiling the relations by FPPs can avoid memory overflow and allow parallelization.</p>
+<section id="tiling-relations-by-fsps">
+<h2><span class="section-number">3.1. </span>Tiling relations by FSPs<a class="headerlink" href="#tiling-relations-by-fsps" title="Link to this heading">#</a></h2>
+<p>The FSP-FPP relations from the FLDPLN model are originally organized segment by segment where each segment file stores all the FPPs that can be flooded by the FSPs on a segment. This organization conceptually “tiles” the relations by groups of FSPs (i.e. segments). The figure below shows the 21 segments (left) for the Spring library and the minimum DTF to flood the FPPs for segments 1 and 8 (middle). As shown in the figure, while the length of the segments 1 and 8 are similar, the FPP footprints they can flood are very different.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Is this organization comes out the convenience of the FLDPLN model?</p>
+</div>
+<!-- ![](./images/spring_segments.PNG)
+![](./images/spring_segments_1_8.PNG) -->
+<a class="reference internal image-reference" href="../_images/spring_segments.PNG"><img alt="../_images/spring_segments.PNG" src="../_images/spring_segments.PNG" style="width: 200px;" />
+</a>
+<a class="reference internal image-reference" href="../_images/spring_segments_1_8.PNG"><img alt="../_images/spring_segments_1_8.PNG" src="../_images/spring_segments_1_8.PNG" style="width: 200px;" />
+</a>
+<a class="reference internal image-reference" href="../_images/spring_tiles.png"><img alt="../_images/spring_tiles.png" src="../_images/spring_tiles.png" style="width: 200px;" />
+</a>
+<!-- <img src="./images/spring_segments.PNG" alt="Getting started" width=200 />
+<img src="./images/spring_segments_1_8.PNG" alt="Getting started" width=200 />
+<img src="./images/spring_tiles.png" alt="Getting started" width=200 /> -->
+<p>A FPP might be flooded by the FSPs from several different segments, typically upstream or downstream segments. When mapping the flood depth at a FPP, all the FSPs that might flood the FPP have to be identified from the segment files. As such, FSP-FPP relations from several different segment files (possibly all the segment files) need to be accessed and processed. With this segment-tiled relations, flood depth can be mapped in several ways, though none of them are ideal.</p>
+<ul class="simple">
+<li><p>Load all the segments/relations into computer memory and map the depth for the entire library all at once (Jim did exactly this way). This approach, however, will cause memory overflow for large libraries (e.g., lowark) and is not scalable.</p></li>
+<li><p>Map flood depth segment by segment (i.e., generating segment flood depth maps) and then combine the results to get the final depth (maximum of segment flood depth). This approach may still cause memory overflow when the FPP footprints get too large for some segments. In addition, the final map can only be generated until all the segment maps are finished and the max-operation is applied. This is not good for parallelizing the mapping process.</p></li>
+<li><p>Map flood depth region/tile by region/tile. In this approach, each region/tile map can be generated independently (i.e., is scalable). But, as a region/tile is typically covered by several segments, mapping each region/tile involves several segment file I/Os. As such,  segment file I/Os (especially large segments) can significantly slow down the process, and large segment files may cause memory overflow.</p>
+<ul>
+<li><p>Use fishnet tool to create a grid of tiles.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="tiling-relations-by-fpps">
+<h2><span class="section-number">3.2. </span>Tiling relations by FPPs<a class="headerlink" href="#tiling-relations-by-fpps" title="Link to this heading">#</a></h2>
+<p>To avoid memory overflow and to allow parallelization (i.e., scalable ), the FSP-FPP relations from the FLDPLN model are re-organized by groups of FPPs (i.e., tiles) instead of segments. The figure below shows the 21 10-by-10km tiles for the Spring library. It is a coincidence that there are also 21 tiles. Note that the actually tile size (i.e., the FPP extent) is different from tile to tile.</p>
+<a class="reference internal image-reference" href="../_images/spring_segments.PNG"><img alt="../_images/spring_segments.PNG" src="../_images/spring_segments.PNG" style="width: 200px;" />
+</a>
+<a class="reference internal image-reference" href="../_images/spring_tiles.png"><img alt="../_images/spring_tiles.png" src="../_images/spring_tiles.png" style="width: 200px;" />
+</a>
+<!-- ```
+<img src="./images/spring_segments.PNG" alt="Getting started" width=200 />
+<img src="./images/spring_tiles.png" alt="Getting started" width=200 /> -->
+<p>By re-organizing the relations into tiles, the mapping process</p>
+<ul class="simple">
+<li><p>avoids memory overflow (by using a proper tile size)</p></li>
+<li><p>reduces file I/Os (only one tile file I/O is needed to map each tile)</p></li>
+<li><p>is scalable by mapping the tiles in parallel as each tile map is generated independent to each other.</p></li>
+</ul>
+<p>In addition to tiled FSP-FPP relation files (i.e.., .snz files), several other files are also created to either reduce file size or to speed up the mapping process. Below is a snapshot of the files for the tiled Spring library.</p>
+<p><img alt="" src="../_images/spring_tiled_files.PNG" /></p>
+<p>The fsp_info.csv file lists all the FSPs within a tile. Each FSP is assigned a unique ID which is then used to represent the FSP in the FSP-FPP relations (instead of its coordinates). It also stores each FSP’s coordinates (in UTM 14N), bed elevation (in feet), original segment ID, and two additional fields (DsDist and StrOrd) that are used to interpolate FSP’s DOF, which will be discussed later.</p>
+<p><img alt="" src="../_images/spring_fsp_info_csv.PNG" /></p>
+<p>The segment_info.csv file lists all the segments within a tile. It stores stream network connectivity information in the DsSegId field. Two additional fields (DsDist and StrOrd) are used in interpolating FSP DOF which will be discussed later.</p>
+<p><img alt="" src="../_images/spring_segment_info_csv.PNG" /></p>
+<p>The stream_order_info.csv file stores stream order network connectivity information which is used in interpolating FSP DOF which will be discussed later.</p>
+<p><img alt="" src="../_images/spring_stream_order_info_csv.PNG" /></p>
+<p><strong>Two index files</strong> are created to speed up the mapping process.</p>
+<ul class="simple">
+<li><p>The tile-index file (FLDPLN_tiled_tile_index.csv) stores tile extent, FPP extent within the tile, FSP extent within the tile, and the minimum DTF within the tile. When a certain geographical area needs to be mapped, this index (with the FPP extent) helps quickly determine the tiles that need to be mapped. With gauge location, this index (with the FSP extent) also helps quickly determine the FSPs which need to update their DOFs.</p></li>
+</ul>
+<p><img alt="" src="../_images/spring_tile_index_csv.PNG" /></p>
+<ul class="simple">
+<li><p>tile-fsp index (FLDPLN_tiled_fsp_index) stores the tile-FSP relations (i.e., TileId-FspId) and the minDtf for each FSP. When FSP DOF is updated, this index helps quickly determine and access the tile(s) that need to be mapped.</p></li>
+</ul>
+<p><img alt="" src="../_images/spring_tile_fsp_index_csv.PNG" /></p>
+<section id="tile-file-formats">
+<h3><span class="section-number">3.2.1. </span>Tile File Formats<a class="headerlink" href="#tile-file-formats" title="Link to this heading">#</a></h3>
+<p>Several file formats, including mat, parquet, and HDF5, were explored. The experiment results show that Parquet format with snappy compression (i.e., .snz file) is the most efficient.</p>
+<section id="using-mat-format">
+<h4><span class="section-number">3.2.1.1. </span>Using .mat format<a class="headerlink" href="#using-mat-format" title="Link to this heading">#</a></h4>
+<p>Initially, MATLAB’s .mat file format was used to save the FSP-FPP relations in a tile. The main reasons are that 1) the original segment-based relations are in .mat format; 2) ArcGIS Pro’s default python environment has the scipy package (and scipy.io.savemat) installed and no additional python package needs to be installed.</p>
+<p>When the number coordinate-based relations in a tile reaches a certain number, scipy.io.savemat()) could not save the relations anymore. For example, when tiling “lowark” watershed with a tile size of 20-km, it crashed on tile #8 with 115,048,288 FSP-FPP relations.</p>
+<p><img alt="" src="book/images/lowark_tile8_crash.PNG" /></p>
+<p>The crash also happened when “neosho” was tiled on tile #84 with a tile size of 10-km.</p>
+<p><img alt="" src="book/images/neosho_tile84_crash.PNG" /></p>
+<p>The crashes were caused by scipy.io.savemat() as somewhere in the method it uses a C Long (4 byte integer) variable to count the number of bytes that needs to be saved in the mat file (see this <a class="reference external" href="https://github.com/scipy/scipy/issues/12465">post</a>). The maximum number of bytes it can count using a C Long type is: 2^31 = 2,147,483,648.  This means the total number of FSP-FPP relations in a tile should be less than 90 million (2**31/(6*4)=89,478,485, 6 columns in the relation and each column uses 4 bytes). If the number of relations is greater than this, savemat() will fail until this bug is fixed.</p>
+<p>With ID-Row-Column-based relations, there are only 5 columns (FspId, FppRow, FppCol, Dtf, FilledDepth) and the first 3 columns are int32 and the last 2 columns are float32. So the maximum number relations would be: 2**31/(5*4)= 107,374,182 (5 columns in the relation and each column uses 4 bytes)</p>
+</section>
+<section id="using-parquet-format">
+<h4><span class="section-number">3.2.1.2. </span>Using Parquet format<a class="headerlink" href="#using-parquet-format" title="Link to this heading">#</a></h4>
+<p>Parquet (pronounced as par-kay) is a file format that is used to store table data in a compressed binary form. Parquet files are usually compressed using either gzip or Snappy compression. In general, gzip is often a good choice for cold data, which is accessed infrequently. Snappy or LZO are a better choice for hot data, which is accessed frequently.</p>
+<p>Snappy-compressed file (.snz) size is about 50% more than gzip-compressed file (.gzip) size. But reading and writing Snappy file are faster than .gzip. Change to snappy-based tile files saves about 25% of the mapping time. For the neosho library, mapping time went down from 12-mins to 9-mins.</p>
+<ul class="simple">
+<li><p>Parquet vs HDF5: HDF5 file size (with the highest compression level of 9) is still larger and slower than parquet .gzip file. Note that HDF5, like mat file, can save several matrices in one file but a parquet file can only save one table/dataframe!</p></li>
+<li><p>Mat vs snappy: Mat file size is about 62% of snappy file size. But during mapping, mat-based library by average is 34% slower than snappy-based library. Mat-based library doesn’t need to install the ‘fastparquet” package in ArcGIS python environment, which may be a problem. Mat-based library may not possible with a large tile size (see the bug in scipy.io.savemat())</p></li>
+</ul>
+</section>
+</section>
+<section id="coordinate-based-vs-id-row-column-based-relations">
+<h3><span class="section-number">3.2.2. </span>Coordinate-based vs <strong>ID-row-column-based</strong> Relations<a class="headerlink" href="#coordinate-based-vs-id-row-column-based-relations" title="Link to this heading">#</a></h3>
+<p>In the original FSP-FPP relations, FSPs and FPPs are identified by their coordinates, each is a float64 number. To save space, FSP IDs and FPP’s row &amp; column in a tile are used to identify them. In FSP-FPP relation table, column data types changed from original 6 float64 to {“FspId”:np.int32, “FppCol”:np.int32, “FppRow”:np.int32, “Dtf”:np.float32, “FilledDepth”:np.float32}. This saves file size (in snappy format) about 30%.</p>
+<p>The ID-row-column-based relations use less than HALF of the memory than before and there is no memory overflow issue for Neosho watershed (even with 20-km tiles) anymore. It also cuts mapping time more than half because of reduced file reading time and faster dataframe merging using FSP IDs instead of FSP coordinates.</p>
+</section>
+<section id="tile-size-and-mapping-time">
+<h3><span class="section-number">3.2.3. </span>Tile size and mapping Time<a class="headerlink" href="#tile-size-and-mapping-time" title="Link to this heading">#</a></h3>
+<p>Large tiles reduce file I/O as few files need to be read. But this may increase the merging time as only a small portion of a tile needs to be mapped in a typical case. Based on the experiment results, the <strong>tile size of 10-km</strong> is overall better than 20-km in file size and mapping time.</p>
+<p><img alt="" src="../_images/tile_size_table.PNG" /></p>
+</section>
+</section>
+<section id="system-bottlenecks">
+<h2><span class="section-number">3.3. </span>System bottlenecks<a class="headerlink" href="#system-bottlenecks" title="Link to this heading">#</a></h2>
+<ul>
+<li><p>Reading relations from file and merging a large number relations with FSPs with interpolated DOF are the biggest two factors.</p></li>
+<li><p>Removing the relations whose DTF is greater than or equal to the max interpolated DOF significantly saves memory and time when merging the relations with the DOFs! See the following two lines of code in TileFspFppRelations2Array():</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">maxDof</span> <span class="o">=</span> <span class="n">fspDof</span><span class="p">[</span><span class="s1">&#39;Dof&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="n">tdf</span> <span class="o">=</span> <span class="n">tdf</span><span class="p">[</span><span class="n">tdf</span><span class="p">[</span><span class="s1">&#39;Dtf&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">maxDof</span><span class="p">]</span>
+</pre></div>
+</div>
+</li>
+<li><p>When turning relations to map (2D array), using a for-loop to iterate through the relations seems not an issue, at least compared with the above two factors.</p></li>
+</ul>
+</section>
+<section id="issues-in-tiling-the-libraries">
+<h2><span class="section-number">3.4. </span>Issues in tiling the libraries<a class="headerlink" href="#issues-in-tiling-the-libraries" title="Link to this heading">#</a></h2>
+<p>There are total of 25 libraries and they are listed below:
+[‘bigblue’,’chik_saltfork_medlodg’,’cotneo’,’ksrv’,’litark’,<br />
+‘lowark’,’lowrep’,’mdc’,’midkan’,’midsol’,<br />
+‘morv’,’nemaha’,’neosho’, ‘ninnescah’,’osagemarmaton’,<br />
+‘smoksalsol’,’spring’,’upark’,’upkan’,’uprep’,<br />
+‘upsal’,’upsmoky’,’upsol’,’verdigriscaney’,’walnut’]</p>
+<p>Some libraries had errors in segment files:</p>
+<ul class="simple">
+<li><p>cotneo has issue with its segment file and was fixed by Jude.</p></li>
+<li><p>minkan has negative flood depth when mapped with a constant DOF of 10 ft. It turned out that some segments (and therefore some tiles) have negative filled depth.</p></li>
+<li><p>ksrv has negative flood depth when mapped with “Major” flood. It turned out that some segments (1-12 and 17) have zeros for the ‘DTF+fill depth’ column which led to negative filled depth.</p></li>
+<li><p>One segment in midkan has the same error. This issue was identified by Mike and fixed on 1/8/2021.</p></li>
+<li><p>morv segment 72 only has one FSP and it is the only upstream segment of segment 73. My script may not handle this situation especially in interpolating FSP DOF. Currently segment 72 is merged with segment 73 and its only FSP is also added as the first FSP in segment 73.  Jim also deleted the segment in stream order shapefile but I’m not sure whether the FSP was kept in segment 73! Simply deleting segment 72 and its FSP didn’t work as the FSP inundates many FPPs (see SLIE_segment72.mat and note there is only one FSP in the file)!</p></li>
+</ul>
+</section>
+<section id="adaptive-tiling">
+<h2><span class="section-number">3.5. </span>Adaptive tiling<a class="headerlink" href="#adaptive-tiling" title="Link to this heading">#</a></h2>
+<p>Based on the FSP-FPP relations, the tiling can be adaptive. A cluster of FPPs which are inundated by the same FSPs can be tiled as a single tile. It’s not necessary that the tiles are rectangles</p>
+<ul class="simple">
+<li><p>Tiling based on MinDTF as flood propagate from FSPs</p></li>
+<li><p>Equal size tiling (i.e., similar tile size) for evenly distributing computation in parallelization?</p></li>
+</ul>
+</section>
+<section id="connection-to-the-map-compute-framework">
+<h2><span class="section-number">3.6. </span>Connection to the Map Compute framework<a class="headerlink" href="#connection-to-the-map-compute-framework" title="Link to this heading">#</a></h2>
+<p>The FPP-FSP relations from the FLDPLN model represents a certain type of landscape connectivity, i.e., flood hydrological connectivity. They can be viewed as the neighborhoods for either the FPPs or FSPs from the perspective of the Map Compute Framework. The neighborhood of a FPP represents the set of FSPs that may flood the FPP, and the neighborhood of a FSP represents the set of FPPs that the FSP can flood.</p>
+<p>As such, flood mapping can be performed in two ways in MC:</p>
+<ul class="simple">
+<li><p>FPPs are the mapping/analysis units. For each FPP, a ReduceValue operation (in this case, max(DOF-DTF)) is performed within the FPP’s neighborhood.</p></li>
+<li><p>FSPs or segments (FSP zones) are the mapping/analysis units. For each FSP or FSP zone, a NbrRelation operation (in this case, max(DOF-DTF)) on their neighborhoods is performed.</p></li>
+</ul>
+<section id="use-vs-create-neighborhoods-in-mc">
+<h3><span class="section-number">3.6.1. </span>Use vs Create neighborhoods in MC<a class="headerlink" href="#use-vs-create-neighborhoods-in-mc" title="Link to this heading">#</a></h3>
+<p>Can the FSP-FPP relations be computed by MC?</p>
+<ul class="simple">
+<li><p>When a neighborhood operation return location (and associated value), the result is a new relation (or neighborhood)</p></li>
+</ul>
+<p>Data and MC operations (egg vs chicken)</p>
+<ul class="simple">
+<li><p>Data contains both operations (chicken) and maps (egg)?</p></li>
+<li><p>When data is collected (or the data collection process) it actually entangled the operations and maps. Is this related with Sinton’s measurement framework and Chrisman’s transformation operations?</p></li>
+</ul>
+</section>
+<section id="neighborhood-as-a-new-data-type">
+<h3><span class="section-number">3.6.2. </span>Neighborhood as a new data type<a class="headerlink" href="#neighborhood-as-a-new-data-type" title="Link to this heading">#</a></h3>
+<p>Neighborhoods, i.e., spatial relationships or conductivities, are a new data type in the Map Compute Framework. They have two locations and attributes characterize the relationship. There are several aspects worth of research on neighborhoods.</p>
+<ul class="simple">
+<li><p>See Cova and Goodchild IJGIS Extending Geographical Representation to Include Fields of Spatial Objects</p></li>
+</ul>
+<section id="neighborhood-indexing">
+<h4><span class="section-number">3.6.2.1. </span>Neighborhood indexing<a class="headerlink" href="#neighborhood-indexing" title="Link to this heading">#</a></h4>
+<p>In the case of FPP-FSP relations, the locations are FSP and FPP’s locations and attribute is the DTF. This stored neighborhoods can be indexed by both FPP and FSP.</p>
+<ul class="simple">
+<li><p>Indexed-by-FPP (properly), it can deal with extreme large relation and can parallelize the mapping.</p></li>
+<li><p>Indexed-by-FSP, it can quickly update the relation when FSP status is changed (for example, depth-to-flow at FSPs)</p></li>
+<li><p>Note that FSPs are already organized/indexed by segments from Jude’s library!</p></li>
+</ul>
+</section>
+<section id="neighborhood-pyramid-and-generalization">
+<h4><span class="section-number">3.6.2.2. </span>Neighborhood pyramid and generalization<a class="headerlink" href="#neighborhood-pyramid-and-generalization" title="Link to this heading">#</a></h4>
+<p><strong>Can we build a pyramid for the FSP-FPP relations (i.e., generalizing the FSP-FPP relations), for example, down scaling the relations by combining 4 or 9 FPPs as one FPP?</strong></p>
+</section>
+<section id="api-for-neighborhoods">
+<h4><span class="section-number">3.6.2.3. </span>API for neighborhoods<a class="headerlink" href="#api-for-neighborhoods" title="Link to this heading">#</a></h4>
+<p>Just like geospatial data, domain-based neighborhoods are also as valuable as domain geospatial data and should provide a standard way to access the them. Possible research ideas may include:</p>
+<ul class="simple">
+<li><p>A standard web service API for accessing neighborhoods</p></li>
+<li><p>A STAC extension for accessing neighborhoods</p></li>
+</ul>
+</section>
+<section id="neighborhood-couple-and-de-couple">
+<h4><span class="section-number">3.6.2.4. </span>Neighborhood couple and de-couple<a class="headerlink" href="#neighborhood-couple-and-de-couple" title="Link to this heading">#</a></h4>
+<p>At a location, there are multiple neighborhoods. How those neighborhoods are coupled and decoupled? Are those just local operations on the results of focal operations with different neighborhoods?</p>
+<ul class="simple">
+<li><p>see Admin Husic’s paper and literature on landscape connectivity under E:\Research\00_Grants\2017_NSF_SpatiotemporalMA\Literature\LandscapeConnectivity</p></li>
+</ul>
+<p>This seems different from the fourth type of operations (i.e., neighborhood relation operation which examines all the neighborhoods at different location) in the Map Compute Framework.</p>
+</section>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "giswqs/jupyter-book-demo",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="02_fldpln.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">2. </span>The FLDPLN Model</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="04_parallelization.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>Parallelize Flood Mapping</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tiling-relations-by-fsps">3.1. Tiling relations by FSPs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tiling-relations-by-fpps">3.2. Tiling relations by FPPs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tile-file-formats">3.2.1. Tile File Formats</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-mat-format">3.2.1.1. Using .mat format</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-parquet-format">3.2.1.2. Using Parquet format</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coordinate-based-vs-id-row-column-based-relations">3.2.2. Coordinate-based vs <strong>ID-row-column-based</strong> Relations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tile-size-and-mapping-time">3.2.3. Tile size and mapping Time</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#system-bottlenecks">3.3. System bottlenecks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#issues-in-tiling-the-libraries">3.4. Issues in tiling the libraries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adaptive-tiling">3.5. Adaptive tiling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-to-the-map-compute-framework">3.6. Connection to the Map Compute framework</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-vs-create-neighborhoods-in-mc">3.6.1. Use vs Create neighborhoods in MC</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#neighborhood-as-a-new-data-type">3.6.2. Neighborhood as a new data type</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#neighborhood-indexing">3.6.2.1. Neighborhood indexing</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#neighborhood-pyramid-and-generalization">3.6.2.2. Neighborhood pyramid and generalization</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#api-for-neighborhoods">3.6.2.3. API for neighborhoods</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#neighborhood-couple-and-de-couple">3.6.2.4. Neighborhood couple and de-couple</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Qiusheng Wu
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
