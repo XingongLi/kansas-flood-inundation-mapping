@@ -1,0 +1,184 @@
+Total: 24 libraries
+23 tiled and 1 'morv' cannot be tiled
+6: ['bigblue', 'litark','lowrep','midsol','upsmoky','upsol'] don't have stream orders
+
+17 libs tiled and have stream orders, 14 can be mapped with 'Observed'
+3: ['midkan','nemaha','uprep'] cannot be mapped
+
+Processing library:  morv
+Clean up FSP and segment file and calculate FSP and segment downstream distance ...
+Tile library morv into morv ...
+Calculate library extent ...
+Library external border extent (minX, maxX, minY, maxY) : (777905.0, 905670.0, 4303085.0, 4453045.0)
+Total number of FSP-FPP relations: 1762289978
+Number of (possible) tiles: 195
+...
+Processing tile:  57
+Tile extent (minX, maxX, minY, maxY) : (857905.0, 867905.0, 4363085.0, 4373085.0)
+Number of segments interseting with the tile:  80
+Total number of FSP-FPP relations in the tile: 32806376
+Traceback (most recent call last):
+  File "c:\Users\lixi\OneDrive - The University of Kansas\FLDPLN\tools\ReorganizeLibrary.py", line 61, in <module>
+    TileLibrary(inLibFolder,inLibName,cellSize,outLibFolder,outLibName,tileSize,'mat')
+  File "c:\Users\lixi\OneDrive - The University of Kansas\FLDPLN\tools\fldpln_reorg.py", line 157, in TileLibrary
+    tdf=tdf.astype(dtype={"FspId":np.int32, "FppCol":np.int32, "FppRow":np.int32, "Dtf":np.float32, "FilledDepth":np.float32},copy=False)
+  File "C:\Program Files\ArcGIS\Pro\bin\Python\envs\arcgispro-py3\lib\site-packages\pandas\core\generic.py", line 5862, in astype
+    col.astype(dtype=dtype[col_name], copy=copy, errors=errors)
+  File "C:\Program Files\ArcGIS\Pro\bin\Python\envs\arcgispro-py3\lib\site-packages\pandas\core\generic.py", line 5877, in astype
+    new_data = self._mgr.astype(dtype=dtype, copy=copy, errors=errors)
+  File "C:\Program Files\ArcGIS\Pro\bin\Python\envs\arcgispro-py3\lib\site-packages\pandas\core\internals\managers.py", line 631, in astype
+    return self.apply("astype", dtype=dtype, copy=copy, errors=errors)
+  File "C:\Program Files\ArcGIS\Pro\bin\Python\envs\arcgispro-py3\lib\site-packages\pandas\core\internals\managers.py", line 427, in apply
+    applied = getattr(b, f)(**kwargs)
+  File "C:\Program Files\ArcGIS\Pro\bin\Python\envs\arcgispro-py3\lib\site-packages\pandas\core\internals\blocks.py", line 673, in astype
+    values = astype_nansafe(vals1d, dtype, copy=True)
+  File "C:\Program Files\ArcGIS\Pro\bin\Python\envs\arcgispro-py3\lib\site-packages\pandas\core\dtypes\cast.py", line 1068, in astype_nansafe
+    raise ValueError("Cannot convert non-finite values (NA or inf) to integer")
+ValueError: Cannot convert non-finite values (NA or inf) to integer
+
+
+Mapping library:  midkan
+Snap gauges to FSPs and calculate their depth of flow (DOF) ...
+Interpolate FSP DOF using gauge DOF ...
+Map flood depth ...
+Tiles need to be mapped:  []
+Mosaic tile maps ...
+Traceback (most recent call last):
+  File "c:\Users\lixi\OneDrive - The University of Kansas\FLDPLN\tools\FloodMapping.py", line 64, in <module>
+    MapFloodDepthWithTiles(libFolder,libName,fileFormat,outMapFolder,outMapName=obsType,fspDof=fspDof,aoiExtent=None,keepTileMaps=False)
+  File "c:\Users\lixi\OneDrive - The University of Kansas\FLDPLN\tools\fldpln.py", line 413, in MapFloodDepthWithTiles
+    arcpy.MosaicToNewRaster_management(mapFileNames,outMapFolder, outName, "","32_BIT_FLOAT", str(cellSize), "1", "FIRST")
+  File "C:\Program Files\ArcGIS\Pro\Resources\ArcPy\arcpy\management.py", line 19287, in MosaicToNewRaster
+    raise e
+  File "C:\Program Files\ArcGIS\Pro\Resources\ArcPy\arcpy\management.py", line 19284, in MosaicToNewRaster
+    retval = convertArcObjectToPythonObject(gp.MosaicToNewRaster_management(*gp_fixargs((input_rasters, output_location, raster_dataset_name_with_extension, coordinate_system_for_the_raster, pixel_type, cellsize, number_of_bands, mosaic_method, mosaic_colormap_mode), True)))
+  File "C:\Program Files\ArcGIS\Pro\Resources\ArcPy\arcpy\geoprocessing\_base.py", line 512, in <lambda>
+    return lambda *args: val(*gp_fixargs(args, True))
+arcgisscripting.ExecuteError: Failed to execute. Parameters are not valid.
+ERROR 000735: Input Rasters: Value is required
+Failed to execute (MosaicToNewRaster).
+
+Mapping library:  nemaha
+Snap gauges to FSPs and calculate their depth of flow (DOF) ...
+Interpolate FSP DOF using gauge DOF ...
+Map flood depth ...
+Tiles need to be mapped:  []
+Mosaic tile maps ...        
+Traceback (most recent call last):
+  File "c:\Users\lixi\OneDrive - The University of Kansas\FLDPLN\tools\FloodMapping.py", line 70, in <module>
+    MapFloodDepthWithTiles(libFolder,libName,fileFormat,outMapFolder,outMapName=obsType,fspDof=fspDof,aoiExtent=None,keepTileMaps=False)
+  File "c:\Users\lixi\OneDrive - The University of Kansas\FLDPLN\tools\fldpln.py", line 413, in MapFloodDepthWithTiles
+    arcpy.MosaicToNewRaster_management(mapFileNames,outMapFolder, outName, "","32_BIT_FLOAT", str(cellSize), "1", "FIRST")
+  File "C:\Program Files\ArcGIS\Pro\Resources\ArcPy\arcpy\management.py", line 19287, in MosaicToNewRaster
+    raise e
+  File "C:\Program Files\ArcGIS\Pro\Resources\ArcPy\arcpy\management.py", line 19284, in MosaicToNewRaster
+    retval = convertArcObjectToPythonObject(gp.MosaicToNewRaster_management(*gp_fixargs((input_rasters, output_location, raster_dataset_name_with_extension, coordinate_system_for_the_raster, pixel_type, cellsize, number_of_bands, mosaic_method, mosaic_colormap_mode), True)))
+  File "C:\Program Files\ArcGIS\Pro\Resources\ArcPy\arcpy\geoprocessing\_base.py", line 512, in <lambda>
+    return lambda *args: val(*gp_fixargs(args, True))
+arcgisscripting.ExecuteError: Failed to execute. Parameters are not valid.
+ERROR 000735: Input Rasters: Value is required
+Failed to execute (MosaicToNewRaster).
+
+Mapping library:  uprep
+Snap gauges to FSPs and calculate their depth of flow (DOF) ...
+Interpolate FSP DOF using gauge DOF ...
+Map flood depth ...
+Tiles need to be mapped:  []
+Mosaic tile maps ...
+Traceback (most recent call last):
+  File "c:\Users\lixi\OneDrive - The University of Kansas\FLDPLN\tools\FloodMapping.py", line 70, in <module>
+    MapFloodDepthWithTiles(libFolder,libName,fileFormat,outMapFolder,outMapName=obsType,fspDof=fspDof,aoiExtent=None,keepTileMaps=False)
+  File "c:\Users\lixi\OneDrive - The University of Kansas\FLDPLN\tools\fldpln.py", line 413, in MapFloodDepthWithTiles
+    arcpy.MosaicToNewRaster_management(mapFileNames,outMapFolder, outName, "","32_BIT_FLOAT", str(cellSize), "1", "FIRST")
+  File "C:\Program Files\ArcGIS\Pro\Resources\ArcPy\arcpy\management.py", line 19287, in MosaicToNewRaster
+    raise e
+  File "C:\Program Files\ArcGIS\Pro\Resources\ArcPy\arcpy\management.py", line 19284, in MosaicToNewRaster
+    retval = convertArcObjectToPythonObject(gp.MosaicToNewRaster_management(*gp_fixargs((input_rasters, output_location, raster_dataset_name_with_extension, coordinate_system_for_the_raster, pixel_type, cellsize, number_of_bands, mosaic_method, mosaic_colormap_mode), True)))
+  File "C:\Program Files\ArcGIS\Pro\Resources\ArcPy\arcpy\geoprocessing\_base.py", line 512, in <lambda>
+    return lambda *args: val(*gp_fixargs(args, True))
+arcgisscripting.ExecuteError: Failed to execute. Parameters are not valid.
+ERROR 000735: Input Rasters: Value is required
+Failed to execute (MosaicToNewRaster).
+
+Mapping MinDTF:
+Mapping library:  chik_saltfork_medlodg
+Create maps ...
+Tiles need to be mapped:  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84]
+Mosaic tile maps ...
+Processing time (minutes): 2.639
+Mapping library:  ksrv
+Create maps ...
+Tiles need to be mapped:  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103]
+Mosaic tile maps ...
+Processing time (minutes): 5.177
+Mapping library:  lowark
+Create maps ...
+Tiles need to be mapped:  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62]
+Mosaic tile maps ...
+Processing time (minutes): 3.506
+Mapping library:  mdc
+Create maps ...
+Tiles need to be mapped:  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65]
+Mosaic tile maps ...
+Processing time (minutes): 2.363
+Mapping library:  midkan
+Create maps ...
+Tiles need to be mapped:  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
+Mosaic tile maps ...
+Processing time (minutes): 1.274
+Mapping library:  nemaha
+Create maps ...
+Tiles need to be mapped:  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27]
+Mosaic tile maps ...
+Processing time (minutes): 0.744
+Mapping library:  neosho
+Create maps ...
+Tiles need to be mapped:  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103]
+Mosaic tile maps ...
+Processing time (minutes): 6.33
+Mapping library:  osagemarmaton
+Create maps ...
+Tiles need to be mapped:  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22]
+Mosaic tile maps ...
+Processing time (minutes): 0.51
+Mapping library:  smoksalsol
+Create maps ...
+Tiles need to be mapped:  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66]
+Mosaic tile maps ...
+Processing time (minutes): 4.216
+Mapping library:  spring
+Create maps ...
+Tiles need to be mapped:  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]
+Mosaic tile maps ...
+Processing time (minutes): 0.693
+Mapping library:  upark
+Create maps ...
+Tiles need to be mapped:  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83]
+Mosaic tile maps ...
+Processing time (minutes): 10.151
+Mapping library:  upkan
+Create maps ...
+Tiles need to be mapped:  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44]
+Mosaic tile maps ...
+Processing time (minutes): 1.852
+Mapping library:  uprep
+Create maps ...
+Tiles need to be mapped:  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39]
+Mosaic tile maps ...
+Processing time (minutes): 1.24
+Mapping library:  upsal
+Create maps ...
+Tiles need to be mapped:  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
+Mosaic tile maps ...
+Processing time (minutes): 0.783
+Mapping library:  verdigriscaney
+Create maps ...
+Tiles need to be mapped:  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 6
+60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89]
+Mosaic tile maps ...
+Processing time (minutes): 2.484
+Mapping library:  walnut
+Create maps ...
+Tiles need to be mapped:  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47]
+Mosaic tile maps ...
+Processing time (minutes): 1.315

@@ -1,0 +1,65 @@
+
+Generate reservoir depth map ...
+Current time: 20220724_1330
+Map folder: D:\projects_new\fldpln\kansas\maps\reservoir_20220724_1330
+Commandline arguments: ['D:\\projects_new\\fldpln\\tools\\task_res2map_gauge_table.py', 'D:\\projects_new\\fldpln\\kansas\\maps\\reservoir_20220724_1330']
+Reservoir map folder: D:\projects_new\fldpln\kansas\maps\reservoir_20220724_1330
+Processing Melvern - MLVK1
+Adjusted guage elevation 1036.5685302
+Processing Clinton - CLIK1
+Adjusted guage elevation 875.97230972
+Processing Wilson - WLSK1
+Adjusted guage elevation 1516.79086616
+Processing Kanopolis - KANK1
+Adjusted guage elevation 1467.43635172
+Processing Pomona - PLKK1
+Adjusted guage elevation 974.65603676
+Processing Perry - PRRK1
+Adjusted guage elevation 894.28230972
+Processing Webster - STCK1
+Adjusted guage elevation 1887.92803152
+Processing Cheney - CHNK1
+Adjusted guage elevation 1421.72900264
+Processing Lovewell - LOVK1
+Adjusted guage elevation 1579.8977427999998
+Processing Milford - MLFK1
+Adjusted guage elevation 1144.92322836
+Processing Council Grove - CNGK1
+Adjusted guage elevation 1267.1857218
+Processing El Dorado - EDRK1
+Adjusted guage elevation 1339.29275592
+Processing Fall River - FLLK1
+Adjusted guage elevation 949.2458792799999
+Processing Tuttle Creek - MTTK1
+Adjusted guage elevation 1075.92682416
+Processing Elk City - ECLK1
+Adjusted guage elevation 796.60259844
+Processing Marion - MLBK1
+Adjusted guage elevation 1350.71821524
+Processing John Redmond - JRLK1
+Adjusted guage elevation 1041.9818110400001
+Processing Toronto - TRLK1
+Adjusted guage elevation 902.0158792799999
+Processing Big Hill - BIGK1
+Adjusted guage elevation 857.81603676
+Total time: 3.2370006601015726
+
+Update mosaic dataset with flood map ...
+Commandline arguments: ['D:\\projects_new\\fldpln\\tools\\task_map2md.py', 'D:\\projects_new\\fldpln\\kansas\\mosaic_dataset_gdbs\\reservoir.gdb', 'reservoir_depth', 'D:\\projects_new\\fldpln\\kansas\\maps\\reservoir_20220724_1330']
+Update D:\projects_new\fldpln\kansas\mosaic_dataset_gdbs\reservoir.gdb\reservoir_depth from D:\projects_new\fldpln\kansas\maps\reservoir_20220724_1330 ...
+Remove all rasters from the mosaic dataset: D:\projects_new\fldpln\kansas\mosaic_dataset_gdbs\reservoir.gdb\reservoir_depth ...
+Add rasters to the mosaic dataset: D:\projects_new\fldpln\kansas\mosaic_dataset_gdbs\reservoir.gdb\reservoir_depth ...
+Total processing time (minutes): 0.947
+
+Update reservoir depth statistic ...
+Commandline arguments: ['D:\\projects_new\\fldpln\\tools\\task_update_depth_stats.py', 'max_res_depth', 'D:\\projects_new\\fldpln\\kansas\\mosaic_dataset_gdbs\\reservoir.gdb\\reservoir_depth']
+Selecting hexagons intersecting mosaic dataset footprints ...
+Calculting zonal statistics ...
+Creating hex max dictionary
+Updating hexagon table ...
+Total time: 2.4283950289090472
+
+Delete old map folders ...
+Commandline arguments: ['D:\\projects_new\\fldpln\\tools\\task_deletemapfolder.py', 'D:\\projects_new\\fldpln\\kansas\\maps', 'reservoir', '1']
+Current time: 20220724_1338
+Delete D:\projects_new\fldpln\kansas\maps\reservoir_20220723_1330 ...

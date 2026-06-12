@@ -1,0 +1,56 @@
+---
+jupytext:
+  text_representation:
+    extension: .md
+    format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.11.5
+kernelspec:
+  display_name: Python 3
+  language: python
+  name: python3
+---
+
+
+# Open Source vs. ArcPy
+
+Two versions of code are available: ArcPy and Open Source. The Open Source version is the one that uses open source packages for stream flood mapping. The ArcPy version is the one that uses ESRI's ArcPy package in flood mapping. Note that tiled library file formats are different between the two versions. The ArcPy version uses the .mat file format while the Open Source version uses the .snz file format.
+
+## ArcPy version
+
+The arcpy version (i.e., the tools_arcpy folder) was first developed for running flood uses ESRI GIS software. It can run within ArcGIS Pro using its default python environment (i.e., arcgispro-py3 environment) without the need of any additional python packages. This version is primarily for KDEM ad the scripts are not updated after the open source version was created. So there are difference between the two versions, and the open source version is the preferred version.
+
+With the default arcgispro-py3 environment in ArcGIS Pro, **it can only tile a library into MAT file format and therefore can only map MAT-based library** but not snappy (.snz) based tiled library as this requires installing the “fastparquet” package. Note snappy file is larger than .mat file but reads faster compared with MAT file.
+
+With the **arcgispro-py3-clone environment on my laptop** which has fastparquet installed, it can tile and map libraries in both MAT and snappy formats. Office desktop computer failed to create such an environment so only MAT file based libraries can be tiled and mapped.
+
+##  Open source version
+
+This version removes the dependence on the ArcPy package comes with ArcGIS and is entirely based on open source python packages.  Anyone can use and improve it after making it available on github. 
+
+This version uses the “fldpln” python environment and has been tested on desktop computer and laptop for both tiling and mapping scripts. It’s main development focus for the project.
+
+###	Major changes in the tiling scripts
+
+* Generating FSP segment shapefile
+  * Function GenerateSegmentShapefile() in fldpln_reorg.py, which generates a shapefile from FSP segments for manually assigning stream order to the segments, is implemented ONLY in open source code.  
+  * Each upstream segment is extended to the first FSP of the downstream segment as the segments are based on FSP pixel centers and are not connected between two adjacent segments. There is either one or square root of two pixel size between them. The shapefile is used to manually assign the segments to a stream order (i.e., “StrOrd” field), which is used in interpolating FSP DOF in the mapping scripts. Specifically, the shapefile is used to populate the stream order (“StrOrd”) column in both fsp_info.csv and segment_info.csv files and to generate the stream_order_info.csv file.
+* Reading segment shapefile to get stream order for the segments.
+* It’s noted that the spatial reference saved in CellSizeSpatialReference.json is different between arcpy-based and open source based code. **Arcpy-based code adds some additional data** (at the end) to the spatial reference read from SpatialReference.prj. It’s not sure what the use of those numbers is.
+ 
+### Major changes in the mapping scripts
+
+* Handling gauge observation shapefile downloaded from NOAA using open source packages.
+* Generating tile GeoTif. 
+  * **Note that TileFspFppRelations2Array() in open source version returns array’s upper-left corner coordinates (i.e., mapMinX, mapMaxY) while the arcpy version returns lower-left corner (i.e., mapMinX, mapMinY)**
+* Mosaic tile GeoTifs (implemented 3 functions). Tested on the largest library "morv" and it works even with the in-memory mosaicing function. 
+
+## Yet another version
+
+There is another version (i.e., folder tools_os_laptop_arcgispro_clone on OneDrive) which uses the “arcgispro-py-clone” environment on my laptop and runs both arcpy-based and open source based code and supports both mat-based and snappy-based tiles. 
+
+It’s nice to have ONE python environment for testing all the versions. However, the environment still has a few issues listed below. As such this version and environment were also not updated further.
+  * When import geopandas, it failed the first time complaining inconsistent python version.
+  * The code shows the message “Can't find requested entry point: GDALRegisterMe” and “Can't find requested entry point: GDALRegister_nitf” when run the mapping scripts. Not much help found on this issue on the web. I can try replacing the gdal from ESRI channel with the one from channel conda-forge but this may mess up arcpy!
+
+
