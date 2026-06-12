@@ -3,12 +3,36 @@
 
 format: jb-book
 root: index
-chapters:
-  - file: book/markdown
-  - file: book/introduction
-  - file: book/notebooks
-  - file: book/bibliography
-# Or you organize the TOC by parts
+
+parts:
+  - caption: Preface
+    numbered: false
+    maxdepth: 2
+    chapters:
+      - file: book/preface
+
+  - caption: Chapters
+    numbered: true
+    maxdepth: 2
+    chapters:
+      - file: book/01_intro
+      - file: book/02_fldpln
+      - file: book/03_tiling
+      - file: book/04_parallelization
+      - file: book/05_gauge.md
+      - file: book/06_server
+      - file: book/07_client
+      - file: book/08_image_viewer
+      - file: book/09_future
+  - caption: Appendices
+    numbered: false
+    maxdepth: 2
+    chapters:
+      - file: book/system.md
+      - file: book/open_source.md
+      - file: book/python_env.md
+      - file: book/binder.md
+      - file: book/bibliography.md
 
 # parts:
 #   - caption: Chapters
