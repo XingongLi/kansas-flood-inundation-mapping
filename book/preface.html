@@ -491,64 +491,15 @@
 <h1>Preface<a class="headerlink" href="#preface" title="Link to this heading">#</a></h1>
 <section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
-<p>Geographic Information Systems (GIS) and geospatial analysis have become fundamental tools across numerous disciplines, from environmental science and urban planning to business analytics and public health. As the volume and complexity of geospatial data continue to grow exponentially, the ability to programmatically process, analyze, and visualize this data has become an essential skill for researchers, analysts, and professionals working with spatial information.</p>
-<p>Python has emerged as the leading programming language for geospatial analysis, offering a rich ecosystem of libraries and tools that make complex spatial operations accessible to both beginners and experts. However, the path from Python novice to confident geospatial programmer can seem daunting, with numerous libraries to learn and concepts to master.</p>
-<p>This book bridges that gap by providing a structured, practical approach to learning geospatial programming with Python. Rather than overwhelming you with advanced techniques from the start, we focus on building a solid foundation of essential skills that will serve you throughout your geospatial programming journey. Each chapter builds upon the previous ones, ensuring you develop both theoretical understanding and practical expertise.</p>
-<p>The approach taken in this book is hands-on and example-driven. You’ll work with real geospatial datasets, solve practical problems, and build projects that demonstrate the power of Python for geospatial analysis and visualization. By the end of this book, you’ll have the confidence and skills to tackle your own geospatial programming challenges.</p>
 </section>
 <section id="who-this-book-is-for">
 <h2>Who This Book Is For<a class="headerlink" href="#who-this-book-is-for" title="Link to this heading">#</a></h2>
-<p>This book is designed for a diverse audience of learners who want to harness the power of Python for geospatial analysis and visualization:</p>
-<p><strong>Students and Researchers</strong> in geography, environmental science, urban planning, data science, and related fields who need to analyze spatial data as part of their studies or research. No prior programming experience is assumed, though basic familiarity with computers and data analysis concepts is helpful.</p>
-<p><strong>GIS Professionals</strong> who currently use desktop GIS software and want to expand their toolkit with programming skills. If you’ve worked with ArcGIS, QGIS, or similar tools and want to automate workflows or perform analyses that are challenging in traditional GIS software, this book will help you make that transition.</p>
-<p><strong>Data Scientists and Analysts</strong> who work with location-based data and want to add spatial analysis capabilities to their skillset. If you’re comfortable with Python basics but new to geospatial concepts, this book will introduce you to the spatial thinking and tools you need.</p>
-<p><strong>Software Developers</strong> interested in building applications that work with geospatial data. Whether you’re developing web mapping applications, mobile apps with location features, or data processing pipelines, this book provides the foundation you need.</p>
-<p><strong>Self-Learners and Career Changers</strong> who are interested in the growing field of geospatial data science. The book assumes no prior knowledge of either Python programming or GIS concepts, making it accessible to motivated beginners.</p>
-<p><strong>Professionals in Government and Industry</strong> who need to incorporate spatial analysis into their work, such as urban planners, environmental consultants, market researchers, logistics coordinators, or public health officials.</p>
-<p>The key requirement is curiosity and willingness to learn. While programming experience is helpful, it’s not necessary. We start with the fundamentals and build up systematically.</p>
 </section>
 <section id="what-this-book-covers">
 <h2>What This Book Covers<a class="headerlink" href="#what-this-book-covers" title="Link to this heading">#</a></h2>
-<p>This book is organized into three progressive sections that take you from software setup through Python fundamentals to advanced geospatial programming:</p>
-<p><strong>Software Setup</strong> prepares your development environment with everything you need for geospatial programming. You’ll learn to install and configure essential tools including Miniconda for package management, VS Code for development, Git for version control, and cloud-based alternatives like Google Colab and JupyterLab. This section ensures you have a solid foundation before diving into programming.</p>
-<p><strong>Python Programming Fundamentals</strong> builds your core programming skills through seven comprehensive chapters. Starting with Python basics, you’ll master variables and data types, data structures (lists, dictionaries, sets), string operations, control flow with loops and conditionals, functions and classes, file handling, and data analysis with NumPy and Pandas. These skills form the foundation for all geospatial programming tasks.</p>
-<p><strong>Geospatial Programming with Python</strong> comprises fourteen specialized chapters that transform you into a confident geospatial programmer:</p>
-<ul class="simple">
-<li><p><strong>Introduction to Geospatial Python</strong> - Core concepts and the Python geospatial ecosystem</p></li>
-<li><p><strong>Vector Data Analysis with GeoPandas</strong> - Working with points, lines, and polygons</p></li>
-<li><p><strong>Raster Data with Rasterio</strong> - Processing satellite imagery and gridded datasets</p></li>
-<li><p><strong>Multi-dimensional Data Analysis with Xarray</strong> - Handling complex scientific datasets</p></li>
-<li><p><strong>Raster Analysis with Rioxarray</strong> - Advanced raster processing and analysis</p></li>
-<li><p><strong>Interactive Visualization with Leafmap</strong> - Creating dynamic, interactive maps</p></li>
-<li><p><strong>Geoprocessing with WhiteboxTools</strong> - Advanced spatial analysis operations</p></li>
-<li><p><strong>3D Mapping with MapLibre</strong> - Building three-dimensional visualizations</p></li>
-<li><p><strong>Cloud Computing with Earth Engine and Geemap</strong> - Leveraging Google Earth Engine for large-scale analysis</p></li>
-<li><p><strong>Hyperspectral Data Visualization with HyperCoast</strong> - Working with hyperspectral data</p></li>
-<li><p><strong>High-Performance Geospatial Analytics with DuckDB</strong> - High-performance spatial data processing</p></li>
-<li><p><strong>Geospatial Data Processing with GDAL and OGR</strong> - Working with various geospatial data formats</p></li>
-<li><p><strong>Building Interactive Dashboards with Solara</strong> - Creating interactive dashboards for geospatial applications</p></li>
-<li><p><strong>Distributed Computing with Apache Sedona</strong> - Processing large geospatial datasets in a distributed environment</p></li>
-</ul>
-<p>Each chapter follows a consistent structure:</p>
-<ul class="simple">
-<li><p>Clear concept explanations with real-world context</p></li>
-<li><p>Step-by-step code examples with detailed annotations</p></li>
-<li><p>Hands-on exercises using authentic geospatial datasets</p></li>
-<li><p>Common pitfalls and troubleshooting guidance</p></li>
-<li><p>References to additional resources and further reading</p></li>
-</ul>
-<p>The progression is carefully designed so that each chapter builds upon previous concepts while introducing new capabilities, ensuring you develop both breadth and depth in geospatial programming.</p>
 </section>
 <section id="getting-the-most-out-of-this-book">
 <h2>Getting the Most Out of This Book<a class="headerlink" href="#getting-the-most-out-of-this-book" title="Link to this heading">#</a></h2>
-<p>To maximize your learning experience with this book, consider the following recommendations:</p>
-<p><strong>Set Up a Proper Development Environment</strong>: Install Python and the required libraries as described in the first section of the book. A well-configured environment will save you time and frustration throughout your learning journey. Consider using conda or uv to manage your Python packages, as this simplifies the installation of geospatial libraries.</p>
-<p><strong>Follow Along with Code Examples</strong>: This book is designed to be interactive. Don’t just read the code—type it out, run it, and experiment with modifications. Understanding comes through practice, and each example builds skills you’ll need later.</p>
-<p><strong>Work Through the Exercises</strong>: Each chapter includes exercises designed to reinforce the concepts you’ve learned. These are not optional extras—they are an integral part of the learning process. Start with the guided exercises, then challenge yourself with your own projects.</p>
-<p><strong>Use Real Data</strong>: While the book provides datasets for examples and exercises, try applying the techniques to data from your own field or interests. This will help you understand how the concepts apply to real-world scenarios and build confidence in your abilities.</p>
-<p><strong>Build Projects</strong>: As you progress through the book, consider working on a personal project that interests you. This could be analyzing data from your research, creating maps for your community, or solving a problem you’ve encountered in your work.</p>
-<p><strong>Be Patient with Yourself</strong>: Programming can be frustrating, especially when you’re learning. Expect to encounter errors, spend time debugging, and occasionally feel stuck. This is normal and part of the learning process. Take breaks when needed, and remember that expertise develops gradually through consistent practice. If you get stuck, don’t hesitate to ask for help on the book’s GitHub repository.</p>
-<p><strong>Keep Practicing</strong>: The skills in this book require regular practice to maintain and develop. Set aside time regularly to work on geospatial programming projects, even if they’re small ones.</p>
 </section>
 <section id="conventions-used-in-this-book">
 <h2>Conventions Used in This Book<a class="headerlink" href="#conventions-used-in-this-book" title="Link to this heading">#</a></h2>
@@ -613,17 +564,6 @@ $<span class="w"> </span>python<span class="w"> </span>script.py
 </section>
 <section id="video-tutorials">
 <h2>Video Tutorials<a class="headerlink" href="#video-tutorials" title="Link to this heading">#</a></h2>
-<p>Complementing the written content, this book is supported by a comprehensive series of video tutorials that walk through key concepts and provide additional examples:</p>
-<p><strong><a class="reference external" href="https://tinyurl.com/intro-gispro-videos">https://tinyurl.com/intro-gispro-videos</a></strong></p>
-<p>The videos are designed to complement, not replace, the written material. They’re particularly helpful for:</p>
-<ul class="simple">
-<li><p>Visual learners who benefit from seeing code being written and executed</p></li>
-<li><p>Understanding complex concepts through multiple explanations</p></li>
-<li><p>Learning about the development workflow and best practices</p></li>
-<li><p>Seeing how to approach problems and debug issues</p></li>
-</ul>
-<p>The playlist is organized to follow the book’s structure. You can watch them in order as you progress through the book, or jump to specific topics as needed.</p>
-<p>The videos were created in Fall 2024 when I was teaching the <a class="reference external" href="https://geog-312.gishub.org"><strong>Introduction to GIS Programming</strong></a> <a class="footnote-reference brackets" href="#geog312" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> course at the University of Kansas. Although the course has concluded, the videos remain relevant and can be used as a reference for the book. Additional videos will be added in the future.</p>
 </section>
 <section id="get-in-touch">
 <h2>Get in Touch<a class="headerlink" href="#get-in-touch" title="Link to this heading">#</a></h2>
@@ -650,12 +590,11 @@ $<span class="w"> </span>python<span class="w"> </span>script.py
 <p><strong>Research Collaborators</strong>: Colleagues and collaborators in the geospatial research community have provided real-world use cases, datasets, and problem scenarios that inform the practical examples throughout the book.</p>
 <p><strong>Family and Friends</strong>: Writing a technical book requires significant time and focus. I’m grateful for the patience and support of family and friends who understood the many evenings and weekends dedicated to this project.</p>
 <p><strong>The Broader GIS Community</strong>: The geospatial field is built on a foundation of sharing knowledge and tools. This book is part of that tradition, and I’m honored to contribute to the resources available for learning geospatial programming.</p>
-<p>This book was written using <a class="reference external" href="https://mystmd.org">MyST Markdown</a> <a class="footnote-reference brackets" href="#mystmd" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> and compiled using <a class="reference external" href="https://github.com/typst/typst">Typst</a> <a class="footnote-reference brackets" href="#typst" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> with the <a class="reference external" href="https://github.com/mayconfmelo/min-book">min-book</a> <a class="footnote-reference brackets" href="#min-book" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a> template. Credits to developers and maintainers of the Typst and MyST Markdown projects. Special thanks to <a class="reference external" href="https://github.com/mayconfmelo">Maycon F. Melo</a> <a class="footnote-reference brackets" href="#mayconfmelo" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a> for the min-book template and their help with customizing the template for this book.</p>
+<p>This book was written using <a class="reference external" href="https://mystmd.org">MyST Markdown</a> <a class="footnote-reference brackets" href="#mystmd" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> and compiled using <a class="reference external" href="https://github.com/typst/typst">Typst</a> <a class="footnote-reference brackets" href="#typst" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> with the <a class="reference external" href="https://github.com/mayconfmelo/min-book">min-book</a> <a class="footnote-reference brackets" href="#min-book" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> template. Credits to developers and maintainers of the Typst and MyST Markdown projects. Special thanks to <a class="reference external" href="https://github.com/mayconfmelo">Maycon F. Melo</a> <a class="footnote-reference brackets" href="#mayconfmelo" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a> for the min-book template and their help with customizing the template for this book.</p>
 <p>Any errors or omissions in this book remain my responsibility. I’m committed to addressing issues and improving the content based on reader feedback.</p>
 </section>
 <section id="about-the-author">
 <h2>About the Author<a class="headerlink" href="#about-the-author" title="Link to this heading">#</a></h2>
-<p>Dr. Xingong Li is an Associate Professor and the Director of Graduate Studies in the Department of Geography &amp; Sustainability at the University of Kansas, Knoxville. He also serves as an Amazon Scholar. Dr. Wu’s research focuses on geospatial data science and open-source software development, with an emphasis on leveraging big geospatial data and cloud computing to study environmental change, particularly surface water and wetland inundation dynamics. He is the creator of several widely used open-source Python packages, including <a class="reference external" href="https://geemap.org">geemap</a> <a class="footnote-reference brackets" href="#geemap" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a>, <a class="reference external" href="https://leafmap.org">leafmap</a> <a class="footnote-reference brackets" href="#leafmap" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a>, <a class="reference external" href="https://samgeo.gishub.org">segment-geospatial</a> <a class="footnote-reference brackets" href="#samgeo" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></a>, and <a class="reference external" href="https://opengeoai.org">geoai</a> <a class="footnote-reference brackets" href="#geoai" id="id9" role="doc-noteref"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></a>, which support advanced geospatial analysis and interactive visualization. His open-source work is available at the <a class="reference external" href="https://github.com/opengeos">Open Geospatial Solutions</a> <a class="footnote-reference brackets" href="#opengeos" id="id10" role="doc-noteref"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></a> on GitHub.</p>
 </section>
 <section id="licensing-and-copyright">
 <h2>Licensing and Copyright<a class="headerlink" href="#licensing-and-copyright" title="Link to this heading">#</a></h2>
@@ -669,45 +608,21 @@ $<span class="w"> </span>python<span class="w"> </span>script.py
 <p>This dual licensing approach helps balance open access to learning materials with the protection of original creative work. Thank you for respecting these terms and supporting the open-source geospatial community.</p>
 <hr class="footnotes docutils" />
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="geog312" role="doc-footnote">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
-<p><a class="reference external" href="https://geog-312.gishub.org">https://geog-312.gishub.org</a></p>
-</aside>
 <aside class="footnote brackets" id="mystmd" role="doc-footnote">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
 <p><a class="reference external" href="https://mystmd.org">https://mystmd.org</a></p>
 </aside>
 <aside class="footnote brackets" id="typst" role="doc-footnote">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">3</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
 <p><a class="github reference external" href="https://github.com/typst/typst">typst/typst</a></p>
 </aside>
 <aside class="footnote brackets" id="min-book" role="doc-footnote">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">4</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">3</a><span class="fn-bracket">]</span></span>
 <p><a class="github reference external" href="https://github.com/mayconfmelo/min-book">mayconfmelo/min-book</a></p>
 </aside>
 <aside class="footnote brackets" id="mayconfmelo" role="doc-footnote">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">5</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">4</a><span class="fn-bracket">]</span></span>
 <p><a class="github reference external" href="https://github.com/mayconfmelo">mayconfmelo</a></p>
-</aside>
-<aside class="footnote brackets" id="geemap" role="doc-footnote">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">6</a><span class="fn-bracket">]</span></span>
-<p><a class="reference external" href="https://geemap.org">https://geemap.org</a></p>
-</aside>
-<aside class="footnote brackets" id="leafmap" role="doc-footnote">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">7</a><span class="fn-bracket">]</span></span>
-<p><a class="reference external" href="https://leafmap.org">https://leafmap.org</a></p>
-</aside>
-<aside class="footnote brackets" id="samgeo" role="doc-footnote">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id8">8</a><span class="fn-bracket">]</span></span>
-<p><a class="reference external" href="https://samgeo.gishub.org">https://samgeo.gishub.org</a></p>
-</aside>
-<aside class="footnote brackets" id="geoai" role="doc-footnote">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id9">9</a><span class="fn-bracket">]</span></span>
-<p><a class="reference external" href="https://opengeoai.org">https://opengeoai.org</a></p>
-</aside>
-<aside class="footnote brackets" id="opengeos" role="doc-footnote">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id10">10</a><span class="fn-bracket">]</span></span>
-<p><a class="github reference external" href="https://github.com/opengeos">opengeos</a></p>
 </aside>
 </aside>
 </section>
